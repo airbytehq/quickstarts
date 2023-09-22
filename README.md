@@ -19,3 +19,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 ## Contribution Guidelines
 
 We highly encourage community contributions to help improve and expand our templates. Please read our [Contribution Guidelines](CONTRIBUTING.md) before making a submission.
+
+## Contact
+
+For questions or help with the contributing process, please reach out in the #hackathons channel in the [Airbyte Slack](https://airbytehq.slack.com/).

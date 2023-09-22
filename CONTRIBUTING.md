@@ -54,6 +54,6 @@ Once your pull request is submitted, maintainers will review it. They may ask fo
 
 ## Contact
 
-For questions or help with the contributing process, please reach out to thalia@airbyte.io
+For questions or help with the contributing process, please reach out in the #hackathons channel in the [Airbyte Slack](https://airbytehq.slack.com/).
 
 Thank you for contributing to Airbyte Quickstarts! 🚀
