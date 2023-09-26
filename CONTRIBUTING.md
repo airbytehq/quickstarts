@@ -1,6 +1,6 @@
 # Contributing to Airbyte Quickstarts
 
-Thank you for considering contributing to Airbyte Quickstarts! 🌟 It’s people like you that make this project valuable for the community. Whether it’s fixing bugs, improving documentation, or suggesting adding new templates, we welcome your contributions.
+Thank you for considering contributing to Airbyte Quickstarts! 🌟 It’s people like you that make this project valuable for the community. Whether it’s fixing bugs or adding new Quickstarts, we welcome your contributions.
 
 ## How Can I Contribute?
 
@@ -38,8 +38,8 @@ Thank you for considering contributing to Airbyte Quickstarts! 🌟 It’s peopl
 
 ### 4. Notes for New Quickstarts
 
-1. **Create it in a New Directory**: Each quickstart should live in its own directory and be a standalone project. 
-2. **Add a README.md**: All quickstarts should have clear and detailed instructions about how to set them up.
+1. **Create it in a New Directory**: Each Quickstart should live in its own directory and be a standalone project. 
+2. **Add a README.md**: All Quickstarts should have clear and detailed instructions about how to set them up.
 
 ## Style Guides
 

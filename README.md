@@ -8,17 +8,19 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 
 ## How To Start?
 
-1. **Choose a Template**: Navigate to the template that suits you needs.
-2. **Follow Setup Instructions**: Each template contains a `README.md` file with step-by-step instructions to set up the stack.
-3. **Customize**: Modify the templates as needed to suit your specific requirements.
+1. **Choose a Template**: Navigate to the Quickstart that suits you needs. Each folder in this repository is a Quickstart and can be used as a standalone project.
+2. **Follow Setup Instructions**: Each Quickstart contains a `README.md` file with step-by-step instructions to set up the stack.
+3. **Customize**: Modify the Quickstart as needed to suit your specific requirements.
 
-## Templates
+## List Of Available Quickstarts
 
 - [Airbyte, dbt, Dagster and BigQuery General Stack](./airbyte_dbt_dagster)
 
 ## Contribution Guidelines
 
-We highly encourage community contributions to help improve and expand our templates. Please read our [Contribution Guidelines](CONTRIBUTING.md) before making a submission.
+We highly encourage community contributions to help improve, expand and add new Quickstarts! Please read our [Contribution Guidelines](CONTRIBUTING.md) before making a submission.
+
+If you're looking to contibute with a new Quickstart, you can look for inspiration in the [Issues](https://github.com/airbytehq/quickstarts/issues) tab. There, we keep a list of our most wanted Quickstarts and often offer rewards for contributions, for example, during our different Hackathons.
 
 ## Contact
 
