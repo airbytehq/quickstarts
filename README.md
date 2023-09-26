@@ -20,7 +20,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 
 We highly encourage community contributions to help improve, expand and add new Quickstarts! Please read our [Contribution Guidelines](CONTRIBUTING.md) before making a submission.
 
-If you're looking to contibute with a new Quickstart, you can look for inspiration in the [Issues](https://github.com/airbytehq/quickstarts/issues) tab. There, we keep a list of our most wanted Quickstarts and often offer rewards for contributions, for example, during our different Hackathons.
+If you're looking to contribute with a new Quickstart, you can look for inspiration in the [Issues](https://github.com/airbytehq/quickstarts/issues) tab. There, we keep a list of our most wanted Quickstarts and often offer rewards for contributions, for example, during our different Hackathons.
 
 ## Contact
 
