@@ -4,6 +4,10 @@ Welcome to the "E-Commerce Analytics Stack" repository! 🌟 This is your go-to 
 
 This Quickstart is all about making things easy, getting you started quickly and showing you how smoothly all these tools can work together!
 
+Below is a visual representation of how data flows through our integrated tools in this Quickstart. This comes from Dagster's global asset lineage view:
+
+![Global Asset Lineage](./assets/Global_Asset_Lineage.svg)
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
