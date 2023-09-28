@@ -14,7 +14,8 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 
 ## List Of Available Quickstarts
 
-- [Airbyte, dbt, Dagster and BigQuery General Stack](./airbyte_dbt_dagster)
+- [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
+- [E-commerce analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
 
 ## Contribution Guidelines
 
