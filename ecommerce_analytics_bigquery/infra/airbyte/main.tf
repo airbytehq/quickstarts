@@ -10,8 +10,7 @@ resource "airbyte_source_faker" "faker" {
     seed              = 6
     source_type       = "faker"
   }
-  name         = "Faker Quickstarts"
-  // secret_id    = "...my_secret_id..."
+  name         = "Faker"
   workspace_id = var.workspace_id
 }
 
@@ -29,7 +28,7 @@ resource "airbyte_destination_bigquery" "bigquery" {
             }
         }
     }
-    name = "BigQuery Quickstarts"
+    name = "BigQuery"
     workspace_id = var.workspace_id
 }
 

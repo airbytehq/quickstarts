@@ -45,7 +45,7 @@ Get the project up and running on your local machine by following these steps:
    git sparse-checkout add ecommerce_analytics_bigquery
    ```
 
-   
+
 2. **Navigate to the directory**:  
    ```bash
    cd ecommerce_analytics_bigquery

@@ -2,7 +2,9 @@ version: 2
 
 sources:
   - name: faker
-    database: quickstarts-400312
+    # Use your BigQuery project ID
+    database: your_project_id
+    # Use your BigQuery dataset name
     schema: raw_data
 
     tables:
