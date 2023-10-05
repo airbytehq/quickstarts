@@ -23,7 +23,7 @@ resource "airbyte_source_postgres" "postgres" {
             }
         }
         replication_method = {
-            source_postgres_replication_method_standard = {
+            source_postgres_update_method_scan_changes_with_user_defined_cursor = {
                 method = "Standard"
             }
         }
@@ -36,26 +36,25 @@ resource "airbyte_source_postgres" "postgres" {
 resource "airbyte_destination_snowflake" "snowflake" {
     configuration = {
         credentials = {
-            source_snowflake_authorization_method_o_auth2_0 = {
-                access_token  = "...my_access_token..."
-                auth_type     = "OAuth"
-                client_id     = "...my_client_id..."
-                client_secret = "...my_client_secret..."
-                refresh_token = "...my_refresh_token..."
+            destination_snowflake_authorization_method_key_pair_authentication = {
+                auth_type            = "Key Pair Authentication"
+                private_key          = "...my_private_key..."
+                private_key_password = "...my_private_key_password..."
             }
         }
-        database        = "AIRBYTE_DATABASE"
-        host            = "accountname.us-east-2.aws.snowflakecomputing.com"
-        jdbc_url_params = "...my_jdbc_url_params..."
-        role            = "AIRBYTE_ROLE"
-        schema          = "AIRBYTE_SCHEMA"
-        source_type     = "snowflake"
-        warehouse       = "AIRBYTE_WAREHOUSE"
+        database         = "AIRBYTE_DATABASE"
+        destination_type = "snowflake"
+        host             = "accountname.us-east-2.aws.snowflakecomputing.com"
+        jdbc_url_params  = "...my_jdbc_url_params..."
+        raw_data_schema  = "...my_raw_data_schema..."
+        role             = "AIRBYTE_ROLE"
+        schema           = "AIRBYTE_SCHEMA"
+        username         = "AIRBYTE_USER"
+        warehouse        = "AIRBYTE_WAREHOUSE"
     }
-    name         = "Katrina Tillman"
-    secret_id    = "...my_secret_id..."
+    name         = "Snowflake"
     workspace_id = var.workspace_id
-}
+}   
 
 // Connections
 resource "airbyte_connection" "postgres_to_snowflake" {
