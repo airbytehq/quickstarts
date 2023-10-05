@@ -8,12 +8,20 @@ This quickstart is designed to minimize setup hassles and propel you forward.
 
 - [Airbyte-dbt-Dagster-Snowflake Integration](#airbyte-dbt-dagster-snowflake-integration)
   - [Table of Contents](#table-of-contents)
+  - [Infrastructure Layout](#infrastructure-layout)
+  - [Pipeline DAG](#pipeline-dag)
   - [Prerequisites](#prerequisites)
   - [1. Setting an environment for your project](#1-setting-an-environment-for-your-project)
   - [2. Setting Up Airbyte Connectors with Terraform](#2-setting-up-airbyte-connectors-with-terraform)
   - [3. Setting Up the dbt Project](#3-setting-up-the-dbt-project)
   - [4. Orchestrating with Dagster](#4-orchestrating-with-dagster)
   - [Next Steps](#next-steps)
+
+## Infrastructure Layout
+![insfrastructure layout](images/dad_snowflake_stack.png)
+
+## Pipeline DAG
+![pipeline dag](images/dag.svg)
 
 ## Prerequisites
 
@@ -121,7 +129,7 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    Change to the directory containing the dbt configuration:
    ```bash
-   cd dbt_project
+   cd ../../dbt_project
    ```
 
 2. **Update Connection Details**:
@@ -149,7 +157,7 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    Switch to the directory containing the Dagster orchestration configurations:
    ```bash
-   cd orchestration
+   cd ../../orchestration
    ```
 
 2. **Set Environment Variables**:
