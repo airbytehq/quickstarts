@@ -23,39 +23,41 @@ resource "airbyte_source_postgres" "postgres" {
             }
         }
         replication_method = {
-            source_postgres_replication_method_standard = {
-                method = "Standard"
+            source_postgres_update_method_read_changes_using_write_ahead_log_cdc = {
+                method = "CDC"
+                publication = "...pub..."
+                replication_slot = "...slot..."
             }
         }
     }
-    name = "Postgres"
+    name = "Postgres-Primary"
     workspace_id = var.workspace_id
 }
 
 // Destinations
 resource "airbyte_destination_postgres" "postgres" {
-  configuration = {
-    database         = "...my_database..."
-    destination_type = "postgres"
-    host             = "...my_host..."
-    jdbc_url_params  = "...my_jdbc_url_params..."
-    password         = "...my_password..."
-    port             = 5432
-    schema           = "public"
-    ssl_mode = {
-      destination_postgres_ssl_modes_allow = {
-        mode = "allow"
-      }
+    configuration = {
+        database         = "...my_database..."
+        destination_type = "postgres"
+        host             = "...my_host..."
+        jdbc_url_params  = "...my_jdbc_url_params..."
+        password         = "...my_password..."
+        port             = 5432
+        schema           = "public"
+        ssl_mode = {
+            destination_postgres_ssl_modes_allow = {
+                mode = "allow"
+            }
+        }
+        tunnel_method = {
+            destination_postgres_ssh_tunnel_method_no_tunnel = {
+                tunnel_method = "NO_TUNNEL"
+            }
+        }
+        username = "...my_username..."
     }
-    tunnel_method = {
-      destination_postgres_ssh_tunnel_method_no_tunnel = {
-        tunnel_method = "NO_TUNNEL"
-      }
-    }
-    username = "Foster.Borer"
-  }
-  name         = "Karen Kautzer"
-  workspace_id = "904f3b11-94b8-4abf-a03a-79f9dfe0ab7d"
+    name         = "Postgres-Secondary"
+    workspace_id = var.workspace_id
 }
 
 // Connections
@@ -72,5 +74,9 @@ resource "airbyte_connection" "postgres_to_postgres" {
                 name = "...my_table_name_2..."
             },
         ]
+    }
+    schedule = {
+        cron_expression = "...my_cron_expression..."
+        schedule_type   = "cron"
     }
 }
