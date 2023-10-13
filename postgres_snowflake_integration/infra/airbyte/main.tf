@@ -35,34 +35,34 @@ resource "airbyte_source_postgres" "postgres" {
 }
 
 // Destinations
-resource "airbyte_destination_mysql" "mysql" {
+resource "airbyte_destination_snowflake" "snowflake" {
     configuration = {
-        host             = "...my_host..."
-        port             = 3306
-        destination_type = "mysql"
-        database         = "...my_database..."
-        schema           = "public"
-        username = "...my_username..."
-        password         = "...my_password..."
-        jdbc_url_params  = "...my_jdbc_url_params..."
-        tunnel_method = {
-            destination_mysql_ssh_tunnel_method_no_tunnel = {
-                tunnel_method = "NO_TUNNEL"
+        credentials = {
+            destination_snowflake_authorization_method_key_pair_authentication = {
+                auth_type            = "Key Pair Authentication"
+                private_key          = "...my_private_key..."
+                private_key_password = "...my_private_key_password..."
             }
         }
-        ssl_method = {
-            ssl_method =  "unencrypted"
-        }        
+        database         = "AIRBYTE_DATABASE"
+        destination_type = "snowflake"
+        host             = "accountname.us-east-2.aws.snowflakecomputing.com"
+        jdbc_url_params  = "...my_jdbc_url_params..."
+        raw_data_schema  = "...my_raw_data_schema..."
+        role             = "AIRBYTE_ROLE"
+        schema           = "AIRBYTE_SCHEMA"
+        username         = "AIRBYTE_USER"
+        warehouse        = "AIRBYTE_WAREHOUSE"
     }
-    name         = "Mysql"
+    name         = "Snowflake"
     workspace_id = var.workspace_id
-}
+}  
 
 // Connections
-resource "airbyte_connection" "postgres_to_mysql" {
-    name = "Postgres to Mysql"
+resource "airbyte_connection" "postgres_to_snowflake" {
+    name = "Postgres to Snowflake"
     source_id = airbyte_source_postgres.postgres.source_id
-    destination_id = airbyte_destination_mysql.mysql.destination_id
+    destination_id = airbyte_destination_snowflake.snowflake.destination_id
     configurations = {
         streams = [
             {
@@ -72,9 +72,5 @@ resource "airbyte_connection" "postgres_to_mysql" {
                 name = "...my_table_name_2..."
             },
         ]
-    }
-    schedule = {
-        cron_expression = "...my_cron_expression..."
-        schedule_type   = "cron"
     }
 }

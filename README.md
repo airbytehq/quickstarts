@@ -16,6 +16,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
 - [E-commerce analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
+- [Postgres to snowflake data integraton](./postgres_snowflake_integration)
 
 ## Contribution Guidelines
 

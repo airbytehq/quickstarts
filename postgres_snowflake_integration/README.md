@@ -1,6 +1,6 @@
-# Postgres MySql Data Integration Stack
+# Postgres Snowflake Data Integration Stack
 
-Welcome to the "Postgres MySql Data Integration Stack" repository! This repo provides a quickstart template for integrating postgres data to mysql using Airbyte powering terraform. We will easily integrate data from Postgres databases with Airbyte using terraform airbyte provider. [Ref](https://registry.terraform.io/providers/airbytehq/airbyte/latest/docs) While this template doesn't delve into specific data, it could be act as a template for integrating and also adding new sources, etc... the limits are endless.
+Welcome to the "Postgres Snowflake Data Integration Stack" repository! This repo provides a quickstart template for integrating postgres data to snowflake warehouses using Airbyte powering terraform. We will easily integrate data from Postgres databases with Airbyte using terraform airbyte provider. This template could be act as a starter for integrating and also adding new sources, etc... the limits are endless.
 
 This quickstart is designed to minimize setup hassles and propel you forward.
 
@@ -46,13 +46,13 @@ Get the project up and running on your local machine by following these steps:
    ```
 
    ```bash
-   git sparse-checkout add postgres_mysql_integration
+   git sparse-checkout add postgres_snowflake_integration
    ```
 
    
 2. **Navigate to the directory**:  
    ```bash
-   cd postgres_mysql_integration
+   cd postgres_snowflake_integration
    ```
 
 3. **Set Up a Virtual Environment**:  

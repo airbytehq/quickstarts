@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="postgres-mysql-integration",
+    name="postgres-snowflake-integration",
     packages=find_packages(),
     install_requires=[
     ],
