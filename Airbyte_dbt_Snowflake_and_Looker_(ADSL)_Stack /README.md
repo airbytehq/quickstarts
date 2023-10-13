@@ -26,7 +26,7 @@ Before you embark on this integration, ensure you have the following set up and 
 
 3. **Airbyte OSS version**: Deploy the open-source version of Airbyte. Follow the installation instructions from the [Airbyte Documentation](https://docs.airbyte.com/quickstart/deploy-airbyte/).
 
-4. GitHub account: You will need it to get your GitHub key. A step-by-step guide is provided [here]((#2-Getting-Data-from-GitHub)
+4. GitHub account: You will need it to get your GitHub key. A step-by-step guide is provided [here]((#2-getting-data-from-gitHub)
 
 5. Snowflakes: You will also need to add the necessary permissions to allow Airbyte and dbt to access the data in Snowflakes. A step-by-step guide is provided [below](#3-setting-up-snowflakes).
 
