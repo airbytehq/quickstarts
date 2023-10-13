@@ -84,9 +84,9 @@ Get the project up and running on your local machine by following these steps:
 
 #### 2. **Using the GitHub connector in Airbyte**
    - Log into your Airbyte Cloud account.
-   - Select In the left navigation bar, click Sources, and define GitHub as your source.
+   - Select in the left navigation bar, click Sources, and define GitHub as your source.
    - Authenticate with Personal Access Token.
-   - Fill in details about the repositories like the start date and GitHu URL.
+   - Fill in details about the repositories like the start date and GitHub URL.
 
 ![image](https://github.com/Bennykillua/airbyte-quickstart/assets/67695793/d54026e2-cbac-4f65-a987-a2610ae95348)
 
