@@ -12,6 +12,7 @@ In this diagram, the sources in green are provided by our Airbyte Sync.
 
 ## Table of Contents
 
+- [Prerequisites](#prerequisites)
 - [1. Setting an environment for your project](#1-setting-an-environment-for-your-project)
 - [2. Setting up Apache Airflow for development](#2-setting-up-apache-airflow-for-development)
   - [2.1. Running Airflow locally](#21-running-airflow-locally)
@@ -30,6 +31,8 @@ In this diagram, the sources in green are provided by our Airbyte Sync.
     - [6.2.1. dbt\_\_jaffle-shop](#621-dbt__jaffle-shop)
     - [6.2.2. dbt\_\_example](#622-dbt__example)
 - [7. Next Steps](#7-next-steps)
+
+## Prerequisites
 
 1. **Python 3.10 or later**: If not installed, download and install it from [Python's official website](https://www.python.org/downloads/). We'll also use pip and venv, so make sure they're installed as well.
 
