@@ -1,0 +1,91 @@
+version: 2
+
+models:
+    - name: stg_users
+      columns:
+          - name: id
+            tests:
+                - unique
+          - name: gender
+            tests:
+                - not_null
+          - name: academic_degree
+            tests:
+                - not_null
+          - name: title
+            tests:
+                - not_null
+          - name: nationality
+            tests:
+                - not_null
+          - name: age
+            tests:
+                - not_null
+          - name: name
+            tests:
+                - not_null
+          - name: email
+            tests:
+                - not_null
+          - name: created_at
+            tests:
+                - not_null
+          - name: updated_at
+            tests:
+                - not_null
+          - name: _airbyte_extracted_at
+            tests:
+                - not_null
+
+    - name: stg_purchases
+      columns:
+          - name: id
+            tests:
+                - unique
+          - name: user_id
+            tests:
+                - not_null
+          - name: product_id
+            tests:
+                - not_null
+          - name: updated_at
+            tests:
+                - not_null
+          - name: purchased_at
+            tests:
+                - not_null
+          - name: returned_at
+          - name: created_at
+            tests:
+                - not_null
+          - name: added_to_cart_at
+          - name: _airbyte_extracted_at
+            tests:
+                - not_null
+
+    - name: stg_products
+      columns:
+          - name: id
+            tests:
+                - unique
+          - name: year
+            tests:
+                - not_null
+          - name: price
+            tests:
+                - not_null
+          - name: model
+            tests:
+                - not_null
+          - name: make
+            tests:
+                - not_null
+          - name: created_at
+            tests:
+                - not_null
+          - name: updated_at
+            tests:
+                - not_null
+          - name: _airbyte_extracted_at
+            tests:
+                - not_null
