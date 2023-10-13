@@ -6,7 +6,7 @@ This quickstart is designed to minimize setup hassles and propel you forward.
 
 ## Table of Contents
 
-- [Postgres Data Replication Stack](#postgres-data-replication-stack)
+- [Postgres SnowFlake Data integration Stack](#postgres-snowflake-integration-stack)
   - [Table of Contents](#table-of-contents)
   - [Infrastructure Layout](#infrastructure-layout)
   - [Prerequisites](#prerequisites)
