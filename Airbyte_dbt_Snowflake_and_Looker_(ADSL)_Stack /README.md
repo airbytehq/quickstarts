@@ -15,6 +15,9 @@ This quickstart is designed to minimize setup hassles and propel you forward.
 - [Getting Data from GitHub](#2-getting-data-from-github)
 - [Setting Up Snowflakes](#3-setting-up-snowflakes)
 - [Setting Up the dbt Project](#4-setting-up-the-dbt-project)
+- [Visualization with Looker](#5-visualization-with-Looker)
+- [Next Step](#6-next-step)
+
 
 ## Prerequisites
 
@@ -196,4 +199,7 @@ You can find your Snowflakes host's name [here](https://app.snowflake.com/zyrtjf
 
 This is for transformation.
 
+# 5. Visualization with Looker
+
+# 6. Next Step
 
