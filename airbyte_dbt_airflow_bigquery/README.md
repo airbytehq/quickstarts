@@ -390,4 +390,3 @@ Once you've gone through the steps above, you should have a working Airbyte, dbt
 5. **Contribute with the community**
 
    All tools mentioned here are open-source and have very active communities. You can contribute with them by creating issues, suggesting features, or even creating pull requests. You can also contribute with the Airbyte community by creating [connectors](https://docs.airbyte.io/connector-development) for new sources and destinations.
-*
