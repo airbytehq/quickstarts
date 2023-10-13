@@ -4,7 +4,7 @@ Welcome to the Airbyte, dbt and Airflow (ADA) Stack with BigQuery quickstart! Th
 
 This quickstart is designed to help you set up the orchestration of your Airbyte Syncs and dbt models using Apache Airflow, providing a end-to-end ELT pipeline. We have some examples of different forms of running dbt models that can be used as a starting point for your project.
 
-Here are a representation of our data transformations, provided by the dbt Docs page:
+Here's a representation of our data transformations, provided by the dbt Docs page:
 
 ![dbt lineage grapth](assets/10_dbt-lineage.png)
 
@@ -12,7 +12,24 @@ In this diagram, the sources in green are provided by our Airbyte Sync.
 
 ## Table of Contents
 
-## Prerequisites
+- [1. Setting an environment for your project](#1-setting-an-environment-for-your-project)
+- [2. Setting up Apache Airflow for development](#2-setting-up-apache-airflow-for-development)
+  - [2.1. Running Airflow locally](#21-running-airflow-locally)
+- [3. Setting up Airflow Connections](#3-setting-up-airflow-connections)
+  - [3.1. Airbyte Connection](#31-airbyte-connection)
+  - [3.2. Google Cloud (BigQuery) connection](#32-google-cloud-bigquery-connection)
+- [4. Setting up Airbyte Connectors](#4-setting-up-airbyte-connectors)
+  - [4.1. With Terraform](#41-with-terraform)
+  - [4.2. With the UI](#42-with-the-ui)
+- [5. Setting Up the dbt project](#5-setting-up-the-dbt-project)
+  - [5.1. Setting up the dbt project on your local machine](#51-setting-up-the-dbt-project-on-your-local-machine)
+  - [5.2. Setting up dbt to run in Airflow](#52-setting-up-dbt-to-run-in-airflow)
+- [6. Orchestrating with Airflow](#6-orchestrating-with-airflow)
+  - [6.1. Triggering Airbyte Syncs](#61-triggering-airbyte-syncs)
+  - [6.2. Running dbt models](#62-running-dbt-models)
+    - [6.2.1. dbt\_\_jaffle-shop](#621-dbt__jaffle-shop)
+    - [6.2.2. dbt\_\_example](#622-dbt__example)
+- [7. Next Steps](#7-next-steps)
 
 1. **Python 3.10 or later**: If not installed, download and install it from [Python's official website](https://www.python.org/downloads/). We'll also use pip and venv, so make sure they're installed as well.
 
@@ -290,14 +307,14 @@ To develop it locally, we need to set up some connection details for your data p
 
 ### 5.2. Setting up dbt to run in Airflow
 
-To run dbt in Airflow, we're using [Astronomer Cosmos](https://astronomer.github.io/astronomer-cosmos/), a library to run dbt parse DAGs and Task Groups from dbt models, besides adding support for using Airflow connections instead of dbt profiles. It also runs tests immediately after a model is done.
+We use [Astronomer Cosmos](https://astronomer.github.io/astronomer-cosmos/) to integrate dbt with Airflow. This library parses DAGs and Task Groups from dbt models, and allows us to use Airflow connections instead of dbt profiles. Additionally, it runs tests automatically after each model is completed.
 
 To set it up, we've created the file `orchestration/airflow/config/dbt_config.py` with the necessary configurations. 
 
 In this file we're setting up the following:
 
 - **project_config**: The path to the dbt project folder. In our case, it's mounted into `/opt/airflow/dbt_project`.
-- **google_config**: The configuration that parses a Airflow connection into a dbt profile. Here we need to set the `conn_id` (it's `dbt_file_connection` by default) and the dataset, locations and any other dbt connection configuration. We're using the  `GoogleCloudServiceAccountFileProfileMapping`, which is created by a connection that uses the Keyfile path. If you used the Keyfile JSON, you can use the `GoogleCloudServiceAccountDictProfileMapping` instead.
+- **google_config**: The configuration that parses an Airflow connection into a dbt profile. Here we need to set the `conn_id` (it's `dbt_file_connection` by default) and the dataset, locations and any other dbt connection configuration. We're using the  `GoogleCloudServiceAccountFileProfileMapping`, which is created by a connection that uses the Keyfile path. If you used the Keyfile JSON, you can use the `GoogleCloudServiceAccountDictProfileMapping` instead.
 - **profile_config**: The configuration that uses a profile mapping and exports it to be used by the cosmos operators.
 
 ## 6. Orchestrating with Airflow
@@ -370,3 +387,4 @@ Once you've gone through the steps above, you should have a working Airbyte, dbt
 5. **Contribute with the community**
 
    All tools mentioned here are open-source and have very active communities. You can contribute with them by creating issues, suggesting features, or even creating pull requests. You can also contribute with the Airbyte community by creating [connectors](https://docs.airbyte.io/connector-development) for new sources and destinations.
+*
