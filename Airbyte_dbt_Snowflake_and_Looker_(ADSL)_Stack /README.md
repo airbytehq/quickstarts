@@ -74,7 +74,7 @@ Get the project up and running on your local machine by following these steps:
 
 #### 1. **Log into your [GitHub account](https://github.com/)**
    - Log into your GitHub account.
-   - Find a repository or repositories to use.
+   - Find a repository or repositories to use. I made use of this [Getting Started in Technical Writing repo](https://github.com/Bennykillua/Getting-started-in-Technical-Writing/blob/main/README.md)
    - Get a [Personal Access Token](https://github.com/settings/tokens).
 
  **How to generate JSON key:**
