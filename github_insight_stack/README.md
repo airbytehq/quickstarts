@@ -7,6 +7,7 @@ Dive in and discover how smoothly these tools integrate for an enriched data ana
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
+- [Architecture Layout](#architecture-layout)
 - [Setting an environment for your project](#1-setting-an-environment-for-your-project)
 - [Setting Up BigQuery to work with Airbyte and dbt](#2-setting-up-bigquery)
 - [Setting Up Airbyte Connectors with Terraform](#3-setting-up-airbyte-connectors-with-terraform)
@@ -26,6 +27,9 @@ Before you embark on this integration, ensure you have the following set up and 
 4. **Terraform**: Terraform will help you provision and manage the Airbyte resources. If you haven't installed it, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
 5. **Google Cloud account with BigQuery**: You will also need to add the necessary permissions to allow Airbyte and dbt to access the data in BigQuery. A step-by-step guide is provided [below](#2-setting-up-bigquery).
+
+## Architecture Layout
+![img](architecture.png)
 
 ## 1. Setting an environment for your project
 
