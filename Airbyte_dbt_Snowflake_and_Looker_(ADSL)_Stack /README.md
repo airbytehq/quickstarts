@@ -44,13 +44,13 @@ Get the project up and running on your local machine by following these steps:
    ```
 
    ```bash
-   git sparse-checkout add ecommerce_analytics_bigquery
+   git sparse-checkout add Airbyte_dbt_Snowflake_and_Looker_(ADSL)_Stack
    ```
 
 
 2. **Navigate to the directory**:  
    ```bash
-   cd ecommerce_analytics_bigquery
+   cd Airbyte_dbt_Snowflake_and_Looker_(ADSL)_Stack
    ```
 
 3. **Set Up a Virtual Environment**:  
@@ -71,6 +71,26 @@ Get the project up and running on your local machine by following these steps:
    ```
 
 # 2. Getting Data from GitHub
+
+#### 1. **Log into your [GitHub account](https://github.com/)**
+   - Log into your GitHub account.
+   - Find a repository or repositories to use.
+   - Get a [Personal Access Token](https://github.com/settings/tokens).
+
+ **How to generate JSON key:**
+   - Find the Developer Settings in the settings tab.
+   - Click on generate new token under [Personal Access Token](https://github.com/settings/tokens).
+   - Copy and store the token key. Remember to keep it safe and don’t share it.
+
+#### 2. **Using the GitHub connector in Airbyte**
+   - Log into your Airbyte Cloud account.
+   - Select In the left navigation bar, click Sources, and define GitHub as your source.
+   - Authenticate with Personal Access Token.
+   - Fill in details about the repositories like the start date and GitHu URL.
+
+   ![image](https://github.com/Bennykillua/airbyte-quickstart/assets/67695793/1834c2a9-16b1-4fbc-9015-ccaf2b0b2927)
+
+
 
 # 3. Setting up Snowflakes
 
