@@ -16,7 +16,10 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
 - [MongoDB MySQL Integration Stack](./mongodb_mysql_integration)
+- [Airbyte, dbt, Dagster and Snowflake Basic Stack](./airbyte_dbt_dagster_snowflake)
 - [E-commerce analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
+- [Postgres Data Replication Stack](./postgres_data_replication)
+- [Postgres to MySQL Database Migration Stack](./postgres_to_mysql_migration)
 
 ## Contribution Guidelines
 
