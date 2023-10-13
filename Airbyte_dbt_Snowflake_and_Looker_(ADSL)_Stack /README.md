@@ -88,7 +88,8 @@ Get the project up and running on your local machine by following these steps:
    - Authenticate with Personal Access Token.
    - Fill in details about the repositories like the start date and GitHu URL.
 
-   ![image](https://github.com/Bennykillua/airbyte-quickstart/assets/67695793/1834c2a9-16b1-4fbc-9015-ccaf2b0b2927)
+![image](https://github.com/Bennykillua/airbyte-quickstart/assets/67695793/d54026e2-cbac-4f65-a987-a2610ae95348)
+
 
 
 
