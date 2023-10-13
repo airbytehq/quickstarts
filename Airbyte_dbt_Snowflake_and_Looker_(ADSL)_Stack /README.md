@@ -91,8 +91,109 @@ Get the project up and running on your local machine by following these steps:
 ![image](https://github.com/Bennykillua/airbyte-quickstart/assets/67695793/d54026e2-cbac-4f65-a987-a2610ae95348)
 
 
-
-
 # 3. Setting up Snowflakes
 
+#### 1. **Setting up your account and creating the database in snowflakes**
+   - Log into your account or create a [Snowflakes](https://signup.snowflake.com) if you don't have one.
+   - Click on the plus button to create a worksheet.
+   - You can rename your worksheet.
+   - In the UI, use the script below to create the destination database, user, role, and schema on Snowflake where the sync will occur. Remember to change the airbyte_password variable to your preferred password before running the script.
+
+   ```bash
+        -- set variables (these need to be uppercase)
+set airbyte_role = 'AIRBYTE_ROLE';
+set airbyte_username = 'AIRBYTE_USER';
+set airbyte_warehouse = 'AIRBYTE_WAREHOUSE';
+set airbyte_database = 'AIRBYTE_DATABASE';
+set airbyte_schema = 'AIRBYTE_SCHEMA';
+
+-- set user password
+set airbyte_password ='YOUR_AIRBYTE_PASSWORD';
+
+begin;
+
+-- create Airbyte role
+use role securityadmin;
+create role if not exists identifier($airbyte_role);
+grant role identifier($airbyte_role) to role SYSADMIN;
+
+-- create Airbyte user
+create user if not exists identifier($airbyte_username)
+password = $airbyte_password
+default_role = $airbyte_role
+default_warehouse = $airbyte_warehouse;
+
+grant role identifier($airbyte_role) to user identifier($airbyte_username);
+
+-- change role to sysadmin for warehouse/database steps
+use role sysadmin;
+
+-- create Airbyte warehouse
+create warehouse if not exists identifier($airbyte_warehouse)
+warehouse_size = xsmall
+warehouse_type = standard
+auto_suspend = 60
+auto_resume = true
+initially_suspended = true;
+
+-- create Airbyte database
+create database if not exists identifier($airbyte_database);
+
+-- grant Airbyte warehouse access
+grant USAGE
+on warehouse identifier($airbyte_warehouse)
+to role identifier($airbyte_role);
+
+-- grant Airbyte database access
+grant OWNERSHIP
+on database identifier($airbyte_database)
+to role identifier($airbyte_role);
+
+commit;
+
+begin;
+
+USE DATABASE identifier($airbyte_database);
+
+-- create schema for Airbyte data
+CREATE SCHEMA IF NOT EXISTS identifier($airbyte_schema);
+
+commit;
+
+begin;
+
+-- grant Airbyte schema access
+grant OWNERSHIP
+on schema identifier($airbyte_schema)
+to role identifier($airbyte_role);
+
+commit;
+
+   ```
+
+- select all query and run.
+
+#### 2. **Snowflakes as the Destination**
+   - On your Airbyte UI, select Snowflakes as the destination.
+   - Fill in the following fields.
+Host =YOUR_SNOWFLAKE_HOST (https://id.region.cloud-provider.snowflakecomputing.com)
+Role = AIRBYTE_ROLE
+Warehouse = AIRBYTE_WAREHOUSE
+Database = AIRBYTE_DATABASE
+Schema = AIRBYTE_SCHEMA
+User = AIRBYTE_USER
+Password = password
+
+You can find your Snowflakes host's name [here](https://app.snowflake.com/zyrtjfa/na36523/#/organization)
+
+- Verify your connection and choose your sync frequency.
+- Pick the tables you want from your source and Sync.
+
+![image](https://github.com/Bennykillua/airbyte-quickstart/assets/67695793/aae3544f-eedf-4baa-956b-9af6a23996da)
+
+
 # 4. Setting up the dbt Project
+
+This is for transformation.
+
+
