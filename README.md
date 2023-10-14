@@ -15,8 +15,12 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 ## List Of Available Quickstarts
 
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
+- [Airbyte, dbt, Dagster and Snowflake Basic Stack](./airbyte_dbt_dagster_snowflake)
 - [E-commerce analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
+- [MongoDB MySQL Integration Stack](./mongodb_mysql_integration)
 - [Multisource Database Aggregtion Stack](./multisource_aggregation)
+- [Postgres Data Replication Stack](./postgres_data_replication)
+- [Postgres to MySQL Database Migration Stack](./postgres_to_mysql_migration)
 
 ## Contribution Guidelines
 
