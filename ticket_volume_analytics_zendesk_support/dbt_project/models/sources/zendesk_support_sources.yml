@@ -1,0 +1,141 @@
+version: 2
+
+sources:
+  - name: zendesk_support
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: zendesk_airbyte_trial
+
+    tables:
+      - name: users
+        description: "Simulated user data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the user."
+          - name: active
+          - name: alias
+          - name: chat_only
+          - name: created_at
+          - name: custom_role_id
+          - name: default_group_id
+          - name: details
+          - name: email
+          - name: external_id
+          - name: updated_at
+          - name: iana_time_zone
+          - name: last_login_at
+          - name: locale
+          - name: locale_id
+          - name: moderator
+          - name: name
+          - name: notes
+          - name: only_private_comments
+          - name: organization_id
+          - name: permanently_deleted
+          - name: phone
+          - name: photo
+          - name: report_csv
+          - name: restricted_agent
+          - name: role
+          - name: role_type
+          - name: shared
+          - name: shared_agent
+          - name: shared_phone_number
+          - name: signature
+          - name: suspended
+          - name: tags
+          - name: ticket_restriction
+          - name: time_zone
+          - name: two_factor_auth_enabled
+          - name: url
+          - name: user_fields
+          - name: verified
+
+      - name: tickets
+        description: "Simulated tickets data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket."
+          - name: updated_at
+          - name: allow_attachments
+          - name: allow_channelback
+          - name: assignee_id
+          - name: brand_id
+          - name: collaborator_ids
+          - name: created_at
+          - name: custom_fields
+          - name: custom_status_id
+          - name: description
+          - name: due_at
+          - name: email_cc_ids
+          - name: external_id
+          - name: fields
+          - name: follower_ids 
+          - name: followup_ids
+          - name: forum_topic_id
+          - name: from_messaging_channel
+          - name: generated_timestamp
+          - name: group_id
+          - name: has_incidents
+          - name: is_public
+          - name: organization_id
+          - name: priority
+          - name: problem_id
+          - name: raw_subject
+          - name: recipient
+          - name: requester_id
+          - name: satisfaction_rating
+          - name: sharing_agreement_ids
+          - name: status
+          - name: subject
+          - name: submitter_id
+          - name: tags
+          - name: ticket_form_id
+          - name: type
+          - name: url
+          - name: via
+
+      - name: schedules
+        description: "Simulated schedules data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the schedule."
+          - name: created_at
+          - name: intervals
+          - name: name
+          - name: time_zone
+          - name: updated_at
+
+      - name: ticket_metrics
+        description: "Simulated ticket_metrics data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_metrics."
+          - name: agent_wait_time_in_minutes
+          - name: created_at
+          - name: assigned_at
+          - name: assignee_stations
+          - name: assignee_updated_at
+          - name: custom_status_updated_at
+          - name: first_resolution_time_in_minutes
+          - name: full_resolution_time_in_minutes
+          - name: group_stations
+          - name: initially_assigned_at
+          - name: instance_id
+          - name: latest_comment_added_at
+          - name: metric
+          - name: on_hold_time_in_minutes
+          - name: updated_at
+          - name: url
+          - name: reopens
+          - name: replies
+          - name: reply_time_in_minutes
+          - name: requester_updated_at
+          - name: requester_wait_time_in_minutes
+          - name: solved_at
+          - name: status
+          - name: status_updated_at
+          - name: ticket_id
+          - name: time
+          - name: type
