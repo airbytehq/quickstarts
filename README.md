@@ -16,12 +16,17 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
 - [Airbyte, dbt, Dagster and Snowflake Basic Stack](./airbyte_dbt_dagster_snowflake)
+- [Airbyte, dbt, Airflow and BigQuery E-commerce Stack](./airbyte_dbt_airflow_bigquery)
 - [E-commerce analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
 - [Postgres to snowflake data integraton](./postgres_snowflake_integration)
 - [MongoDB MySQL Integration Stack](./mongodb_mysql_integration)
 - [Multisource Database Aggregtion Stack](./multisource_aggregation)
 - [Postgres Data Replication Stack](./postgres_data_replication)
 - [Postgres to MySQL Database Migration Stack](./postgres_to_mysql_migration)
+- [API to Data Warehouse Integration Stack](./api_to_warehouse)
+- [Github Insight Stack with Airbyte, dbt, Dagster and BigQuery](./github_insight_stack)
+- [Customer Satisfaction Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./satisfaction_analytics_zendesk_support)
+- [Customer Ticket Volume Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./ticket_volume_analytics_zendesk_support)
 
 ## Contribution Guidelines
 
