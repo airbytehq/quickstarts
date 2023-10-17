@@ -1,0 +1,5 @@
+dbt-core~=1.6.0
+astronomer-cosmos~=1.1.0
+astronomer-cosmos[dbt-bigquery]~=1.1.0
+apache-airflow-providers-google~=10.9.0
+apache-airflow-providers-airbyte~=3.3.2

@@ -1,0 +1,54 @@
+version: 2
+
+models:
+    - name: product_popularity
+      columns:
+          - name: id
+            tests:
+                - unique
+          - name: make
+            tests:
+                - not_null
+          - name: model
+            tests:
+                - not_null
+          - name: purchase_count
+            tests:
+                - not_null
+
+    - name: purchase_patterns
+      columns:
+          - name: user_id
+            tests:
+                - not_null
+          - name: product_id
+            tests:
+                - not_null
+          - name: purchased_at
+            tests:
+                - not_null
+          - name: added_to_cart_at
+            tests:
+                - not_null
+          - name: time_to_purchase_seconds
+            tests:
+                - not_null
+          - name: returned_at
+
+    - name: user_demographics
+      columns:
+          - name: gender
+            tests:
+                - not_null
+          - name: academic_degree
+            tests:
+                - not_null
+          - name: nationality
+            tests:
+                - not_null
+          - name: average_age
+            tests:
+                - not_null
+          - name: user_count
+            tests:
+                - not_null

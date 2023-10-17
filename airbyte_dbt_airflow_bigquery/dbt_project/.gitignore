@@ -1,0 +1,10 @@
+
+target/
+dbt_packages/
+logs/
+
+#Desktop Services Store
+.DS_Store
+
+#User cookie
+.user.yml
