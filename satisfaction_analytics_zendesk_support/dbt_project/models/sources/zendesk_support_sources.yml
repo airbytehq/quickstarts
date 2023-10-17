@@ -1,0 +1,316 @@
+version: 2
+
+sources:
+  - name: zendesk_support
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: zendesk_airbyte_trial
+
+    tables:
+      - name: users
+        description: "Simulated user data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the user."
+          - name: active
+          - name: alias
+          - name: chat_only
+          - name: created_at
+          - name: custom_role_id
+          - name: default_group_id
+          - name: details
+          - name: email
+          - name: external_id
+          - name: updated_at
+          - name: iana_time_zone
+          - name: last_login_at
+          - name: locale
+          - name: locale_id
+          - name: moderator
+          - name: name
+          - name: notes
+          - name: only_private_comments
+          - name: organization_id
+          - name: permanently_deleted
+          - name: phone
+          - name: photo
+          - name: report_csv
+          - name: restricted_agent
+          - name: role
+          - name: role_type
+          - name: shared
+          - name: shared_agent
+          - name: shared_phone_number
+          - name: signature
+          - name: suspended
+          - name: tags
+          - name: ticket_restriction
+          - name: time_zone
+          - name: two_factor_auth_enabled
+          - name: url
+          - name: user_fields
+          - name: verified
+
+      - name: tickets
+        description: "Simulated tickets data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket."
+          - name: updated_at
+          - name: allow_attachments
+          - name: allow_channelback
+          - name: assignee_id
+          - name: brand_id
+          - name: collaborator_ids
+          - name: created_at
+          - name: custom_fields
+          - name: custom_status_id
+          - name: description
+          - name: due_at
+          - name: email_cc_ids
+          - name: external_id
+          - name: fields
+          - name: follower_ids 
+          - name: followup_ids
+          - name: forum_topic_id
+          - name: from_messaging_channel
+          - name: generated_timestamp
+          - name: group_id
+          - name: has_incidents
+          - name: is_public
+          - name: organization_id
+          - name: priority
+          - name: problem_id
+          - name: raw_subject
+          - name: recipient
+          - name: requester_id
+          - name: satisfaction_rating
+          - name: sharing_agreement_ids
+          - name: status
+          - name: subject
+          - name: submitter_id
+          - name: tags
+          - name: ticket_form_id
+          - name: type
+          - name: url
+          - name: via
+
+
+      - name: satisfaction_ratings
+        description: "Simulated satisfaction_ratings data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the satisfaction_ratings."
+          - name: updated_at
+          - name: created_at
+          - name: assignee_id
+          - name: comment
+          - name: group_id
+          - name: reason
+          - name: reason_id
+          - name: requester_id
+          - name: score
+          - name: ticket_id
+          - name: url
+
+      - name: brands
+        description: "Simulated brands data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the brands."
+          - name: updated_at
+          - name: created_at
+          - name: url
+          - name: active
+          - name: brand_url
+          - name: default
+          - name: has_help_center
+          - name: help_center_state
+          - name: host_mapping
+          - name: is_deleted
+          - name: logo
+          - name: name
+          - name: signature_template
+          - name: subdomain
+          - name: ticket_form_ids
+
+      - name: groups
+        description: "Simulated groups data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the groups."
+          - name: updated_at
+          - name: created_at
+          - name: url
+          - name: deleted
+          - name: description
+          - name: default
+          - name: is_public
+          - name: name
+
+      - name: organizations
+        description: "Simulated organizations data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the organizations."
+          - name: updated_at
+          - name: created_at
+          - name: url
+          - name: details
+          - name: domain_names
+          - name: external_id
+          - name: group_id
+          - name: notes
+          - name: organization_fields
+          - name: deleted_at
+          - name: shared_comments
+          - name: name
+          - name: shared_tickets
+          - name: tags
+
+      - name: tags
+        description: "Simulated tags data from the Zendesk Support connector."
+        columns:
+          - name: name
+          - name: count
+
+      - name: ticket_audits
+        description: "Simulated ticket_audits data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_audits."
+          - name: author_id
+          - name: created_at
+          - name: events
+          - name: metadata
+          - name: ticket_id
+          - name: via
+
+      - name: ticket_comments
+        description: "Simulated ticket_comments data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_comments."
+          - name: attachments
+          - name: created_at
+          - name: audit_id
+          - name: author_id
+          - name: body
+          - name: event_type
+          - name: html_body
+          - name: metadata
+          - name: plain_body
+          - name: public
+          - name: ticket_id
+          - name: timestamp
+          - name: type
+          - name: uploads
+          - name: via
+          - name: via_reference_id
+
+      - name: ticket_fields
+        description: "Simulated ticket_fields data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_fields."
+          - name: active
+          - name: created_at
+          - name: agent_description
+          - name: collapsed_for_agents
+          - name: custom_field_options
+          - name: custom_statuses
+          - name: description
+          - name: editable_in_portal
+          - name: key
+          - name: position
+          - name: raw_description
+          - name: raw_title
+          - name: raw_title_in_portal
+          - name: regexp_for_validation
+          - name: removable
+          - name: required
+          - name: required_in_portal
+          - name: sub_type_id
+          - name: system_field_options
+          - name: tag
+          - name: title
+          - name: title_in_portal
+          - name: type
+          - name: updated_at
+          - name: url
+          - name: visible_in_portal
+         
+      - name: ticket_forms
+        description: "Simulated ticket_forms data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_forms."
+          - name: active
+          - name: created_at
+          - name: agent_conditions
+          - name: default
+          - name: display_name
+          - name: end_user_conditions
+          - name: end_user_visible
+          - name: in_all_brands
+          - name: name
+          - name: position
+          - name: raw_display_name
+          - name: raw_name
+          - name: restricted_brand_ids
+          - name: ticket_field_ids
+          - name: updated_at
+          - name: url
+
+      - name: ticket_metric_events
+        description: "Simulated ticket_metric_events data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_metric_events."
+          - name: instance_id
+          - name: metric
+          - name: time
+          - name: type
+          - name: ticket_id
+
+      - name: ticket_metrics
+        description: "Simulated ticket_metrics data from the Zendesk Support connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the ticket_metrics."
+          - name: agent_wait_time_in_minutes
+          - name: created_at
+          - name: assigned_at
+          - name: assignee_stations
+          - name: assignee_updated_at
+          - name: custom_status_updated_at
+          - name: first_resolution_time_in_minutes
+          - name: full_resolution_time_in_minutes
+          - name: group_stations
+          - name: initially_assigned_at
+          - name: instance_id
+          - name: latest_comment_added_at
+          - name: metric
+          - name: on_hold_time_in_minutes
+          - name: updated_at
+          - name: url
+          - name: reopens
+          - name: replies
+          - name: reply_time_in_minutes
+          - name: requester_updated_at
+          - name: requester_wait_time_in_minutes
+          - name: solved_at
+          - name: status
+          - name: status_updated_at
+          - name: ticket_id
+          - name: time
+          - name: type
+        
+          
+        
+         
+       
+          
+         
+
