@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: github_raw
+    database: your_bigquery_project_id
+    schema: github_raw_data
+
+    tables:
+      - name: repositories
+      - name: commits
+      - name: pull_requests
