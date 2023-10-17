@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: zendesk_support
     # Use your BigQuery project ID
-    database: collab-test-bishal
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
     # Use your BigQuery dataset name
     schema: zendesk_airbyte_trial
 

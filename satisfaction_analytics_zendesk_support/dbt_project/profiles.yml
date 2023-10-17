@@ -10,7 +10,7 @@ dbt_project:
       method: service-account
       priority: interactive
       # Indicate your BigQuery project ID
-      project: collab-test-bishal
+      project: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
       threads: 1
       type: bigquery
   target: dev
