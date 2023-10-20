@@ -7,11 +7,11 @@ resource "airbyte_source_github" "my_source_github" {
         personal_access_token = var.personal_access_token
       }
     }
-    repository  = "bishalbera/Skillify"
+    repository  = var.repository
     source_type = "github"
     start_date  = "2023-09-01T00:00:00Z"
   }
-  name         = "Biplab Bera"
+  name         = "Your_Name"
   workspace_id = var.workspace_id
 }
 

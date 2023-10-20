@@ -18,6 +18,10 @@ variable "credentials_json" {
   type = string
 }
 
+variable "repository" {
+  type = string
+}
+
 
 
 
