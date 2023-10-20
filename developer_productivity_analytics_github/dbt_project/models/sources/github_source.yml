@@ -1,0 +1,423 @@
+version: 2
+
+sources:
+  - name: github
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: github_airbyte
+    
+    tables: 
+
+      - name: users
+        description: "Simulated user data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the users."
+          - name: avatar_url 
+          - name: events_url
+          - name: followers_url
+          - name: following_url
+          - name: gists_url
+          - name: gravatar_url
+          - name: html_url
+          - name: login
+          - name: node_id
+          - name: organization
+          - name: organizations_url
+          - name: received_events_url
+          - name: repos_url
+          - name: site_admin
+          - name: starred_url
+          - name: subscriptions_url
+          - name: type
+          - name: url
+
+      - name: teams
+        description: "Simulated team data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the teams."
+          - name: description 
+          - name: members_url
+          - name: name
+          - name: notifaction_setting
+          - name: parent
+          - name: permission
+          - name: html_url
+          - name: privacy
+          - name: node_id
+          - name: organization
+          - name: repositories_url
+          - name: slug
+          - name: url
+
+      - name: tags
+        description: "Simulated tag data from the Github connector."
+        columns:
+          - name: name 
+          - name: commit 
+          - name: tarball_url
+          - name: zipball_url
+          - name: repository
+          - name: node_id
+
+      - name: stargazers
+        description: "Simulated stargazer data from the Github connector."
+        columns:
+          - name: user 
+          - name: user_id 
+          - name: starred_at
+          - name: repository
+
+      - name: reviews
+        description: "Simulated review data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the reviews."
+          - name: user 
+          - name: author_association 
+          - name: body
+          - name: repository
+          - name: commit_id
+          - name: created_at
+          - name: html_url
+          - name: node_id
+          - name: pull_request_url
+          - name: state
+          - name: submitted_at
+          - name: updated_at
+          - name: _links
+
+      - name: review_comments
+        description: "Simulated review_comment data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the review_comments."
+          - name: user 
+          - name: author_association 
+          - name: body
+          - name: repository
+          - name: commit_id
+          - name: created_at
+          - name: html_url
+          - name: node_id
+          - name: pull_request_url
+          - name: diff_hunk
+          - name: in_reply_to_id
+          - name: updated_at
+          - name: _links
+          - name: line
+          - name: original_commit_id
+          - name: original_line
+          - name: original_position
+          - name: original_start_line
+          - name: path
+          - name: position
+          - name: pull_request_review_id
+          - name: reactions
+          - name: side
+          - name: start_line
+          - name: start_side
+          - name: subject_type
+          - name: url
+
+      - name: repositories
+        description: "Simulated repository data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the repositories."
+          - name: allow_forking 
+          - name: archive_url 
+          - name: archived
+          - name: assignees_url
+          - name: blobs_url
+          - name: branches_url
+          - name: clone_url
+          - name: collaborators_url
+          - name: comments_url
+          - name: commits_url
+          - name: compare_url
+          - name: contents_url
+          - name: contributors_url
+          - name: created_at
+          - name: default_branch
+          - name: deployments_url
+          - name: description
+          - name: disabled
+          - name: downloads_url
+          - name: events_url
+          - name: fork
+          - name: forks
+          - name: forks_count
+          - name: forks_url
+          - name: full_name
+          - name: git_commits_url
+          - name: git_refs_url  
+          - name: git_tags_url
+          - name: git_url
+          - name: has_discussions
+          - name: has_downloads
+          - name: has_issues
+          - name: has_pages
+          - name: has_projects
+          - name: has_wiki
+          - name: homepage
+          - name: hooks_url
+          - name: html_url
+          - name: is_template
+          - name: issue_comment_url
+          - name: issue_events_url
+          - name: issues_url
+          - name: keys_url
+          - name: labels_url
+          - name: language
+          - name: languages_url
+          - name: license
+          - name: merges_url
+          - name: milestones_url
+          - name: mirror_url
+          - name: name
+          - name: node_id
+          - name: notifications_url
+          - name: open_issues
+          - name: open_issues_count
+          - name: organization
+          - name: owner
+          - name: permissions
+          - name: private
+          - name: pulls_url
+          - name: pushed_at
+          - name: releases_url
+          - name: security_and_analysis
+          - name: size
+          - name: ssh_url
+          - name: stargazers_count
+          - name: stargazers_url
+          - name: statuses_url
+          - name: subscribers_url
+          - name: subscription_url
+          - name: svn_url
+          - name: tags_url
+          - name: teams_url
+          - name: topics
+          - name: trees_url
+          - name: updated_at
+          - name: url
+          - name: visibility
+          - name: watchers
+          - name: watchers_count
+          - name: web_commit_signoff_required
+
+      - name: pull_requests
+        description: "Simulated pull_request data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the pull_requests."
+          - name: active_lock_reason 
+          - name: assignee 
+          - name: assignees
+          - name: author_association
+          - name: auto_merge
+          - name: base
+          - name: body
+          - name: closed_at
+          - name: comments_url
+          - name: commits_url
+          - name: created_at
+          - name: diff_url
+          - name: draft
+          - name: head
+          - name: html_url
+          - name: issue_url
+          - name: labels
+          - name: locked
+          - name: merge_commit_sha
+          - name: merged_at
+          - name: milestone
+          - name: node_id
+          - name: number
+          - name: patch_url
+          - name: repository
+          - name: requested_reviewers
+          - name: requested_teams
+          - name: review_comment_url
+          - name: review_comments_url
+          - name: state
+          - name: statuses_url
+          - name: title
+          - name: updated_at
+          - name: url
+          - name: user
+
+      - name: organizations
+        description: "Simulated organization data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the organizations."
+          - name: advanced_security_enabled_for_new_repositories 
+          - name: archived_at 
+          - name: archived_at
+          - name: billing_email
+          - name: blog
+          - name: collaborators
+          - name: company
+          - name: created_at
+          - name: default_repository_permission
+          - name: dependabot_alerts_enabled_for_new_repositories
+          - name: dependabot_security_updates_enabled_for_new_repositories
+          - name: dependency_graph_enabled_for_new_repositories
+          - name: description
+          - name: disk_usage
+          - name: email
+          - name: events_url
+          - name: followers
+          - name: following
+          - name: has_organization_projects
+          - name: has_repository_projects
+          - name: hooks_url
+          - name: html_url
+          - name: is_verified
+          - name: issues_url
+          - name: location
+          - name: login
+          - name: members_allowed_repository_creation_type
+          - name: members_can_create_internal_repositories
+          - name: members_can_create_pages
+          - name: members_can_create_private_pages
+          - name: members_can_create_private_repositories
+          - name: members_can_create_public_pages
+          - name: members_can_create_public_repositories
+          - name: members_can_create_repositories
+          - name: members_can_fork_private_repositories
+          - name: members_url
+          - name: name
+          - name: node_id
+          - name: owned_private_repos
+          - name: plan
+          - name: private_gists
+          - name: public_gists
+          - name: public_members_url
+          - name: public_repos
+          - name: repos_url
+          - name: secret_scanning_enabled_for_new_repositories
+          - name: secret_scanning_push_protection_custom_link
+          - name: secret_scanning_push_protection_custom_link_enabled
+          - name: secret_scanning_push_protection_enabled_for_new_repositories
+          - name: total_private_repos
+          - name: twitter_username
+          - name: two_factor_requirement_enabled
+          - name: type
+          - name: updated_at
+          - name: url
+          - name: web_commit_signoff_required
+
+      - name: issues
+        description: "Simulated issue data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the issues."
+          - name: active_lock_reason 
+          - name: assignee
+          - name: assignees
+          - name: author_association
+          - name: body
+          - name: closed_at
+          - name: comments
+          - name: comments_url
+          - name: created_at
+          - name: draft
+          - name: events_url
+          - name: html_url
+          - name: labels
+          - name: labels_url
+          - name: locked
+          - name: milestone
+          - name: node_id
+          - name: node_id
+          - name: performed_via_github_app
+          - name: pull_request
+          - name: reactions
+          - name: repository
+          - name: repository_url
+          - name: state
+          - name: state_reason
+          - name: timeline_url
+          - name: title
+          - name: updated_at
+          - name: url
+          - name: user
+          - name: user_id
+
+      - name: commits
+        description: "Simulated commit data from the Github connector."
+        columns:
+          - name: author 
+          - name: branch
+          - name: comments_url
+          - name: commit
+          - name: committer
+          - name: created_at
+          - name: html_url
+          - name: node_id
+          - name: parents
+          - name: repository
+          - name: sha
+          - name: url
+
+      - name: comments
+        description: "Simulated comment data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the comments."
+          - name: author_association 
+          - name: body
+          - name: created_at
+          - name: html_url
+          - name: issue_url
+          - name: node_id
+          - name: performed_via_github_app
+          - name: reactions
+          - name: repository
+          - name: updated_at
+          - name: url
+          - name: user
+          - name: user_id
+
+      - name: branches
+        description: "Simulated branch data from the Github connector."
+        columns:
+          - name: commit 
+          - name: name
+          - name: protected
+          - name: protection
+          - name: protection_url
+          - name: repository
+
+      - name: collaborators
+        description: "Simulated collaborators data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the collaborators."
+          - name: avatar_url 
+          - name: events_url
+          - name: followers_url
+          - name: following_url
+          - name: gists_url
+          - name: gravatar_id
+          - name: html_url
+          - name: login
+          - name: node_id
+          - name: organizations_url
+          - name: permissions
+          - name: received_events_url
+          - name: repos_url
+          - name: repository
+          - name: role_name
+          - name: site_adminl
+          - name: starred_url
+          - name: subscriptions_url
+          - name: type
+          - name: url
+
+          
