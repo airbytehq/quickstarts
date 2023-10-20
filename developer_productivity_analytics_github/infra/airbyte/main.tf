@@ -11,7 +11,7 @@ resource "airbyte_source_github" "my_source_github" {
     source_type = "github"
     start_date  = "2023-09-01T00:00:00Z"
   }
-  name         = "Your_Name"
+  name         = "your_name"
   workspace_id = var.workspace_id
 }
 
