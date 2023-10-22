@@ -4,7 +4,7 @@ Welcome to the "Weather Data Stack" repository! 🌟 This is your go-to place to
 
 This Quickstart is all about making things easy, getting you started quickly and showing you how smoothly all these tools can work together!
 
-Below is a visual representation of how data flows through our integrated tools in this Quickstart. This comes from Dagster's global asset lineage view:
+Here is a visual representation of how data flows through our integrated tools in this Quickstart.
 
 ![Overview](./assets/Weather.png)
 
@@ -101,7 +101,7 @@ To extract weather data from the Weatherstack API and store the API key in its o
 
 #### 1. Sign Up for a Weatherstack API Key
 
-1. Visit the Weatherstack website at [https://weatherstack.com/](https://weatherstack.com/).
+1. Visit the [Weatherstack website](https://weatherstack.com/).
 2. Sign up for an account or log in if you already have one.
 3. Once logged in, go to the dashboard to obtain your API key.
 
