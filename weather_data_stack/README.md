@@ -138,6 +138,8 @@ You can use a scripting language of your choice to make API requests and extract
 
 2. Create a Python script, for example, `weather_extraction.py`, and add the following code: Feel free to modify the code according to your needs; If you want forecast data, you will have to upgrade to achieve that.
 
+In this particular example, we shall get current weather data about Ugandan districts using this [JSON file.](https://github.com/bahiirwa/uganda-APIs/blob/master/districts.json)
+
 ```python
 
 import requests
