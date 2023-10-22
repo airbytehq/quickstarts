@@ -6,7 +6,7 @@ This Quickstart is all about making things easy, getting you started quickly and
 
 Below is a visual representation of how data flows through our integrated tools in this Quickstart. This comes from Dagster's global asset lineage view:
 
-![Global Asset Lineage](./assets/Global_Asset_Lineage.svg)
+![Overview](./assets/Weather.png)
 
 ## Table of Contents
 
@@ -246,13 +246,11 @@ This setup allows you to securely store your API key in an environment variable 
 Here, you have two options, you can set up connectors with source and destination manually using the Airbyte UI or Terraform. The choice depends on your preferances.
 
 ### 1. Setting Up Airbyte Connectors with AirByteUI
-Use the generated public url from the previous step to manually configure the set p using the File Option as source.
-(image)
+Use the generated public url from the previous step to manually configure using the File Option as source under public HTPPS.
 
-Follow these steps for more.
+![Overview](./assets/connect.PNG)
 
-
-
+- Follow these [steps](https://docs.airbyte.com/quickstart/set-up-a-connection) for more.
 
 ### 2. Setting Up Airbyte Connectors with Terraform
 Airbyte allows you to create connectors for sources and destinations, facilitating data synchronization between various platforms. In this project, we're harnessing the power of Terraform to automate the creation of these connectors and the connections between them. Here's how you can set this up:
