@@ -1,0 +1,69 @@
+version: 2
+
+sources:
+  - name: faker
+    # Use your BigQuery project ID
+    database: your_project_id
+    # Use your BigQuery dataset name
+    schema: raw_data
+
+    tables:
+      - name: users
+        description: "Simulated user data from the Faker connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the user."
+          - name: address
+          - name: occupation
+          - name: gender
+          - name: academic_degree
+          - name: weight
+          - name: created_at
+          - name: language
+          - name: telephone
+          - name: title
+          - name: updated_at
+          - name: nationality
+          - name: blood_type
+          - name: name
+          - name: age
+          - name: email
+          - name: height
+          - name: _airbyte_ab_id
+          - name: _airbyte_emitted_at
+          - name: _airbyte_normalized_at
+          - name: _airbyte_users_hashid
+
+      - name: products
+        description: "Simulated product data from the Faker connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the product."
+          - name: updated_at
+          - name: year
+          - name: price
+          - name: created_at
+          - name: model
+          - name: make
+          - name: _airbyte_ab_id
+          - name: _airbyte_emitted_at
+          - name: _airbyte_normalized_at
+          - name: _airbyte_users_hashid
+
+      - name: purchases
+        description: "Simulated purchase data from the Faker connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the purchase."
+          - name: updated_at
+          - name: purchased_at
+          - name: user_id
+          - name: returned_at
+          - name: product_id
+          - name: created_at
+          - name: added_to_cart_at
+          - name: _airbyte_ab_id
+          - name: _airbyte_emitted_at
+          - name: _airbyte_normalized_at
+          - name: _airbyte_users_hashid
+
