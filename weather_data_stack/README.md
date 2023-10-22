@@ -20,7 +20,7 @@ Below is a visual representation of how data flows through our integrated tools 
       - [3. Create an Environment Variables File](#3-create-an-environment-variables-file)
       - [4. Set Up a Script to Extract Weather Data](#4-set-up-a-script-to-extract-weather-data)
       - [5. Run the Script](#5-run-the-script)
-      - [6. Upload your json file on any web file hosting. In this article, we have used a free JsonUpkeeper tool. You just paste your contents and public URL is generated that you will use as source in the next step.](#6-upload-your-json-file-on-any-web-file-hosting-in-this-article-we-have-used-a-free-jsonupkeeper-tool-you-just-paste-your-contents-and-public-url-is-generated-that-you-will-use-as-source-in-the-next-step)
+      - [6. Upload your json file on any web file hosting.](#6-upload-your-json-file-on-any-web-file-hosting)
   - [3. Setting Up BigQuery](#3-setting-up-bigquery)
       - [1. **Create a Google Cloud Project**](#1-create-a-google-cloud-project)
       - [2. **Create BigQuery Datasets**](#2-create-bigquery-datasets)
@@ -47,7 +47,7 @@ Before you embark on this integration, ensure you have the following set up and 
 
 2. **Docker and Docker Compose (Docker Desktop)**: Install [Docker](https://docs.docker.com/get-docker/) following the official documentation for your specific OS.
 
-3. **Airbyte OSS version**: Deploy the open-source version of Airbyte. Follow the installation instructions from the .Airbyte Documentation](https://docs.airbyte.com/quickstart/deploy-airbyte/).
+3. **Airbyte OSS version**: Deploy the open-source version of Airbyte. Follow the installation instructions from the [Airbyte Documentation](https://docs.airbyte.com/quickstart/deploy-airbyte/).
 
 4. **Terraform**: Terraform will help you provision and manage the Airbyte resources. If you haven't installed it, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
@@ -199,7 +199,13 @@ The script will make an API request to Weatherstack using the API key from your 
 
 This setup allows you to securely store your API key in an environment variable file, ensuring that it's not exposed in your codebase and can be easily managed.
 
-#### 6. Upload your json file on any web file hosting. In this article, we have used a free [JsonUpkeeper](https://www.jsonkeeper.com/) tool. You just paste your contents and public URL is generated that you will use as source in the next step.
+#### 6. Upload your json file on any web file hosting.
+
+In this article, we have used a free [JsonUpkeeper](https://www.jsonkeeper.com/) tool. You just paste your contents and public URL is generated that you will use as source in the next step.
+
+Example of my extracted Uganda weather data:
+![Uganda Weather Data](./assets/uganda.png)
+
 
 ## 3. Setting Up BigQuery
 
@@ -248,7 +254,7 @@ Here, you have two options, you can set up connectors with source and destinatio
 ### 1. Setting Up Airbyte Connectors with AirByteUI
 Use the generated public url from the previous step to manually configure using the File Option as source under public HTPPS.
 
-![Overview](./assets/connect.PNG)
+![AirByte UI](./assets/connect.PNG)
 
 - Follow these [steps](https://docs.airbyte.com/quickstart/set-up-a-connection) for more.
 
