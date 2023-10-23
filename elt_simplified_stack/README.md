@@ -11,7 +11,7 @@ This Quickstart is all about making things easy, getting you started quickly and
 - [Setting Up BigQuery to work with Airbyte and dbt](#2-setting-up-bigquery)
 - [Setting Up Airbyte Connectors with Terraform](#3-setting-up-airbyte-connectors-with-terraform)
 - [Setting Up the dbt Project](#4-setting-up-the-dbt-project)
-- [Orchestrating with Prefect](#5-orchestrating-with-dagster)
+- [Orchestrating with Prefect](#5-orchestrating-with-prefect)
 - [Next Steps](#next-steps)
 
 ## Prerequisites
@@ -207,7 +207,7 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    You can verify the data has been transformed by going to BigQuery and checking the `transformed_data` dataset.
 
-## 4. Orchestrating with Prefect
+## 5. Orchestrating with Prefect
 
 [Prefect](https://prefect.io/) is an orchestration workflow tool that makes it easy to build, run, and monitor data workflows by writing Python code. In this section, we'll walk you through creating a Prefect flow to orchestrate both Airbyte extract and load operations, and dbt transformations with Python:
 
