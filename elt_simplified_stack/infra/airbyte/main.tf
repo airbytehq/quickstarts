@@ -43,46 +43,10 @@ resource "airbyte_connection" "github_bigquery" {
   configurations = {
     streams = [
       {
-        name = "users"
-      },
-      {
-        name = "teams"
-      },
-      {
-        name = "tags"
-      },
-      {
-        name = "stargazers"
-      },
-      {
-        name = "repositories"
-      },
-      {
         name = "pull_requests"
       },
       {
-        name = "organizations"
-      },
-      {
-        name = "issues"
-      },
-      {
         name = "commits"
-      },
-      {
-        name = "comments"
-      }, 
-      {
-        name = "branches"
-      },
-      {
-        name = "reviews"
-      },
-      {
-        name = "review_comments"
-      },
-      {
-        name = "collaborators"
       }
     ]
   }

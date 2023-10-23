@@ -21,10 +21,3 @@ variable "credentials_json" {
 variable "repository" {
   type = string
 }
-
-
-
-
-
-
-
