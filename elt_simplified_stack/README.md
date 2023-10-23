@@ -6,6 +6,7 @@ This Quickstart is all about making things easy, getting you started quickly and
 
 ## Table of Contents
 
+- [Infrastructure Layout](#infrastructure-layout)
 - [Prerequisites](#prerequisites)
 - [Setting an environment for your project](#1-setting-an-environment-for-your-project)
 - [Setting Up BigQuery to work with Airbyte and dbt](#2-setting-up-bigquery)
@@ -13,6 +14,9 @@ This Quickstart is all about making things easy, getting you started quickly and
 - [Setting Up the dbt Project](#4-setting-up-the-dbt-project)
 - [Orchestrating with Prefect](#5-orchestrating-with-prefect)
 - [Next Steps](#next-steps)
+
+## Infrastructure Layout
+![insfrastructure layout](images/infrastructure.png)
 
 ## Prerequisites
 
