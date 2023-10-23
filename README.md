@@ -17,6 +17,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 - [Airbyte, dbt, Airflow and BigQuery E-commerce Stack](./airbyte_dbt_airflow_bigquery)
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
 - [Airbyte, dbt, Dagster and Snowflake Basic Stack](./airbyte_dbt_dagster_snowflake)
+- [Airbyte, dbt, Prefect and Snowflake Basic Stack](./airbyte_dbt_prefect_snowflake)
 - [Airbyte, dbt, Prefect and BigQuery (PAD) Stack](./airbyte_dbt_prefect_bigquery)
 - [API to Data Warehouse Integration Stack](./api_to_warehouse)
 - [Customer Satisfaction Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./satisfaction_analytics_zendesk_support)
