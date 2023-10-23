@@ -1,12 +1,8 @@
-# Developer Productivity Analytics Stack With Github, Airbyte, Dbt, Dagster and BigQuery
+# ELT simplified Stack With Github, Airbyte, DBT, Prefect and BigQuery
 
-Welcome to the "Developer Productivity Analytics Stack" repository! ✨ This is your go-to place to easily set up a data stack using , Airbyte Github, Dbt, BigQuery, and Dagster. With this setup, you can pull Github data, extract it using Airbyte, put it into BigQuery, and play around with it using dbt and Dagster.
+Welcome to the "ELT simplified Stack" repository! ✨ For extracting from source - and travel towards destination with some intermediate transformations with Airbyte - Github, DBT, BigQuery, and Prefect. With this setup, you can pull Github data, extract it using Airbyte, put it into BigQuery, and play around with it using dbt and Prefect.
 
 This Quickstart is all about making things easy, getting you started quickly and showing you how smoothly all these tools can work together!
-
-Below is a visual representation of how data flows through our integrated tools in this Quickstart. This comes from Dagster's global asset lineage view:
-
-![Global Asset Lineage](<./assets/Global_Asset_Lineage (5).svg>)
 
 ## Table of Contents
 
@@ -15,7 +11,7 @@ Below is a visual representation of how data flows through our integrated tools 
 - [Setting Up BigQuery to work with Airbyte and dbt](#2-setting-up-bigquery)
 - [Setting Up Airbyte Connectors with Terraform](#3-setting-up-airbyte-connectors-with-terraform)
 - [Setting Up the dbt Project](#4-setting-up-the-dbt-project)
-- [Orchestrating with Dagster](#5-orchestrating-with-dagster)
+- [Orchestrating with Prefect](#5-orchestrating-with-dagster)
 - [Next Steps](#next-steps)
 
 ## Prerequisites
@@ -47,13 +43,13 @@ Get the project up and running on your local machine by following these steps:
    ```
 
    ```bash
-   git sparse-checkout add developer_productivity_analytics_github
+   git sparse-checkout add elt_simplified
    ```
 
 2. **Navigate to the directory**:
 
    ```bash
-   cd developer_productivity_analytics_github
+   cd elt_simplified
    ```
 
 3. **Set Up a Virtual Environment**:
@@ -211,59 +207,63 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    You can verify the data has been transformed by going to BigQuery and checking the `transformed_data` dataset.
 
-## 5. Orchestrating with Dagster
+## 4. Orchestrating with Prefect
 
-[Dagster](https://dagster.io/) is a modern data orchestrator designed to help you build, test, and monitor your data workflows. In this section, we'll walk you through setting up Dagster to oversee both the Airbyte and dbt workflows:
+[Prefect](https://prefect.io/) is an orchestration workflow tool that makes it easy to build, run, and monitor data workflows by writing Python code. In this section, we'll walk you through creating a Prefect flow to orchestrate both Airbyte extract and load operations, and dbt transformations with Python:
 
 1. **Navigate to the Orchestration Directory**:
 
-   Switch to the directory containing the Dagster orchestration configurations:
-
+   Switch to the directory containing the Prefect orchestration configurations:
    ```bash
-   cd orchestration
+   cd ../orchestration
    ```
 
 2. **Set Environment Variables**:
 
-   Dagster requires certain environment variables to be set to interact with other tools like dbt and Airbyte. Set the following variables:
+   Prefect requires certain environment variables to be set to interact with other tools like dbt and Airbyte. Set the following variables:
 
    ```bash
-   export DAGSTER_DBT_PARSE_PROJECT_ON_LOAD=1
    export AIRBYTE_PASSWORD=password
    ```
 
-   Note: The `AIRBYTE_PASSWORD` is set to `password` as a default for local Airbyte instances. If you've changed this during your Airbyte setup, ensure you use the appropriate password here.
+3. **Connect to Prefect's API**:
 
-3. **Launch the Dagster UI**:
-
-   With the environment variables in place, kick-start the Dagster UI:
+   Open a new terminal window. Start a local Prefect server instance in your virtual environment:
 
    ```bash
-   dagster dev
+   prefect server start
    ```
 
-4. **Access Dagster in Your Browser**:
+4. **Deploy the Flow**:
+
+   When we run the flow script, Prefect will automatically create a flow deployment that you can interact with via the UI and API. The script will stay running so that it can listen for scheduled or triggered runs of this flow; once a run is found, it will be executed within a subprocess.
+
+   ```bash
+   python my_elt_flow.py
+   ```
+
+5. **Access Prefect UI in Your Browser**:
 
    Open your browser and navigate to:
-
    ```
-   http://127.0.0.1:3000
+   http://127.0.0.1:4200
    ```
-
-   Here, you should see assets for both Airbyte and dbt. To get an overview of how these assets interrelate, click on "view global asset lineage". This will give you a clear picture of the data lineage, visualizing how data flows between the tools.
-
-5. **Materialize Dagster Assets**:
-   In the Dagster UI, click on "Materialize all". This should trigger the full pipeline. First the Airbyte sync to extract data from Faker and load it into BigQuery, and then dbt to transform the raw data, materializing the `staging` and `marts` models.
+   You can now begin interacting with your newly created deployment!
 
 ## Next Steps
 
-Congratulations on deploying and running the Customer Satisfaction Analytics Quistart! 🎉 Here are some suggestions on what you can explore next to dive deeper and get more out of your project:
+Congratulations on deploying and running the elt_simplified quickstart! 🎉 Here are some suggestions on what you can explore next to dive deeper and get more out of your project:
 
 ### 1. **Explore the Data and Insights**
-   - Dive into the datasets in BigQuery, run some queries, and explore the data you've collected and transformed. This is your chance to uncover insights and understand the data better!
+   - Your raw data extracted via Airbyte can be represented as sources in dbt. Start by [creating new dbt sources](https://docs.getdbt.com/docs/build/sources) to represent this data, allowing for structured transformations down the line.
 
 ### 2. **Optimize Your dbt Models**
    - Review the transformations you’ve applied using dbt. Try optimizing the models or create new ones based on your evolving needs and insights you want to extract.
 
-### 3. **Automate and Monitor Your Pipelines**
-   - Explore more advanced Dagster configurations and setups to automate your pipelines further and set up monitoring and alerting to be informed of any issues immediately.
+### 3. **Extend the Prefect Pipeline**:
+
+    - You can create flow runs from this deployment via API calls to be triggered by new data sync in Airbyte rather than on a schedule. You can customize your dbt   runs based on the results got from AirbyteSyncResult. You can also migrate the deployment to the Prefect cloud.
+
+### 4. **Extend the Project**:
+
+    - The real beauty of this integration is its extensibility. Whether you want to add more data sources, integrate additional tools, or enhance your transformation logic – the floor is yours. With the foundation set, sky's the limit for how you want to extend and refine your data processes.

@@ -5,3 +5,4 @@ FROM
   transformed_data.stg_pull_requests
 GROUP BY
   developer_username
+  
