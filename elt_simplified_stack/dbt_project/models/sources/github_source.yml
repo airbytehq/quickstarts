@@ -1,0 +1,67 @@
+version: 2
+
+sources:
+  - name: github
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: github_airbyte
+    
+    tables: 
+
+      - name: pull_requests
+        description: "Simulated pull_request data from the Github connector."
+        columns:
+          - name: id 
+            description: "Unique identifier for the pull_requests."
+          - name: active_lock_reason 
+          - name: assignee 
+          - name: assignees
+          - name: author_association
+          - name: auto_merge
+          - name: base
+          - name: body
+          - name: closed_at
+          - name: comments_url
+          - name: commits_url
+          - name: created_at
+          - name: diff_url
+          - name: draft
+          - name: head
+          - name: html_url
+          - name: issue_url
+          - name: labels
+          - name: locked
+          - name: merge_commit_sha
+          - name: merged_at
+          - name: milestone
+          - name: node_id
+          - name: number
+          - name: patch_url
+          - name: repository
+          - name: requested_reviewers
+          - name: requested_teams
+          - name: review_comment_url
+          - name: review_comments_url
+          - name: state
+          - name: statuses_url
+          - name: title
+          - name: updated_at
+          - name: url
+          - name: user
+
+      - name: commits
+        description: "Simulated commit data from the Github connector."
+        columns:
+          - name: author 
+          - name: branch
+          - name: comments_url
+          - name: commit
+          - name: committer
+          - name: created_at
+          - name: html_url
+          - name: node_id
+          - name: parents
+          - name: repository
+          - name: sha
+          - name: url

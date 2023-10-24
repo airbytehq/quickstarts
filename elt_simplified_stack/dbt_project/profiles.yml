@@ -1,0 +1,16 @@
+dbt_project:
+  outputs:
+    dev:
+      dataset: transformed_data
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      # Use an env variable to indicate your JSON key file path
+      keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE_PATH', '') }}"
+      location: US
+      method: service-account
+      priority: interactive
+      # Indicate your BigQuery project ID
+      project: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+      threads: 1
+      type: bigquery
+  target: dev
