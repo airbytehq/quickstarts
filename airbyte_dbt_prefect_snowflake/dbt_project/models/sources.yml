@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: snowflake
+    tables:
+      - name: sample_table
+        meta:
+          dagster:
+            asset_key: ["sample_table"] # This metadata specifies the corresponding Dagster asset for this dbt source.
