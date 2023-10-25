@@ -1,0 +1,27 @@
+dbt_project:
+  outputs:
+    dev:
+
+      type: snowflake
+      account: "{{ env_var('DBT_SNOWFLAKE_ACCOUNT_ID', '') }}"
+
+      # User/password auth
+      user: username
+      password: "{{ env_var('DBT_SNOWFLAKE_PASSWORD', '') }}"
+
+      role: user_role
+      database: database_name
+      warehouse: warehouse_name
+      schema: dbt_schema
+      threads: 1
+      client_session_keep_alive: False
+      query_tag: anything
+
+      # optional
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false
+      retry_all: False  # default: false
+      reuse_connections: False # default: false (available v1.4+)
+
+  target: dev
