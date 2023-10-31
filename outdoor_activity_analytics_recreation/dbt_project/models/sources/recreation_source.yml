@@ -1,0 +1,114 @@
+version: 2
+
+sources:
+  - name: recreation
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: recreation_airbyte
+    
+    tables:
+      - name: recreationareas
+        description: "Simulated recreationareas data from the Recreation connector."
+        columns:
+          - name: RecAreaID
+            description: "Unique identifier for the recreationareas."
+          - name: ACTIVITY
+          - name: Enabled
+          - name: EVENT
+          - name: FACILITY
+          - name: GEOJSON
+          - name: Keywords
+          - name: LastUpdatedDate
+          - name: LINK
+          - name: MEDIA
+          - name: ORGANIZATION
+          - name: OrgRecAreaID
+          - name: ParentOrgID
+          - name: RECAREAADDRESS
+          - name: RecAreaDescription
+          - name: RecAreaDirections
+          - name: RecAreaEmail
+          - name: RecAreaFeeDescription
+          - name: RecAreaLatitude
+          - name: RecAreaLongitude
+          - name: RecAreaMapURL
+          - name: RecAreaName
+          - name: RecAreaPhone
+          - name: RecAreaReservationURL
+          - name: Reservable
+          - name: StayLimit
+
+      - name: activities
+        description: "Simulated activities data from the Recreation connector."
+        columns:
+          - name: ActivityID
+            description: "Unique identifier for the activities."
+          - name: ActivityLevel
+          - name: ActivityName
+          - name: ActivityParentID
+
+      - name: campsites
+        description: "Simulated campsites data from the Recreation connector."
+        columns:
+          - name: CampsiteID
+            description: "Unique identifier for the campsites."
+          - name: ATTRIBUTES
+          - name: CampsiteAccessible
+          - name: CampsiteLatitude
+          - name: CampsiteLongitude
+          - name: CampsiteName
+          - name: CampsiteType
+          - name: CreatedDate
+          - name: ENTITYMEDIA
+          - name: FacilityID
+          - name: LastUpdatedDate
+          - name: Loop
+          - name: PERMITTEDEQUIPMENT
+          - name: TypeOfUse
+
+      - name: facilities
+        description: "Simulated facilities data from the Recreation connector."
+        columns:
+          - name: FacilityID
+            description: "Unique identifier for the facilities."
+          - name: ACTIVITY
+          - name: CAMPSITE
+          - name: Enabled
+          - name: EVENT
+          - name: FacilityAdaAccess
+          - name: FACILITYADDRESS
+          - name: FacilityDescription
+          - name: FacilityDirections
+          - name: FacilityEmail
+          - name: FacilityLatitude
+          - name: FacilityLongitude
+          - name: FacilityMapURL
+          - name: FacilityName
+          - name: FacilityPhone
+          - name: FacilityReservationURL
+          - name: FacilityTypeDescription
+          - name: FacilityUseFeeDescription
+          - name: GEOJSON
+          - name: Keywords
+          - name: LastUpdatedDate
+          - name: LegacyFacilityID
+          - name: LINK
+          - name: MEDIA
+          - name: ORGANIZATION
+          - name: OrgFacilityID
+          - name: ParentOrgID
+          - name: ParentRecAreaID
+          - name: PERMITENTRANCE
+          - name: RECAREA
+          - name: Reservable
+          - name: StayLimit
+          - name: TOUR
+
+
+
+
+          
+
+
+

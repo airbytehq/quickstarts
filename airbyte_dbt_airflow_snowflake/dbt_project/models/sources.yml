@@ -1,0 +1,6 @@
+version: 2
+
+sources:
+  - name: snowflake
+    tables:
+      - name: sample_table
