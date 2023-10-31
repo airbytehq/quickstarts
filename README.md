@@ -15,6 +15,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 ## List Of Available Quickstarts
 
 - [Airbyte, dbt, Airflow and BigQuery E-commerce Stack](./airbyte_dbt_airflow_bigquery)
+- [Airbyte, dbt, Airflow and Snowflake Basic Stack](./airbyte_dbt_airflow_snowflake)
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
 - [Airbyte, dbt, Dagster and Snowflake Basic Stack](./airbyte_dbt_dagster_snowflake)
 - [Airbyte, dbt, Prefect and Snowflake Basic Stack](./airbyte_dbt_prefect_snowflake)
