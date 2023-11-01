@@ -6,21 +6,15 @@ This Quickstart is all about making things easy, getting you started quickly and
 
 Here is a visual representation of how data flows through our integrated tools in this Quickstart.
 
-![Overview](./assets/Weather.png)
-
 ## Table of Contents
 
 - [Weather Data Stack with Airbyte, dbt, Dagster and BigQuery](#weather-data-stack-with-airbyte-dbt-dagster-and-bigquery)
   - [Table of Contents](#table-of-contents)
+  - [Infrastracture Layout](#infrastracture-layout)
   - [Prerequisites](#prerequisites)
   - [1. Setting an environment for your project](#1-setting-an-environment-for-your-project)
-  - [2. Weather Data Extraction](#2-weather-data-extraction)
+  - [2. Weatherstack API Key](#2-weatherstack-api-key)
       - [1. Sign Up for a Weatherstack API Key](#1-sign-up-for-a-weatherstack-api-key)
-      - [2. Set Up a New Project Directory](#2-set-up-a-new-project-directory)
-      - [3. Create an Environment Variables File](#3-create-an-environment-variables-file)
-      - [4. Set Up a Script to Extract Weather Data](#4-set-up-a-script-to-extract-weather-data)
-      - [5. Run the Script](#5-run-the-script)
-      - [6. Upload your json file on any web file hosting.](#6-upload-your-json-file-on-any-web-file-hosting)
   - [3. Setting Up BigQuery](#3-setting-up-bigquery)
       - [1. **Create a Google Cloud Project**](#1-create-a-google-cloud-project)
       - [2. **Create BigQuery Datasets**](#2-create-bigquery-datasets)
@@ -38,6 +32,9 @@ Here is a visual representation of how data flows through our integrated tools i
     - [5. **Automate and Monitor Your Pipelines**](#5-automate-and-monitor-your-pipelines)
     - [6. **Scale Your Setup**](#6-scale-your-setup)
     - [7. **Contribute to the Community**](#7-contribute-to-the-community)
+
+## Infrastracture Layout
+![Infrastracture Layout](./assets/Weather.png)
 
 ## Prerequisites
 
@@ -95,7 +92,7 @@ Get the project up and running on your local machine by following these steps:
    pip install -e ".[dev]"
    ```
 
-## 2. Weather Data Extraction
+## 2. Weatherstack API Key
 
 To extract weather data from the Weatherstack API and store the API key in its own environment variable file, you can follow these steps:
 
@@ -104,109 +101,6 @@ To extract weather data from the Weatherstack API and store the API key in its o
 1. Visit the [Weatherstack website](https://weatherstack.com/).
 2. Sign up for an account or log in if you already have one.
 3. Once logged in, go to the dashboard to obtain your API key.
-
-#### 2. Set Up a New Project Directory
-
-Create a new directory for your project and navigate to it in your command line or terminal.
-
-```bash
-mkdir weather-data-extraction
-cd weather-data-extraction
-```
-
-#### 3. Create an Environment Variables File
-
-Create a new file to store your API key securely. You can name it something like `.env`. This file will contain your API key, so make sure to keep it secret.
-
-```bash
-touch .env
-```
-
-Open the `.env` file in a text editor and add your Weatherstack API key:
-
-```plaintext
-WEATHERSTACK_API_KEY=YOUR_API_KEY_HERE
-```
-
-Replace `YOUR_API_KEY_HERE` with the actual API key you obtained in step 1.
-
-#### 4. Set Up a Script to Extract Weather Data
-
-You can use a scripting language of your choice to make API requests and extract weather data. Here, I'll provide an example using Python and the `requests` library.
-
-1. Install Python if you haven't already.
-
-2. Create a Python script, for example, `weather_extraction.py`, and add the following code: Feel free to modify the code according to your needs; If you want forecast data, you will have to upgrade to achieve that.
-
-In this particular example, we shall get current weather data about Ugandan districts using this [JSON file.](https://github.com/bahiirwa/uganda-APIs/blob/master/districts.json)
-
-```python
-
-import requests
-import json
-import os
-
-# Load the district data from the JSON file
-with open('districts.json', 'r') as json_file:
-    district_data = json.load(json_file)
-
-# Extract the district names
-uganda_districts = [district['name'] for district in district_data[0]['districts']]
-
-# Load the Weatherstack API key from the environment variable
-api_key = os.getenv("WEATHERSTACK_API_KEY")
-
-if not api_key:
-    raise ValueError("API key not found in environment variables.")
-
-api_url = "http://api.weatherstack.com/current"
-
-weather_data = {}  # Dictionary to store weather data
-
-for district in uganda_districts:
-    params = {
-        'access_key': api_key,
-        'query': district,
-    }
-    try:
-        response = requests.get(api_url, params=params)
-        if response.status_code == 200:
-            data = response.json()
-            weather_data[district] = data
-            print(f'Getting Data...for {district}')
-        else:
-            print(f'Error for {district}: {response.status_code} - {response.text}')
-    except requests.exceptions.RequestException as e:
-        print(f'An error occurred for {district}: {e}')
-
-# Save the collected weather data to a JSON file
-with open('uganda_districts_weather.json', 'w') as json_file:
-    json.dump(weather_data, json_file, indent=4)
-
-print('Real-time weather data for Uganda districts saved to uganda_districts_weather.json')
-
-```
-
-3. Save the script.
-
-#### 5. Run the Script
-
-Execute your Python script to extract weather data using your API key:
-
-```bash
-python weather_extraction.py
-```
-
-The script will make an API request to Weatherstack using the API key from your environment variable and print the weather data to the console. You can modify the script to save the data to a file or integrate it with your data warehouse or analysis tools as needed.
-
-This setup allows you to securely store your API key in an environment variable file, ensuring that it's not exposed in your codebase and can be easily managed.
-
-#### 6. Upload your json file on any web file hosting.
-
-In this article, we have used a free [JsonUpkeeper](https://www.jsonkeeper.com/) tool. You just paste your contents and public URL is generated that you will use as source in the next step.
-
-Example of my extracted Uganda weather data:
-![Uganda Weather Data](./assets/uganda.png)
 
 
 ## 3. Setting Up BigQuery
@@ -255,8 +149,6 @@ Here, you have two options, you can set up connectors with source and destinatio
 
 ### 1. Setting Up Airbyte Connectors with AirByteUI
 Use the generated public url from the previous step to manually configure using the File Option as source under public HTPPS.
-
-![AirByte UI](./assets/connect.PNG)
 
 - Follow these [steps](https://docs.airbyte.com/quickstart/set-up-a-connection) for more.
 

@@ -14,6 +14,10 @@ variable "credentials_json" {
     type = string
 }
 
+variable "access_key" {
+  type = string
+}
 
-
-
+variable "query" {
+  type = string
+}
