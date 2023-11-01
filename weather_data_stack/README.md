@@ -4,8 +4,6 @@ Welcome to the "Weather Data Stack" repository! 🌟 This is your go-to place to
 
 This Quickstart is all about making things easy, getting you started quickly and showing you how smoothly all these tools can work together!
 
-Here is a visual representation of how data flows through our integrated tools in this Quickstart.
-
 ## Table of Contents
 
 - [Weather Data Stack with Airbyte, dbt, Dagster and BigQuery](#weather-data-stack-with-airbyte-dbt-dagster-and-bigquery)
