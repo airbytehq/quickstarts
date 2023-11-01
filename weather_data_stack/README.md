@@ -20,7 +20,6 @@ This Quickstart is all about making things easy, getting you started quickly and
       - [4. **Generate JSON Keys for Service Accounts**](#4-generate-json-keys-for-service-accounts)
   - [4. Setting Up Airbyte Connectors](#4-setting-up-airbyte-connectors)
     - [1. Setting Up Airbyte Connectors with AirByteUI](#1-setting-up-airbyte-connectors-with-airbyteui)
-    - [2. Setting Up Airbyte Connectors with Terraform](#2-setting-up-airbyte-connectors-with-terraform)
   - [5. Setting Up the dbt Project](#5-setting-up-the-dbt-project)
   - [Next Steps](#next-steps)
     - [1. **Explore the Data and Insights**](#1-explore-the-data-and-insights)
@@ -44,11 +43,9 @@ Before you embark on this integration, ensure you have the following set up and 
 
 3. **Airbyte OSS version**: Deploy the open-source version of Airbyte. Follow the installation instructions from the [Airbyte Documentation](https://docs.airbyte.com/quickstart/deploy-airbyte/).
 
-4. **Terraform**: Terraform will help you provision and manage the Airbyte resources. If you haven't installed it, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
+4. **Google Cloud account with BigQuery**: You will also need to add the necessary permissions to allow Airbyte and dbt to access the data in BigQuery. A step-by-step guide is provided [below](#2-setting-up-bigquery).
 
-5. **Google Cloud account with BigQuery**: You will also need to add the necessary permissions to allow Airbyte and dbt to access the data in BigQuery. A step-by-step guide is provided [below](#2-setting-up-bigquery).
-
-6. **Weather Stack API**: You can grab your free weather API from [here](https://weatherstack.com/) after account opening. No Credit card is required for the starter version
+5. **Weather Stack API**: You can grab your free weather API from [here](https://weatherstack.com/) after account opening. No Credit card is required for the starter version
 
 ## 1. Setting an environment for your project
 
@@ -143,57 +140,12 @@ To extract weather data from the Weatherstack API and store the API key in its o
    - Do this for the other service account too.
 
 ## 4. Setting Up Airbyte Connectors
-Here, you have two options, you can set up connectors with source and destination manually using the Airbyte UI or Terraform. The choice depends on your preferances.
+Here, you can set up connectors with source and destination manually using the Airbyte UI.
 
 ### 1. Setting Up Airbyte Connectors with AirByteUI
 Use the generated public url from the previous step to manually configure using the File Option as source under public HTPPS.
 
 - Follow these [steps](https://docs.airbyte.com/quickstart/set-up-a-connection) for more.
-
-### 2. Setting Up Airbyte Connectors with Terraform
-Airbyte allows you to create connectors for sources and destinations, facilitating data synchronization between various platforms. In this project, we're harnessing the power of Terraform to automate the creation of these connectors and the connections between them. Here's how you can set this up:
-
-1. **Navigate to the Airbyte Configuration Directory**:
-   
-   Change to the relevant directory containing the Terraform configuration for Airbyte:
-   ```bash
-   cd infra/airbyte
-   ```
-
-2. **Modify Configuration Files**:
-
-   Within the `infra/airbyte` directory, you'll find three crucial Terraform files:
-    - `provider.tf`: Defines the Airbyte provider.
-    - `main.tf`: Contains the main configuration for creating Airbyte resources.
-    - `variables.tf`: Holds various variables, including credentials.
-
-   Adjust the configurations in these files to suit your project's needs. Specifically, provide credentials for your BigQuery connection. You can utilize the `variables.tf` file to manage these credentials.
-
-3. **Initialize Terraform**:
-   
-   This step prepares Terraform to create the resources defined in your configuration files.
-   ```bash
-   terraform init
-   ```
-
-4. **Review the Plan**:
-
-   Before applying any changes, review the plan to understand what Terraform will do.
-   ```bash
-   terraform plan
-   ```
-
-5. **Apply Configuration**:
-
-   After reviewing and confirming the plan, apply the Terraform configurations to create the necessary Airbyte resources.
-   ```bash
-   terraform apply
-   ```
-
-6. **Verify in Airbyte UI**:
-
-   Once Terraform completes its tasks, navigate to the [Airbyte UI](http://localhost:8000/). Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go.
-
 
 ## 5. Setting Up the dbt Project
 
