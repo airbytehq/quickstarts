@@ -145,6 +145,7 @@ Here, you can set up connectors with source and destination manually using the A
 ### 1. Setting Up Airbyte Connectors with AirByteUI
 Use the generated public url from the previous step to manually configure using the File Option as source under public HTPPS.
 
+- Here are specific [BigQuery](https://docs.airbyte.com/integrations/destinations/bigquery) instructions.
 - Follow these [steps](https://docs.airbyte.com/quickstart/set-up-a-connection) for more.
 
 ## 5. Setting Up the dbt Project
