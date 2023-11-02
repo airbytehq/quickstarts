@@ -132,6 +132,7 @@ Congratulations upon setting up the stock analysis using AirByte. I have created
 
 [![AirByte: Polygon Stock API To MongoDB](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=iZb_NGW0OAE)
 
+[<img src="https://img.youtube.com/vi/iZb_NGW0OAE/maxresdefault.jpg" width="50%">](https://youtu.be/iZb_NGW0OAE)
 
 ### 1. **Automate and Monitor Your Pipelines**
    - Explore more advanced Dagster configurations and setups to automate your pipelines further and set up monitoring and alerting to be informed of any issues immediately.
