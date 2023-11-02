@@ -129,10 +129,9 @@ With these prerequisites in place, you'll be well-prepared to embark on your sto
 
 Congratulations upon setting up the stock analysis using AirByte. I have created a video here to assist you more.
 
-<video width="320" height="240" controls>
-  <source src="https://www.youtube.com/watch?v=iZb_NGW0OAE" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<video width="320" height="240" src="https://www.youtube.com/watch?v=iZb_NGW0OAE" type="video/mp4" controls />
+
+
 
 ![AirByte: Polygon Stock API To MongoDB](https://www.youtube.com/watch?v=iZb_NGW0OAE)
 
