@@ -129,11 +129,9 @@ With these prerequisites in place, you'll be well-prepared to embark on your sto
 
 Congratulations upon setting up the stock analysis using AirByte. I have created a video here to assist you more.
 
-<video width="320" height="240" src="https://www.youtube.com/watch?v=iZb_NGW0OAE" type="video/mp4" controls />
 
+[![AirByte: Polygon Stock API To MongoDB](https://share.gifyoutube.com/KzB6Gb.gif)](https://www.youtube.com/watch?v=iZb_NGW0OAE)
 
-
-![AirByte: Polygon Stock API To MongoDB](https://www.youtube.com/watch?v=iZb_NGW0OAE)
 
 ### 1. **Automate and Monitor Your Pipelines**
    - Explore more advanced Dagster configurations and setups to automate your pipelines further and set up monitoring and alerting to be informed of any issues immediately.
