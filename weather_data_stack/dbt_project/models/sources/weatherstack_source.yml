@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: weatherstack
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: weatherstack_airbyte
+    
+    tables: 
+
+      - name: current_weather
+        description: "Simulated current_weather data from the weatherstack connector."
+        columns:
+          - name: current 
+          - name: location
+          - name: request

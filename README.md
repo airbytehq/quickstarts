@@ -24,6 +24,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 - [API to Data Warehouse Integration Stack](./api_to_warehouse)
 - [Customer Satisfaction Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./satisfaction_analytics_zendesk_support)
 - [Customer Ticket Volume Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./ticket_volume_analytics_zendesk_support)
+- [Database Snapshot Stack](./database_snapshot)
 - [E-commerce Analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
 - [ELT simplified stack with Airbyte, dbt, Prefect, Github and Bigquery](./elt_simplified_stack)
 - [Github Insight Stack with Airbyte, dbt, Dagster and BigQuery](./github_insight_stack)
