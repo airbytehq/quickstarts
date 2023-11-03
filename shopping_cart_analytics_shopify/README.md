@@ -1,6 +1,6 @@
 # Shopping Cart Analytics Stack With Shopify, Airbyte, Dbt, Dagster and BigQuery
 
-Welcome to the "Shopping Cart Analytics Stack" repository! ✨ This is your go-to place to easily set up a data stack using Zendesk Support, Airbyte, Dbt, BigQuery, and Dagster. With this setup, you can pull Shopify data, extract it using Airbyte, put it into BigQuery, and play around with it using dbt and Dagster.
+Welcome to the "Shopping Cart Analytics Stack" repository! ✨ This is your go-to place to easily set up a data stack using Shopify, Airbyte, Dbt, BigQuery, and Dagster. With this setup, you can pull Shopify data, extract it using Airbyte, put it into BigQuery, and play around with it using dbt and Dagster.
 
 This Quickstart is all about making things easy, getting you started quickly and showing you how smoothly all these tools can work together!
 
