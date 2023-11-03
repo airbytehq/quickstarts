@@ -190,6 +190,130 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
 ## 5. Visualization with Looker
 
+Looker is a product that helps you explore, share, and visualize your company's data so that you can make better business decisions. It serves as a web-based tool for Data Visualization and Business Intelligence, employed by numerous entities to generate Business Reports and live Dashboards. It also has the ability to convert user input via a Graphical User Interface (GUI) into SQL queries and subsequently transmit them directly to the database in real-time. To get started with Looker and learn more about it, check [here](https://cloud.google.com/looker/docs).
+
+Follow the steps below to integrate your Snowflake instance with your Looker studio.
+
+1. Create a Looker User in Snowflake
+
+   To allow Looker run queries in Snowflake, you need to create a dedicated user for the looker instance in Snowflake. Run the queries below in Snowflake to do this.
+
+   ```sql
+   -- change role to ACCOUNTADMIN
+   use role ACCOUNTADMIN;
+
+   -- create role for looker
+   create role if not exists looker_role;
+   grant role looker_role to role SYSADMIN;
+      -- Note that we are not making the looker_role a SYSADMIN, but rather granting users with the SYSADMIN role to modify the looker_role
+   
+   -- create a user for looker
+   create user if not exists looker_user
+   password = '<enter password here>';
+
+   grant role looker_role to user looker_user;
+
+   alter user looker_user
+   set default_role = looker_role
+   default_warehouse = 'looker_wh';
+   
+   -- this part is to executed only is the user roles are to be changed  
+   -- change role
+   use role SYSADMIN;
+   
+   -- create a warehouse for looker (optional)
+   create warehouse if not exists looker_wh
+   
+   -- set the size based on your dataset
+   warehouse_size = medium
+   warehouse_type = standard
+   auto_suspend = 1800
+   auto_resume = true
+   initially_suspended = true;
+   
+   grant all privileges
+   on warehouse looker_wh
+   to role looker_role;
+
+   -- grant read only database access (repeat for all database/schemas)
+   grant usage on database <database> to role looker_role;
+   grant usage on schema <database>.<schema> to role looker_role;
+
+   -- rerun the following any time a table is added to the schema
+   grant select on all tables in schema <database>.<schema> to role looker_role;
+   
+   -- or
+   grant select on future tables in schema <database>.<schema> to role looker_role;
+
+   -- create schema for looker to write back to
+   use database <database>;
+   create schema if not exists looker_scratch;
+   use role ACCOUNTADMIN;
+   grant ownership on schema looker_scratch to role SYSADMIN revoke current grants;
+   grant all on schema looker_scratch to role looker_role;
+   ```
+
+2. Adding the Database Connection in Looker
+   
+   To add New Database Connection in Looker you need to navigate to the Admin panel of the interface. Subsequently select “Connections” and then “New Connections”. A Configuration Section will open up where you will be required to enter the following information.
+
+   Name: Provide an Arbitrary name to refer to this connection later. 
+   Host: This section is for providing Hostname for Snowflake deployment. It is of the format <account_name>.snowflakecomputing.com 
+   Port: Depending upon your deployment, you can change the Port number, the default Port is 443. 
+   Database: Provide the name of the default database that is required for use. 
+   Username and Password: These are the credentials of the user that will connect to Looker. 
+   Schema: This the default Database Schema that is used in your Snowflake Deployment.  
+   Temp Database: This section needs to be set to the Database Schema if PDTs [Persistent Derived Tables] are enabled.
+
+   Some selections that are supposed to be made are:
+
+   Dialect: Snowflake needs to be selected. 
+   Persistent Derived Tables: Selection needs to be made to enable PDTs [Persistent Derived Tables]
+
+   Some Optional Changes that you might implement: 
+
+   Max Connections: This is related to Connection Pool size.
+   Connection Pool Timeout: Session Timeout for Connection Pool.
+   Database Time Zone: Default is UTC.
+   Query Time Zone: Default is UTC.
+
+   You can also provide Additional JDBC [Java Database Connectivity] parameters pertaining to Snowflake JDBC driver. An example is providing as follows: 
+
+
+   ```TIMESTAMP_TYPE_MAPPING=TIMESTAMP_LTZ
+   JDBC_TREAT_DECIMAL_AS_INT=FALSE
+   TIMESTAMP_INPUT_FORMAT=AUTO
+   AUTOCOMMIT=TRUE
+   #You can override each of these by setting an alternative value in the Additional Params field, #for example: &AUTOCOMMIT=FALSE
+   ```
+
+   After making the configurations you can proceed to click on the “Test These Settings” button to check if the connection is Successful. Finally, you need to click on the “Add Connection” button to save the connection. 
+
+3. Setting Up OAuth for Connection 
+
+   To set up an OAuth based connection, you will require a user account with ACCOUNTADMIN permission on Snowflake. Firstly you are required to run the following command in Snowflake, where <looker_hostname> is the hostname of the Looker Instance: 
+
+   ```sql
+   CREATE SECURITY INTEGRATION LOOKER
+   TYPE = OAUTH
+   ENABLED = TRUE
+   OAUTH_CLIENT = LOOKER
+   OAUTH_REDIRECT_URI = 'https://<looker_hostname>/external_oauth/redirect';
+   ```
+
+   To obtain the OAuth Client ID and Client Secret, you need to run the following command: 
+
+   ```sql
+   SELECT SYSTEM$SHOW_OAUTH_CLIENT_SECRETS('LOOKER');
+   ```
+
+   You will be required to enter these credentials while creating a new connection, and provide the information in the given window. 
+
+4. Running Queries and Signing in on Snowflake
+   
+   After the OAuth Snowflake connection is set upland running, The users are required to login to run queries, otherwise you will receive the error message. The login can be easily completed by entering the “OAuth Connection Credentials” on the “Accounts” page on Looker. You are required to click on the “Allow” button to give Looker access to your Snowflake account. 
+
+
 ## Next Steps
 
 Once you've set up and launched this initial integration, the real power lies in its adaptability and extensibility. Here’s a roadmap to help you customize and harness this project tailored to your specific data needs:
