@@ -15,6 +15,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 ## List Of Available Quickstarts
 
 - [Airbyte, dbt, Airflow and BigQuery E-commerce Stack](./airbyte_dbt_airflow_bigquery)
+- [Airbyte, dbt, Airflow and Snowflake Basic Stack](./airbyte_dbt_airflow_snowflake)
 - [Airbyte, dbt, Dagster and BigQuery Basic Stack](./airbyte_dbt_dagster)
 - [Airbyte, dbt, Dagster and Snowflake Basic Stack](./airbyte_dbt_dagster_snowflake)
 - [Airbyte, dbt, Prefect and Snowflake Basic Stack](./airbyte_dbt_prefect_snowflake)
@@ -22,6 +23,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 - [API to Data Warehouse Integration Stack](./api_to_warehouse)
 - [Customer Satisfaction Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./satisfaction_analytics_zendesk_support)
 - [Customer Ticket Volume Analytics Stack With Zendesk Support, Airbyte, dbt, Dagster and BigQuery](./ticket_volume_analytics_zendesk_support)
+- [Database Snapshot Stack](./database_snapshot)
 - [E-commerce Analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
 - [ELT simplified stack with Airbyte, dbt, Prefect, Github and Bigquery](./elt_simplified_stack)
 - [Github Insight Stack with Airbyte, dbt, Dagster and BigQuery](./github_insight_stack)
