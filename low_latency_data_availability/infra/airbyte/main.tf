@@ -63,7 +63,7 @@ resource "airbyte_connection" "postgres_to_bigquery" {
                 cursor_field = ["...",]
                 name = "...my_table_name_1..."
                 primary_key = [["...",],]
-                sync_mode = "full_refresh_append"
+                sync_mode = "incremental_deduped_history"
             },
             {
                 cursor_field = ["...",]

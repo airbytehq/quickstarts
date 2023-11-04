@@ -122,15 +122,15 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
 Using Airbyte for the data replication offers the following for achieving low latency;
 
-- Throughput performances for the Postgres source connector are about 11 MB per second. This offers users the capability to sync Terabytes of tables is a fast, reliable manner
+- Throughput performances for the Postgres source connector are about 11 MB per second. This offers users the capability to sync Terabytes of tables is a fast, reliable manner.
 - For very large database tables, the data are read in chunks. This caters for reliability issues due to the strain on the server or network issues. These chunks are either read successively or even concurrently.
 - [Checkpointing](https://docs.airbyte.com/understanding-airbyte/airbyte-protocol/#state--checkpointing). This happens when there is a network error or a server going down for maintenance during a sync operation. Airbyte stores the state of a sync such that we can restart from a known point. This is known as the [CTID](https://enterprisedb.com/postgres-tutorials/what-equivalent-rowid-postgresql#:~:text=The%20ctid%20field%20is%20a,the%20location%20of%20the%20tuple.) markers. Thus, if there is an error, we can restart our read from a last known saved checkpoint.
-- Once an initial sync is done, Airbyte can use either of 3 options that depend on a reliable cursor to be able to find data that has changed These options are;
+- Once an initial sync is done, for subsequent incremental syncs, Airbyte can use either of 3 [options](https://docs.airbyte.com/integrations/sources/postgres#postgres-replication-methods) that depend on a reliable cursor to be able to find data that has changed. These options are;
   -  [CDC](https://docs.airbyte.com/integrations/sources/postgres#cdc),
   -  [xmin](https://docs.airbyte.com/integrations/sources/postgres#xmin), or 
   -  a user column.
 
-   For the quickstart, we will be using the CDC option as it allows the least latency for high volume data sync.
+   For this quickstart, we will be using the CDC option as it offers the least latency for high volume data sync. If your data is less than 500GB, you can go for the xmin option.
 
 ## Next Steps
 
@@ -142,4 +142,4 @@ Once you've set up and launched this initial integration, you can proceed to syn
    
 2. **Extend the Project**:
 
-   The real beauty of this integration is its extensibility. Whether you want to add more Postgres sources, integrate additional tools, or modify the sync schedule – the floor is yours. The granularity of the migration can also be set by selecting the correct sync mode for each stream (table). Read [sync mode](https://docs.airbyte.com/understanding-airbyte/connections/) for more details. With the foundation set, sky's the limit for how you want to extend and refine your data processes.
+   The real beauty of this integration is its extensibility. Whether you want to add more Postgres sources, integrate additional tools, or modify the sync schedule – the floor is yours. The granularity of the replication can also be set by selecting the correct sync mode for each stream (table). Read [sync mode](https://docs.airbyte.com/understanding-airbyte/connections/) for more details. With the foundation set, sky's the limit for how you want to extend and refine your data processes.

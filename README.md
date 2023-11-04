@@ -25,6 +25,7 @@ To empower data teams by providing ready-to-use code templates, enabling the swi
 - [E-commerce Analytics with Airbyte, dbt, Dagster and BigQuery](./ecommerce_analytics_bigquery)
 - [ELT simplified stack with Airbyte, dbt, Prefect, Github and Bigquery](./elt_simplified_stack)
 - [Github Insight Stack with Airbyte, dbt, Dagster and BigQuery](./github_insight_stack)
+- [Low-Latency Data Availability Stack](./low_latency_data_availability)
 - [MongoDB MySQL Integration Stack](./mongodb_mysql_integration)
 - [Multisource Database Aggregtion Stack](./multisource_aggregation)
 - [Postgres Data Replication Stack](./postgres_data_replication)
