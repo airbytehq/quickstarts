@@ -1,0 +1,98 @@
+// Airbyte Terraform provider documentation: https://registry.terraform.io/providers/airbytehq/airbyte/latest/docs
+
+// Sources
+resource "airbyte_source_bigquery" "bigquery" {
+    configuration = {
+      credentials_json = "...my_credentials_json..."
+      dataset_id       = "...my_dataset_id..."
+      project_id       = "...my_project_id..."
+      source_type      = "bigquery"
+    }
+    name          = "My BigQuery source"
+    workspace_id  = var.workspace_id
+}
+resource "airbyte_source_notion" "notion" {
+  configuration = {
+    credentials = {
+      source_notion_authenticate_using_access_token = {
+        auth_type = "token"
+        token     = "...my_token..."
+      }
+    }
+    source_type = "notion"
+    start_date  = "2023-01-01T00:00:00.000Z"
+  }
+  name         = "Francisco Yost"
+  secret_id    = "...my_secret_id..."
+  workspace_id = var.workspace_id
+}
+
+// Destinations
+resource "airbyte_destination_bigquery" "bigquery" {
+    configuration = {
+        dataset_id = "...my_dataset_id..."
+        dataset_location = "...my_dataset_location..."
+        destination_type = "bigquery"
+        project_id = "...my_project_id..."
+        credentials_json = "...my_credentials_json_file_path..."
+        loading_method = {
+            destination_bigquery_loading_method_standard_inserts = {
+                method = "Standard"
+            }
+        }
+    }
+    name = "My BigQuery Destination"
+    workspace_id = var.workspace_id
+}
+resource "airbyte_destination_pinecone" "pinecone" {
+  configuration = {
+    destination_type = "pinecone"
+    embedding = {
+      destination_pinecone_embedding_open_ai = {
+        openai_key = "...my_openai_key..."
+        mode = "openai"
+      }
+    }
+    indexing = {
+      index                = "...my_index..."
+      pinecone_environment = "...my_pinecone_environment..."
+      pinecone_key         = "...my_pinecone_key..."
+    }
+    processing = {
+      chunk_overlap = 16
+      chunk_size    = 1024
+      metadata_fields = [
+        "client_msg_id", "timestamp", "channel", "user", "latest_message_ts"
+      ]
+      text_fields = [
+        "message_text", "thread_text", "text"
+      ]
+    }
+  }
+  name          = "My Pinecone Destination"
+  workspace_id  = var.workspace_id
+}
+
+// Connections
+resource "airbyte_connection" "notion" {
+    name = "Notion to BigQuery"
+    source_id = airbyte_source_notion.notion.source_id
+    destination_id = airbyte_destination_bigquery.bigquery.destination_id
+    configurations = {
+        streams = [
+            { name = "blocks" },
+            { name = "pages" },
+            { name = "users" }
+        ]
+    }
+}
+resource "airbyte_connection" "bigquery_to_pinecone" {
+    name = "BigQuery to Pinecone"
+    source_id = airbyte_source_bigquery.bigquery.source_id
+    destination_id = airbyte_destination_pinecone.pinecone.destination_id
+    configurations = {
+        streams = [
+            { name = "notion" }
+        ]
+    }
+}
