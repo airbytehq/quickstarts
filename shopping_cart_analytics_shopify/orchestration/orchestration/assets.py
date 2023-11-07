@@ -19,4 +19,4 @@ airbyte_instance = AirbyteResource(
     password="password"
 )
 
-airbyte_assets = load_assets_from_airbyte_instance(airbyte_instance,)
+airbyte_assets = load_assets_from_airbyte_instance(airbyte_instance, key_prefix= "shopify")
