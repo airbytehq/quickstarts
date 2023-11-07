@@ -1,0 +1,118 @@
+version: 2
+
+sources:
+  - name: shopify
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: shopify_airbyte
+
+    tables:
+      - name: abandoned_checkouts
+        description: "Simulated abandoned_checkouts data from the Shopify connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the abandoned_checkouts."
+          - name: abandoned_checkout_url
+          - name: billing_address
+          - name: buyer_accepts_marketing
+          - name: cart_token
+          - name: closed_at
+          - name: completed_at
+          - name: created_at
+          - name: currency
+          - name: customer
+          - name: customer_locale
+          - name: device_id
+          - name: discount_codes
+          - name: email
+          - name: gateway
+          - name: landing_site
+          - name: line_items
+          - name: location_id
+          - name: name
+          - name: note
+          - name: note_attributes
+          - name: phone
+          - name: presentment_currency
+          - name: referring_site
+          - name: shipping_address
+          - name: shipping_lines
+          - name: shop_url
+          - name: source
+          - name: source_identifier
+          - name: source_name
+          - name: source_url
+          - name: subtotal_price
+          - name: tax_lines
+          - name: taxes_included
+          - name: token
+          - name: total_discounts
+          - name: total_line_items_price
+          - name: total_price
+          - name: total_tax
+          - name: total_weight
+          - name: updated_at
+          - name: user_id
+
+      - name: customers
+        description: "Simulated customers data from the Shopify connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the customers."
+          - name: accepts_marketing
+          - name: accepts_marketing_updated_at
+          - name: addresses
+          - name: admin_graphql_api_id
+          - name: created_at
+          - name: currency
+          - name: default_address
+          - name: email
+          - name: email_marketing_consent
+          - name: first_name
+          - name: last_name
+          - name: last_order_id
+          - name: last_order_name
+          - name: marketing_opt_in_level
+          - name: multipass_identifier
+          - name: note
+          - name: orders_count
+          - name: phone
+          - name: shop_url
+          - name: sms_marketing_consent
+          - name: state
+          - name: tags
+          - name: tax_exempt
+          - name: tax_exemptions
+          - name: total_spent
+          - name: updated_at
+          - name: verified_email
+
+      - name: transactions
+        description: "Simulated transactions data from the Shopify connector."
+        columns:
+          - name: id
+            description: "Unique identifier for the transactions."
+          - name: admin_graphql_api_id
+          - name: amount
+          - name: authorization
+          - name: created_at
+          - name: currency
+          - name: device_id
+          - name: error_code
+          - name: gateway
+          - name: kind
+          - name: location_id
+          - name: message
+          - name: order_id
+          - name: parent_id
+          - name: payment_details
+          - name: payment_id
+          - name: processed_at
+          - name: receipt
+          - name: shop_url
+          - name: source_name
+          - name: status
+          - name: test
+          - name: total_unsettled_set
+          - name: user_id
