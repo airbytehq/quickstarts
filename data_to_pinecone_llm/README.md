@@ -23,7 +23,13 @@ We'll source Notion pages to make the content searchable in Pinecone. Follow the
 
 BigQuery will store the raw API data from our sources and also the transformed data from dbt. You'll need a BigQuery project and a dataset with a service account that can control the dataset. Airbyte's [BigQuery destination docs](https://docs.airbyte.com/integrations/destinations/bigquery) lists the requirements and links describing how to configure.
 
-### Pinecone index
+### Pinecone
+
+Pinecone is the vector database we will use to index documents and their metadata, and also for finding documents that provide context for a query. You'll need a Pinecone account, an API key, and an index created with 1536 dimensions, as OpenAI returns vectors of 1536 dimensions. See the [Pinecone docs](https://docs.pinecone.io/docs/quickstart) for more information.
+
+### OpenAI
+
+OpenAI is used both in processing the query and also provides the LLM for generating a response. The query is vectorized so it can be used to identify relevant items in the Pinecone index, and these items are provided to the LLM as context to better respond to the query. You'll need an OpenAI account with credits and an API key.
 
 ### Software
 
@@ -103,7 +109,9 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
    - `main.tf`: Contains the main configuration for creating Airbyte resources.
    - `variables.tf`: Holds various variables, including credentials.
 
-   Adjust the configurations in these files to suit your project's needs. Specifically, provide credentials for your Notion, BigQuery, and Pinecone connectors. You can utilize the `variables.tf` file to manage these credentials.
+   Adjust the configurations in these files to suit your project's needs. Credentials and other secrets pull from variables to help protect [sensitve input](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables), and can be set in the `.tsvars` file.
+
+   If you're using Airbyte Cloud instead of a local deployment you will need to update the airbyte provider configuration in _infra/airbyte/provider.tf_ to set the `bearer_auth` to an API key you can generate at https://portal.airbyte.com/.
 
 3. **Initialize Terraform**:
 
@@ -118,7 +126,7 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
    Before applying any changes, review the plan to understand what Terraform will do.
 
    ```bash
-   terraform plan
+   terraform plan -var-file=".tfvars"
    ```
 
 5. **Apply Configuration**:
@@ -126,7 +134,7 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
    After reviewing and confirming the plan, apply the Terraform configurations to create the necessary Airbyte resources.
 
    ```bash
-   terraform apply
+   terraform apply -var-file=".tfvars"
    ```
 
 6. **Verify in Airbyte UI**:

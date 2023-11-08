@@ -3,9 +3,9 @@
 // Sources
 resource "airbyte_source_bigquery" "bigquery" {
     configuration = {
-      credentials_json = "...my_credentials_json..."
-      dataset_id       = "...my_dataset_id..."
-      project_id       = "...my_project_id..."
+      credentials_json = var.bigquery_credentials_json
+      dataset_id       = var.bigquery_dataset_id
+      project_id       = var.bigquery_project_id
       source_type      = "bigquery"
     }
     name          = "My BigQuery source"
@@ -16,25 +16,24 @@ resource "airbyte_source_notion" "notion" {
     credentials = {
       source_notion_authenticate_using_access_token = {
         auth_type = "token"
-        token     = "...my_token..."
+        token     = var.notion_token
       }
     }
     source_type = "notion"
     start_date  = "2023-01-01T00:00:00.000Z"
   }
-  name         = "Francisco Yost"
-  secret_id    = "...my_secret_id..."
+  name         = "My Notion Source"
   workspace_id = var.workspace_id
 }
 
 // Destinations
 resource "airbyte_destination_bigquery" "bigquery" {
     configuration = {
-        dataset_id = "...my_dataset_id..."
-        dataset_location = "...my_dataset_location..."
+        dataset_id = var.bigquery_dataset_id
+        dataset_location = var.bigquery_dataset_location
         destination_type = "bigquery"
-        project_id = "...my_project_id..."
-        credentials_json = "...my_credentials_json_file_path..."
+        project_id = var.bigquery_project_id
+        credentials_json = var.bigquery_credentials_json_file_path
         loading_method = {
             destination_bigquery_loading_method_standard_inserts = {
                 method = "Standard"
@@ -49,23 +48,21 @@ resource "airbyte_destination_pinecone" "pinecone" {
     destination_type = "pinecone"
     embedding = {
       destination_pinecone_embedding_open_ai = {
-        openai_key = "...my_openai_key..."
+        openai_key = var.openai_key
         mode = "openai"
       }
     }
     indexing = {
-      index                = "...my_index..."
-      pinecone_environment = "...my_pinecone_environment..."
-      pinecone_key         = "...my_pinecone_key..."
+      index                = var.pinecone_index
+      pinecone_environment = var.pinecone_environment
+      pinecone_key         = var.pinecone_key
     }
     processing = {
       chunk_overlap = 16
       chunk_size    = 1024
-      metadata_fields = [
-        "client_msg_id", "timestamp", "channel", "user", "latest_message_ts"
-      ]
+      metadata_fields = []
       text_fields = [
-        "message_text", "thread_text", "text"
+        "text"
       ]
     }
   }
