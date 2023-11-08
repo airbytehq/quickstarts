@@ -148,6 +148,7 @@ Use the generated public url from the previous step to manually configure using 
 - Here are specific [BigQuery](https://docs.airbyte.com/integrations/destinations/bigquery) instructions.
 - Follow these [steps](https://docs.airbyte.com/quickstart/set-up-a-connection) for more.
 
+![AirByte UI Layout](./assets/connect.PNG)
 ## 5. Setting Up the dbt Project
 
 [dbt (data build tool)](https://www.getdbt.com/) allows you to transform your data by writing, documenting, and executing SQL workflows. Setting up the dbt project requires specifying connection details for your data platform, in this case, BigQuery. Here’s a step-by-step guide to help you set this up:
