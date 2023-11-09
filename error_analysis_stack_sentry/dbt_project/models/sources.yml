@@ -1,0 +1,58 @@
+sources:
+  - name: snowflake
+    # Use your snowflake project ID
+    database: sentry_to_snowflake
+    # Use your snowflake dataset name
+    schema: raw_data
+
+    tables:
+      - name: issues
+        columns:
+          - name: ANNOTATIONS
+          - name: ASSIGNEDTO
+          - name: COUNT
+          - name: CULPRIT
+          - name: FIRSTSEEN
+          - name: HASSEEN
+          - name: ID
+          - name: ISBOOKMARKED
+          - name: ISPUBLIC
+          - name: ISSUBSCRIBED
+          - name: LASTSEEN
+          - name: LEVEL
+          - name: LOGGER
+          - name: METADATA
+          - name: NUMCOMMENTS
+          - name: PERMALINK
+          - name: PROJECT
+          - name: SHAREID
+          - name: SHORTID
+          - name: STATS
+          - name: STATUS
+          - name: STATUSDETAILS
+          - name: SUBSCRIPTIONDETAILS
+          - name: TITLE
+          - name: TYPE
+          - name: USERCOUNT
+          - name: _AIRBYTE_EXTRACTED_AT
+          - name: _AIRBYTE_META
+          - name: _AIRBYTE_RAW_ID
+
+
+      - name: events
+        columns:
+          - name: DATECREATED
+          - name: EVENT.TYPE
+          - name: EVENTID
+          - name: GROUPID
+          - name: ID
+          - name: MESSAGE
+          - name: PLATFORM
+          - name: TAGS
+          - name: TITLE
+          - name: USER
+          - name: _AIRBYTE_EXTRACTED_AT
+          - name: _AIRBYTE_META
+          - name: _AIRBYTE_RAW_ID
+
+    

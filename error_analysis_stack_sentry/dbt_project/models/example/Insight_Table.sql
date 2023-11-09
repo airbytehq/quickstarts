@@ -11,8 +11,8 @@
 
 with insight_table as (
     SELECT t1.METADATA as METADATA, t1.TITLE as TITLE, t1.LEVEL as LEVEL, t1.CULPRIT as CULPRIT, t2.USER as USER
-    FROM ISSUES AS t1
-    INNER JOIN EVENTS AS t2
+    FROM {{ source('snowflake', 'issues') }} AS t1
+    INNER JOIN {{ source('snowflake', 'events') }} AS t2
     ON t1.ID = t2.GROUPID
 )
 

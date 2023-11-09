@@ -1,0 +1,6 @@
+setup.py
+error_analysis_stack.egg-info/PKG-INFO
+error_analysis_stack.egg-info/SOURCES.txt
+error_analysis_stack.egg-info/dependency_links.txt
+error_analysis_stack.egg-info/requires.txt
+error_analysis_stack.egg-info/top_level.txt
