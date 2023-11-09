@@ -1,7 +1,7 @@
 dbt_sentry_to_snowflake:
   outputs:
     dev:
-      account: dnjjuaq-yz97430
+      account: YOUR_SNOWFLAKE_ACCOUNT_ID
 
       # User/password auth
       user: AIRBYTE_USER
