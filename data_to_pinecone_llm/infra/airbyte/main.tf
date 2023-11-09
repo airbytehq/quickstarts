@@ -89,7 +89,7 @@ resource "airbyte_connection" "bigquery_to_pinecone" {
         streams = [
             {
               name         = "notion",
-              cursor_field = "last_edited_time",
+              cursor_field = ["last_edited_time"],
               primary_key  = [["url"]]
               sync_mode    = "incremental_deduped_history"
             }
