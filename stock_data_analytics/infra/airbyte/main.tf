@@ -36,7 +36,7 @@ resource "airbyte_destination_bigquery" "bigquery" {
 
 // Connections
 resource "airbyte_connection" "polygon_bigquery" {
-  name           = "Weatherstack to BigQuery"
+  name           = "PolygonAPI to BigQuery"
   source_id      = airbyte_source_polygon_stock_api.my_source_polygonstockapi.source_id
   destination_id = airbyte_destination_bigquery.bigquery.destination_id
   configurations = {

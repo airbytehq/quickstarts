@@ -10,7 +10,7 @@ sources:
     tables: 
 
       - name: stock_api
-        description: "Simulated stock_api data from the weatherstack connector."
+        description: "Simulated stock_api data from the Polygon connector."
         columns:
           - name: c 
           - name: t
