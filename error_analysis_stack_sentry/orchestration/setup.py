@@ -7,7 +7,6 @@ setup(
     install_requires=[
         "dagster",
         "dagster-cloud",
-        "dagster-airbyte",
         "dagster-dbt",
         "dbt-core>=1.4.0",
         "dbt-snowflake",

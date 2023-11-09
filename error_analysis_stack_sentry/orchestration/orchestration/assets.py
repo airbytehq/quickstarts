@@ -1,13 +1,12 @@
-from dagster import AssetExecutionContext
+import os
+from dagster import OpExecutionContext
 from dagster_dbt import DbtCliResource, dbt_assets
 from dagster_airbyte import AirbyteResource, load_assets_from_airbyte_instance
-import os
 
 from .constants import dbt_manifest_path
 
-
 @dbt_assets(manifest=dbt_manifest_path)
-def dbt_sentry_to_snowflake_dbt_assets(context: AssetExecutionContext, dbt: DbtCliResource):
+def dbt_project_dbt_assets(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
 airbyte_instance = AirbyteResource(
@@ -18,4 +17,4 @@ airbyte_instance = AirbyteResource(
     password=os.getenv("AIRBYTE_PASSWORD")
 )
 
-airbyte_assets = load_assets_from_airbyte_instance(airbyte_instance, key_prefix="faker")
+airbyte_assets = load_assets_from_airbyte_instance(airbyte_instance,key_prefix="snowflake")

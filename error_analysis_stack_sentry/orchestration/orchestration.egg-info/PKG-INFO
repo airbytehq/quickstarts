@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: orchestration
+Version: 0.0.1
+Requires-Dist: dagster
+Requires-Dist: dagster-cloud
+Requires-Dist: dagster-dbt
+Requires-Dist: dbt-core>=1.4.0
+Requires-Dist: dbt-snowflake
+Provides-Extra: dev
+Requires-Dist: dagster-webserver; extra == "dev"
