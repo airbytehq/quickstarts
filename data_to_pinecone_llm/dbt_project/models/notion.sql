@@ -90,6 +90,6 @@ aggregated_text as (
 )
 
 select
-  url, ifnull(text, "") as notion
+  last_edited_time, url, ifnull(text, "") as notion
 from aggregated_text
 join notion.pages on id = parent_page_id

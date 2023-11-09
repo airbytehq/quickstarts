@@ -60,10 +60,8 @@ resource "airbyte_destination_pinecone" "pinecone" {
     processing = {
       chunk_overlap = 16
       chunk_size    = 1024
-      metadata_fields = []
-      text_fields = [
-        "text"
-      ]
+      metadata_fields = ["url", "last_edited_time"]
+      text_fields = ["notion"]
     }
   }
   name          = "My Pinecone Destination"
@@ -89,7 +87,12 @@ resource "airbyte_connection" "bigquery_to_pinecone" {
     destination_id = airbyte_destination_pinecone.pinecone.destination_id
     configurations = {
         streams = [
-            { name = "notion" }
+            {
+              name         = "notion",
+              cursor_field = "last_edited_time",
+              primary_key  = [["url"]]
+              sync_mode    = "incremental_deduped_history"
+            }
         ]
     }
 }
