@@ -141,6 +141,12 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    Once Terraform completes its tasks, navigate to the Airbyte UI. Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go.
 
+![Airbyte Workspace Connections](assets/1-connections.png)
+
+![Airbyte Workspace Sources](assets/2-sources.png)
+
+![Airbyte Workspace Destinations](assets/3-destinations.png)
+
 ## 3. Setting Up the dbt Project
 
 [dbt (data build tool)](https://www.getdbt.com/) allows you to transform your data by writing, documenting, and executing SQL workflows. Setting up the dbt project requires specifying connection details for your data platform, in this case, BigQuery. Here’s a step-by-step guide to help you set this up:
