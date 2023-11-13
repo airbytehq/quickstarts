@@ -4,6 +4,8 @@ Welcome to the "Data-to-Pinecone Integration" repository! This repo provides a q
 
 This quickstart is designed to minimize setup hassles and propel you forward.
 
+![Quickstart overview](assets/1-dataflow.png)
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -141,11 +143,11 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    Once Terraform completes its tasks, navigate to the Airbyte UI. Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go.
 
-![Airbyte Workspace Connections](assets/1-connections.png)
+![Airbyte Workspace Connections](assets/2-connections.png)
 
-![Airbyte Workspace Sources](assets/2-sources.png)
+![Airbyte Workspace Sources](assets/3-sources.png)
 
-![Airbyte Workspace Destinations](assets/3-destinations.png)
+![Airbyte Workspace Destinations](assets/4-destinations.png)
 
 ## 3. Setting Up the dbt Project
 
