@@ -11,7 +11,7 @@ resource "airbyte_source_bigquery" "bigquery" {
     name          = "My BigQuery source"
     workspace_id  = var.workspace_id
 }
-resource "airbyte_source_notion" "notion" {
+resource "airbyte_source_notion" "notion_source" {
   configuration = {
     credentials = {
       source_notion_authenticate_using_access_token = {
@@ -20,7 +20,7 @@ resource "airbyte_source_notion" "notion" {
       }
     }
     source_type = "notion"
-    start_date  = "2023-01-01T00:00:00.000Z"
+    start_date  = "2023-01-01T00:00:00.001Z"
   }
   name         = "My Notion Source"
   workspace_id = var.workspace_id
@@ -61,7 +61,7 @@ resource "airbyte_destination_pinecone" "pinecone" {
       chunk_overlap = 16
       chunk_size    = 1024
       metadata_fields = ["url", "last_edited_time"]
-      text_fields = ["notion"]
+      text_fields = ["notion_text"]
     }
   }
   name          = "My Pinecone Destination"
@@ -69,9 +69,9 @@ resource "airbyte_destination_pinecone" "pinecone" {
 }
 
 // Connections
-resource "airbyte_connection" "notion" {
+resource "airbyte_connection" "notion_connection" {
     name = "Notion to BigQuery"
-    source_id = airbyte_source_notion.notion.source_id
+    source_id = airbyte_source_notion.notion_source.source_id
     destination_id = airbyte_destination_bigquery.bigquery.destination_id
     configurations = {
         streams = [
@@ -88,10 +88,7 @@ resource "airbyte_connection" "bigquery_to_pinecone" {
     configurations = {
         streams = [
             {
-              name         = "notion",
-              cursor_field = ["last_edited_time"],
-              primary_key  = [["url"]]
-              sync_mode    = "incremental_deduped_history"
+              name         = "notion_data",
             }
         ]
     }

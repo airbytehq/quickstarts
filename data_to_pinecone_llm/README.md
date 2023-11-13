@@ -1,8 +1,10 @@
 # Data-to-Pinecone Integration
 
-Welcome to the "Data-to-Pinecone Integration" repository! This repo provides a quickstart template for building a full data stack using Airbyte, Notion, Dagster, dbt, BigQuery, and Pinecone. Easily extract data from Notion pages, load it into BigQuery, transform into text blobs using dbt, and publish into Pinecone's vector store so it can be queried or interacted with through an LLM.
+Welcome to the "Data-to-Pinecone Integration" repository! This repo provides a quickstart template for building a full data stack using Airbyte, Dagster, and dbt to move data from Notion -> BigQuery -> Pinecone for interacting with Notion data through an LLM.
 
 This quickstart is designed to minimize setup hassles and propel you forward.
+
+![Quickstart overview](assets/1-dataflow.png)
 
 ## Table of Contents
 
@@ -141,6 +143,12 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    Once Terraform completes its tasks, navigate to the Airbyte UI. Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go.
 
+![Airbyte Workspace Connections](assets/2-connections.png)
+
+![Airbyte Workspace Sources](assets/3-sources.png)
+
+![Airbyte Workspace Destinations](assets/4-destinations.png)
+
 ## 3. Setting Up the dbt Project
 
 [dbt (data build tool)](https://www.getdbt.com/) allows you to transform your data by writing, documenting, and executing SQL workflows. Setting up the dbt project requires specifying connection details for your data platform, in this case, BigQuery. Here’s a step-by-step guide to help you set this up:
@@ -245,11 +253,15 @@ Once you've set up and launched this initial integration, the real power lies in
 
    Pinecone allows you to store vectors from multiple sources in a single index. This allows multiple document types to be queried together, and even referenced between themselves by the LLM. Add additional sources to the Terraform configuration or manually through the Airbyte UI.
 
-2. **Extend Access to the LLM**:
+2. **Try Different LLM Chains**:
+
+   The provided _query.py_ uses many default values when creating the LLM chain, which is quick to create but limits flexibility. One constraint is that the `stuff` chain type requires the query and discovered documents all fit within a single tokenized input to the LLM. This is fine for short queries and documents, but if you use longer sources you will need to use another chain type such as `map_reduce`.
+
+3. **Extend Access to the LLM**:
 
    The provided _query.py_ is a simple example of how to interact with the LLM locally. You could build a web-based UI that triggers a query and displays the results, or even integrate the LLM into a Slack bot to provide answers to questions in real-time.
 
-3. **Make Use of Metadata**
+4. **Make Use of Metadata**
 
    When configuring the Pinecone destination you can choose to include metadata fields from the data. This allows you to filter results based on the metadata fields. For example, you could filter the results of a query to only include documents from a specific author, or provide a time range that a matching item must have been created or edited within. Metadata values are also provided back to the query executor so you can use them to provide additional context to the LLM.
 
