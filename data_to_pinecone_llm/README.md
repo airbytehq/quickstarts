@@ -31,7 +31,7 @@ Pinecone is the vector database we will use to index documents and their metadat
 
 ### OpenAI
 
-OpenAI is used both in processing the query and also provides the LLM for generating a response. The query is vectorized so it can be used to identify relevant items in the Pinecone index, and these items are provided to the LLM as context to better respond to the query. You'll need an OpenAI account with credits and an API key.
+OpenAI is used both in processing the query and also provides the LLM for generating a response. The query is vectorized so it can be used to identify relevant items in the Pinecone index, and these items are provided to the LLM as context to better respond to the query. You'll need an OpenAI account with credits and an API key. If you already have an account with OpenAI, you can generate a new API key by visiting this link: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 
 ### Software
 
