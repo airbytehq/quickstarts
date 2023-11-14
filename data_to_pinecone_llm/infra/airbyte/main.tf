@@ -9,7 +9,7 @@ resource "airbyte_source_bigquery" "bigquery" {
       source_type      = "bigquery"
     }
     name          = "My BigQuery source"
-    workspace_id  = var.workspace_id
+    workspace_id  = var.airbyte_workspace_id
 }
 resource "airbyte_source_notion" "notion_source" {
   configuration = {
@@ -20,10 +20,10 @@ resource "airbyte_source_notion" "notion_source" {
       }
     }
     source_type = "notion"
-    start_date  = "2023-01-01T00:00:00.001Z"
+    start_date  = "2023-01-01T00:00:00.001Z"  # Note: Fractional seconds with .000 may not work.
   }
   name         = "My Notion Source"
-  workspace_id = var.workspace_id
+  workspace_id = var.airbyte_workspace_id
 }
 
 // Destinations
@@ -41,7 +41,7 @@ resource "airbyte_destination_bigquery" "bigquery" {
         }
     }
     name = "My BigQuery Destination"
-    workspace_id = var.workspace_id
+    workspace_id = var.airbyte_workspace_id
 }
 resource "airbyte_destination_pinecone" "pinecone" {
   configuration = {
@@ -65,7 +65,7 @@ resource "airbyte_destination_pinecone" "pinecone" {
     }
   }
   name          = "My Pinecone Destination"
-  workspace_id  = var.workspace_id
+  workspace_id  = var.airbyte_workspace_id
 }
 
 // Connections
