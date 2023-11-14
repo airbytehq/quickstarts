@@ -1,0 +1,77 @@
+// This is a generic devcontainer definition for working with Quickstarts.
+//
+// Included in this devcontainer:
+// - Python (3.10)
+// - Terraform CLI
+// - dbt (BigQuery variant)
+// - Docker-In-Docker support (DinD)
+// - Various VS Code extensions supporting the above 👆
+
+{
+    "name": "Airbyte Quickstarts Dev Container (Generic)",
+
+    // For general devcontainer config, see: https://aka.ms/devcontainer.json
+    // For Python-specific options, see: https://github.com/devcontainers/templates/tree/main/src/python
+    "image": "mcr.microsoft.com/devcontainers/python:0-3.10",
+
+    "features": {
+        // Features to add to the dev container.
+        // More info: https://containers.dev/features.
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers-contrib/features/poetry:2": {},
+        "ghcr.io/devcontainers/features/terraform": {},
+        "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
+            "package": "dbt-bigquery",
+            "version": "1.7.2",
+            "interpreter": "python3",
+            "includeDeps": true // ...because dbt-query doesn't directly surface the dbt CLI
+        }
+    },
+    "overrideFeatureInstallOrder": [
+        // Strict ordering gives best chance of cache reuse.
+        // Put things that aren't changing at top of list:
+        "ghcr.io/devcontainers/features/docker-in-docker:2",
+        "ghcr.io/devcontainers/features/terraform",
+        "ghcr.io/devcontainers-contrib/features/poetry:2",
+        "ghcr.io/devcontainers-contrib/features/pipx-package:1"
+    ],
+
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Python extensions:
+                "charliermarsh.ruff",
+                "ms-python.black-formatter",
+                "ms-python.mypy-type-checker",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                // Toml support:
+                "tamasfe.even-better-toml",
+                // Yaml and JSON Schema support:
+                "redhat.vscode-yaml",
+                // Contributing:
+                "GitHub.vscode-pull-request-github"
+            ],
+            "settings": {
+                "extensions.ignoreRecommendations": true,
+                "git.autofetch": true,
+                "git.openRepositoryInParentFolders": "always",
+                "python.defaultInterpreterPath": ".venv/bin/python",
+                "python.interpreter.infoVisibility": "always",
+                "python.terminal.activateEnvironment": true,
+                "python.testing.pytestEnabled": true
+            }
+        }
+    },
+    "containerEnv": {
+        "POETRY_VIRTUALENVS_IN_PROJECT": "true"
+    }
+
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "pip3 install --user -r requirements.txt",
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+}

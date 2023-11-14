@@ -12,7 +12,8 @@ setup(
         "pinecone-client",
         "langchain",
         "openai==0.28.1",
-        "tiktoken"
+        "tiktoken",
+        "rich"
     ],
     extras_require={"dev": ["dagit", "pytest"]},
 )

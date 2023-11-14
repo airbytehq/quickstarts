@@ -9,15 +9,23 @@ terraform {
   }
 }
 
-provider "airbyte" {
-  // If running locally (Airbyte OSS) with docker-compose using the airbyte-proxy, 
-  // include the actual password/username you've set up (or use the defaults below)
-  username = "airbyte"
-  password = "password"
-  
-  // if running locally (Airbyte OSS), include the server url to the airbyte-api-server
-  server_url = "http://localhost:8006/v1"
+/////////////////////////////////
+// Airbyte Provider Definition //
+/////////////////////////////////
 
-  // If running against cloud, get an api key at portal.airbyte.com and use it here
-  // bearer_auth = "...my_api_key..."
+// Uncomment the OSS or Cloud block, depending on your desired deployment location:
+
+// Airbyte Cloud:
+provider "airbyte" {
+  bearer_auth = var.airbyte_cloud_auth_key
 }
+
+# // Airbyte OSS:
+# provider "airbyte" {
+#   // Optionally override the airbyte-api-server URL
+#   server_url = "http://localhost:8006/v1"
+
+#   // Optionally override the default password/username below
+#   username = "airbyte"
+#   password = "password"  
+# }

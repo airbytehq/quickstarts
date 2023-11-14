@@ -31,7 +31,7 @@ Pinecone is the vector database we will use to index documents and their metadat
 
 ### OpenAI
 
-OpenAI is used both in processing the query and also provides the LLM for generating a response. The query is vectorized so it can be used to identify relevant items in the Pinecone index, and these items are provided to the LLM as context to better respond to the query. You'll need an OpenAI account with credits and an API key.
+OpenAI is used both in processing the query and also provides the LLM for generating a response. The query is vectorized so it can be used to identify relevant items in the Pinecone index, and these items are provided to the LLM as context to better respond to the query. You'll need an OpenAI account with credits and an API key. If you already have an account with OpenAI, you can generate a new API key by visiting this link: [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 
 ### Software
 
@@ -71,13 +71,13 @@ Get the project up and running on your local machine by following these steps:
 
    - For Mac:
      ```bash
-     python3 -m venv venv
-     source venv/bin/activate
+     python3 -m venv .venv
+     source .venv/bin/activate
      ```
    - For Windows:
      ```bash
-     python -m venv venv
-     .\venv\Scripts\activate
+     python -m venv .venv
+     .\.venv\Scripts\activate
      ```
 
 4. **Install Dependencies**:
@@ -111,9 +111,9 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
    - `main.tf`: Contains the main configuration for creating Airbyte resources.
    - `variables.tf`: Holds various variables, including credentials.
 
-   Adjust the configurations in these files to suit your project's needs. Credentials and other secrets pull from variables to help protect [sensitve input](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables), and can be set in the `.tsvars` file.
+   Adjust the configurations in these files to suit your project's needs. Credentials and other secrets pull from variables to help protect [sensitve input](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables), and can be set in the `.tfvars` file.
 
-   If you're using Airbyte Cloud instead of a local deployment you will need to update the airbyte provider configuration in _infra/airbyte/provider.tf_ to set the `bearer_auth` to an API key you can generate at https://portal.airbyte.com/.
+   If you're using Airbyte Cloud instead of a local deployment you will need to update the Airbyte provider configuration in _infra/airbyte/provider.tf_ to set the `bearer_auth` to an API key you can generate at https://portal.airbyte.com/. You can find the Airbyte workspace ID in the Cloud URL, e.g. `https://cloud.airbyte.com/workspaces/{workspace-id}/connections`.
 
 3. **Initialize Terraform**:
 
