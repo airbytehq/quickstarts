@@ -6,20 +6,22 @@ variable "airbyte_workspace_id" {
   type = string
 }
 
-
-// BigQuery
-variable "bigquery_credentials_json" {
+variable "airbyte_cloud_auth_key" {
   description = <<DESC
-  The text string representing your credentials JSON file.
-  Not required if 'bigquery_credentials_json_file_path' is set.
+  Your bearer auth key for use with Airbyte Cloud.
+
+  Note: This setting will be ignored if using Airbyte OSS.
   DESC
   type      = string
   sensitive = true
 }
+
 variable "bigquery_credentials_json_file_path" {
   description = <<DESC
-  The path to your credentials JSON file.
-  Not required if 'bigquery_credentials_json' is set.
+  The path to your Google credentials JSON file for BigQuery access.
+
+  The service account used should have the `BigQuery User` and `BigQuery Data Editor`
+
   DESC
   type = string
 }
@@ -55,18 +57,17 @@ variable "notion_token" {
   DESC
   type      = string
   sensitive = true
+  default   = "...none provided..."
 }
 
 
 // OpenAi
 variable "openai_key" {
   description = <<DESC
-  Your Notion auth token.
-  Note: This requires admin permissions on Notion.
+  Your OpenAI API key.
 
-  Airbyte Cloud users can ignore this and set up OAuth credentials manually,
-  after deploying to Airbyte Cloud. (Although connection will then not run until OAuth is
-  configured.)
+  If you already have an account with OpenAI, you can generate a new API key
+  by visiting this link: https://platform.openai.com/api-keys
   DESC
   type      = string
   sensitive = true
