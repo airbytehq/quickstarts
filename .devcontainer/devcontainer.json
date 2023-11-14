@@ -8,14 +8,21 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/devcontainers-contrib/features/poetry:2": {},
-        "ghcr.io/devcontainers/features/terraform": {}
+        "ghcr.io/devcontainers/features/terraform": {},
+        "ghcr.io/devcontainers-contrib/features/pipx-package:1": {
+            "package": "dbt-bigquery",
+            "version": "1.7.2",
+            "interpreter": "python3",
+            "includeDeps": true // ...because dbt-query doesn't directly surface the dbt CLI
+        }
     },
     "overrideFeatureInstallOrder": [
         // Strict ordering gives best chance of cache reuse.
         // Put things that aren't changing at top of list:
         "ghcr.io/devcontainers/features/docker-in-docker:2",
         "ghcr.io/devcontainers/features/terraform",
-        "ghcr.io/devcontainers-contrib/features/poetry:2"
+        "ghcr.io/devcontainers-contrib/features/poetry:2",
+        "ghcr.io/devcontainers-contrib/features/pipx-package:1"
     ],
 
     // Configure tool-specific properties.
