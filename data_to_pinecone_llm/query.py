@@ -1,33 +1,71 @@
 import os
 import pinecone
 
+from rich.console import Console
+from rich.markdown import Markdown
+
+import langchain
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.vectorstores import Pinecone
 
-embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
-pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment=os.getenv("PINECONE_ENVIRONMENT"))
-index = pinecone.Index(os.getenv("PINECONE_INDEX"))
+# langchain.debug = True
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_ENVIRONMENT = os.getenv("PINECONE_ENVIRONMENT")
+PINECONE_INDEX = os.getenv("PINECONE_INDEX")
+
+embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
+index = pinecone.Index(PINECONE_INDEX)
 vector_store = Pinecone(index, embeddings, "text")
 
-prompt_template = """You are a question-answering bot for employees and will be provided relevant context from Notion pages. When possible, include where you got the answer from when available.
+prompt_template = """
+You are a question-answering bot for Airbyte company employees and will be provided
+relevant context from Notion pages on the Airbyte company knowlege base.
 
-Context for this question:
+Whenever you are asked a question you answer with a helpful answer if you can, along
+with the links to those relevant pages for further information. If you are not sure, you
+will say that you are not sure but still provide links if anything might be helpful to the
+questioner.
+
+Only use the provided context. Do not guess and do not use prior knowlege.
+
+Please provide your response in markdown format, starting with a level 2 header that describes
+the answer under a reasonable summary header.
+
+Notion context for this question:
 {context}
 
 Question: {question}
 
-Helpful answer:"""
+Please provide a helpful answer along one or more URLs that would be helpful for finding additional information:
+"""
 
-prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
+prompt = PromptTemplate(
+    template=prompt_template, input_variables=["context", "question"]
+)
 
-qa = RetrievalQA.from_chain_type(llm=OpenAI(temperature=0, openai_api_key=os.getenv("OPENAI_API_KEY")), chain_type="stuff", retriever=vector_store.as_retriever(), chain_type_kwargs={"prompt": prompt})
+qa = RetrievalQA.from_chain_type(
+    llm=OpenAI(temperature=0, openai_api_key=OPENAI_API_KEY),
+    chain_type="stuff",
+    retriever=vector_store.as_retriever(),
+    chain_type_kwargs={"prompt": prompt},
+)
 
-print("What do you want to know?")
+console = Console()
+
+console.print(Markdown("\n------\n> What do you want to know?"))
+console.print("")
 while True:
-  query = input("")
-  answer = qa.run(query)
-  print(answer)
-  print("\nWhat else do you want to know?")
+    query = input("")
+    answer = qa.run(query)
+
+    md = Markdown(answer)
+    console.print(md)
+
+    console.print(Markdown("\n------\n> What else do you want to know?\n"))
+    console.print("\n")
