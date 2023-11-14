@@ -97,9 +97,7 @@ resource "airbyte_connection" "bigquery_to_pinecone" {
     destination_id = airbyte_destination_pinecone.pinecone.destination_id
     configurations = {
         streams = [
-            # {
-            #   name = "notion_data",
-            # }
+            { name = "notion_data" }
         ]
     }
 }
