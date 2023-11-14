@@ -1,3 +1,15 @@
+/* Notion data transformation and cleansing.
+
+Notion data will be conformed to plain text:
+1. Parent page nodes are recursively parsed downwards to locate
+   all child nodes.
+2. All applicable node types are converted to plain text.
+
+TODO:
+- Consider adding markdownified document metatada cues in the
+  future for headers, list items, tables, etc.
+*/
+
 with recursive iterator as (
   select JSON_VALUE(parent.page_id) as parent_page_id, * from notion.blocks
   union all
@@ -83,6 +95,7 @@ combined_text as (
   from extracted_text
 ),
 aggregated_text as (
+  /* Aggregated text string per Notion page */
   select
     parent_page_id, string_agg(text) as text
   from combined_text
@@ -93,3 +106,5 @@ select
   last_edited_time, url, ifnull(text, "") as notion_text
 from aggregated_text
 join notion.pages on id = parent_page_id
+where text is not null  /* Pinecone will fail if we attempt to insert
+                           with a null text value. */
