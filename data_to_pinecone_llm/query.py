@@ -61,11 +61,15 @@ console = Console()
 console.print(Markdown("\n------\n> What do you want to know?"))
 console.print("")
 while True:
-    query = input("")
-    answer = qa.run(query)
+    try:
+        query = input("")
+    except KeyboardInterrupt:
+        console.print("\n")
+        console.print(Markdown("_Goodbye!_ 👋"))
+        exit(0)
 
-    md = Markdown(answer)
-    console.print(md)
+    answer = qa.run(query)
+    console.print(Markdown(answer))
 
     console.print(Markdown("\n------\n> What else do you want to know?\n"))
     console.print("\n")
