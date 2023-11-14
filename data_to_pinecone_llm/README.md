@@ -111,9 +111,9 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
    - `main.tf`: Contains the main configuration for creating Airbyte resources.
    - `variables.tf`: Holds various variables, including credentials.
 
-   Adjust the configurations in these files to suit your project's needs. Credentials and other secrets pull from variables to help protect [sensitve input](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables), and can be set in the `.tsvars` file.
+   Adjust the configurations in these files to suit your project's needs. Credentials and other secrets pull from variables to help protect [sensitve input](https://developer.hashicorp.com/terraform/tutorials/configuration-language/sensitive-variables), and can be set in the `.tfvars` file.
 
-   If you're using Airbyte Cloud instead of a local deployment you will need to update the airbyte provider configuration in _infra/airbyte/provider.tf_ to set the `bearer_auth` to an API key you can generate at https://portal.airbyte.com/.
+   If you're using Airbyte Cloud instead of a local deployment you will need to update the Airbyte provider configuration in _infra/airbyte/provider.tf_ to set the `bearer_auth` to an API key you can generate at https://portal.airbyte.com/. You can find the Airbyte workspace ID in the Cloud URL, e.g. `https://cloud.airbyte.com/workspaces/{workspace-id}/connections`.
 
 3. **Initialize Terraform**:
 
