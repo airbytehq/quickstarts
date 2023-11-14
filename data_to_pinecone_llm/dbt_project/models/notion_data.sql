@@ -11,10 +11,13 @@ TODO:
 */
 
 with recursive iterator as (
-  select JSON_VALUE(parent.page_id) as parent_page_id, * from notion.blocks
+  select JSON_VALUE(parent.page_id) as parent_page_id, *
+  from {{ source('notion_raw', 'blocks') }} AS blocks
   union all
-  select iterator.parent_page_id, next.* from iterator
-  join notion.blocks next on JSON_VALUE(next.parent.block_id) = iterator.id
+  select iterator.parent_page_id, next_block.* 
+  from iterator
+  join {{ source('notion_raw', 'blocks') }} AS next_block
+    on JSON_VALUE(next_block.parent.block_id) = iterator.id
 ),
 extracted_text as (
   select
@@ -105,6 +108,6 @@ aggregated_text as (
 select
   last_edited_time, url, ifnull(text, "") as notion_text
 from aggregated_text
-join notion.pages on id = parent_page_id
+join {{ source('notion_raw', 'pages') }} on id = parent_page_id
 where text is not null  /* Pinecone will fail if we attempt to insert
                            with a null text value. */
