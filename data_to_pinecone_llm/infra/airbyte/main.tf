@@ -83,6 +83,8 @@ resource "airbyte_connection" "notion_connection" {
     name = "Notion to BigQuery"
     source_id = airbyte_source_notion.notion_source.source_id
     destination_id = airbyte_destination_bigquery.bigquery.destination_id
+    namespace_definition = "custom_format"
+    namespace_format = "notion_raw"
     configurations = {
         streams = [
             { name = "blocks" },

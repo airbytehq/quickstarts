@@ -5,15 +5,11 @@ setup(
     packages=find_packages(),
     install_requires=[
         "dbt-bigquery",
-        "dagster",
-        "dagster-cloud",
-        "dagster-dbt",
-        "dagster-airbyte",
         "pinecone-client",
         "langchain",
         "openai==0.28.1",
         "tiktoken",
         "rich"
     ],
-    extras_require={"dev": ["dagit", "pytest"]},
+    extras_require={"dev": ["pytest"]},
 )

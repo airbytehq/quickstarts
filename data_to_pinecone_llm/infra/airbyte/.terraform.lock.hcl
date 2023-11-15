@@ -5,6 +5,7 @@ provider "registry.terraform.io/airbytehq/airbyte" {
   version     = "0.3.4"
   constraints = "0.3.4"
   hashes = [
+    "h1:0AHJKsRTlX6BCJZCJw5/oHsN97zi1AP33JeuPMwoX6U=",
     "h1:E97NK92naRr/9iAtDxA1PJ1aQYWR/vqWN10ThuQjUn8=",
     "zh:02167e00f7e89b6f09ae8796b9ee0ac2d8702b5cb295cb27d7a79266ffafe196",
     "zh:1ddad39354af090e830caf1e5cce845f24ff0bcef61b73e77ebc7703c2ecf90d",
