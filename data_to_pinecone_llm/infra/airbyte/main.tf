@@ -14,8 +14,8 @@ locals {
 resource "airbyte_source_bigquery" "bigquery" {
     configuration = {
       credentials_json = local.bigquery_credentials_json
-      dataset_id       = var.bigquery_dataset_id
       project_id       = var.bigquery_project_id
+      dataset_id       = var.bigquery_dataset_id
       source_type      = "bigquery"
     }
     name          = "BigQuery Publishing Source"
@@ -84,7 +84,8 @@ resource "airbyte_connection" "notion_connection" {
     source_id = airbyte_source_notion.notion_source.source_id
     destination_id = airbyte_destination_bigquery.bigquery.destination_id
     namespace_definition = "custom_format"
-    namespace_format = "notion_raw"
+    namespace_format = var.bigquery_dataset_id
+    prefix = "notion_"
     configurations = {
         streams = [
             { name = "blocks" },
@@ -99,7 +100,12 @@ resource "airbyte_connection" "bigquery_to_pinecone" {
     destination_id = airbyte_destination_pinecone.pinecone.destination_id
     configurations = {
         streams = [
-            { name = "notion_data" }
+            {
+              name         = "notion_data",
+              cursor_field = ["last_edited_time"],
+              primary_key  = [["url"]]
+              sync_mode    = "incremental_deduped_history"
+            }
         ]
     }
 }

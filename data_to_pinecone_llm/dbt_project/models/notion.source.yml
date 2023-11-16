@@ -3,8 +3,8 @@ version: 2
 sources:
   - name: notion_raw
     database: "{{ env_var('BIGQUERY_PROJECT_ID') }}"
-    schema: "{{ env_var('BIGQUERY_DATASET_ID') }}"  
+    schema: "{{ env_var('BIGQUERY_DATASET_ID') }}"
     tables:
-      - name: blocks
-      - name: iterator
-      - name: pages
+      - name: notion_blocks
+      - name: notion_iterator
+      - name: notion_pages

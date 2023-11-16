@@ -9,11 +9,14 @@ This quickstart is designed to minimize setup hassles and propel you forward.
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Setting an environment for your project](#1-setting-an-environment-for-your-project)
+- [Creating an Environment For Your Project](#1-creating-an-environment-for-your-project)
+- [Adding Configuration Values](#2-adding-configuration-values)
 - [Setting Up Airbyte Connectors](#3-setting-up-airbyte-connectors)
-- [Setting Up the dbt Project](#4-setting-up-the-dbt-project)
-- [Syncing Your Data](#5-syncing-your-data)
-- [Next Steps](#next-steps)
+- [Sync Notion Data into BigQuery](#4-sync-notion-data-into-bigquery)
+- [Setting Up the dbt Project](#5-setting-up-the-dbt-project)
+- [Publishing Into Pinecone](#6-publishing-into-pinecone)
+- [Asking Questions About Your Data](#7-asking-questions-about-your-data)
+- [Next Steps](#8-next-steps)
 
 ## Prerequisites
 
@@ -153,13 +156,35 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
 
    Once Terraform completes its tasks, navigate to the Airbyte UI. Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go.
 
-![Airbyte Workspace Connections](assets/2-connections.png)
+   If you're using Airbyte Cloud, we configured Terraform to assemble the URL for you:
 
-![Airbyte Workspace Sources](assets/3-sources.png)
+   ```bash
+   terraform output
+   ```
 
-![Airbyte Workspace Destinations](assets/4-destinations.png)
+   will print something like:
 
-## 4. Setting Up the dbt Project
+   ```
+   airbyte_cloud_url = "https://cloud.airbyte.com/workspaces/{workspace-id}/connections"
+   ```
+
+![Airbyte Workspace Sources](assets/2-sources.png)
+
+![Airbyte Workspace Destinations](assets/3-destinations.png)
+
+![Airbyte Workspace Connections](assets/4-connections.png)
+
+## 4. Sync Notion Data into BigQuery
+
+Before building the dbt project, transforming the raw notion data, the source tables must exist in the BigQuery dataset. Open the Airbyte UI and navigate to the Connections page. Click the _Sync Now_ button for `Notion to BigQuery` to start the sync.
+
+![UI to sync Notion](assets/5-sync-notion.png)
+
+Once the sync is complete you can inspect the tables in BigQuery.
+
+![Notion source tables in BigQuery](assets/6-bigquery-dataset.png)
+
+## 5. Setting Up the dbt Project
 
 [dbt (data build tool)](https://www.getdbt.com/) allows you to transform your data by writing, documenting, and executing SQL workflows. Setting up the dbt project requires specifying connection details for your data platform, in this case, BigQuery. Here’s a step-by-step guide to help you set this up:
 
@@ -197,13 +222,19 @@ Airbyte allows you to create connectors for sources and destinations, facilitati
    dbt build
    ```
 
-## 5. Syncing Your Data
+   You should now see the `notion_data` view in BigQuery.
 
-Now that the Airbyte connections are set up and the dbt model is built, its time to sync and transform your data.
+   ![Notion source tables and view in BigQuery](assets/7-bigquery-dataset-with-view.png)
 
-## 6. Asking Questions About Your Data
+## 6. Publishing Into Pinecone
 
-Now that Airbyte has synced the raw Notion data into BigQuery and inserted the page text into your Pinecone index, it is ready to be interacted with by an LLM model. After providing a couple more environment variables, the provided _query.py_ will provide an interactive session to ask questions about your data.
+With the source data transformed it is now ready to publish into the Pinecone index. Head back to the Connections and start a sync for `Publish BigQuery Data to Pinecone`.
+
+![Notion source tables and view in BigQuery](assets/8-sync-pinecone.png)
+
+## 7. Asking Questions About Your Data
+
+After Airbyte has published the Notion page text into your Pinecone index, it is ready to be interacted with via an LLM model. After providing a couple more environment variables, the provided _query.py_ will provide an interactive session to ask questions about your data.
 
 ```bash
 export OPENAI_API_KEY=openai_api_key
@@ -214,7 +245,7 @@ export PINECONE_INDEX=pinecone_index
 python query.py
 ```
 
-## 7. Next Steps
+## 8. Next Steps
 
 Once you've set up and launched this initial integration, the real power lies in its adaptability and extensibility. Here’s a roadmap to help you customize and harness this project tailored to your specific data needs:
 
