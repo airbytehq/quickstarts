@@ -1,0 +1,14 @@
+dbt_project:
+  outputs:
+    dev:
+      type: bigquery
+      project: "{{ env_var('BIGQUERY_PROJECT_ID') }}"
+      dataset: "{{ env_var('BIGQUERY_DATASET_ID') }}"
+      location: "{{ env_var('BIGQUERY_DATASET_LOCATION') }}"
+      keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE_PATH') }}"
+      method: service-account
+      priority: interactive
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      threads: 1
+  target: dev
