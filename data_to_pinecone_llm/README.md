@@ -46,6 +46,12 @@ OpenAI is used both in processing the query and also provides the LLM for genera
 
 4. **Terraform**: Terraform will help you provision and manage the Airbyte resources. If you haven't installed it, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 
+### Using GitHub Codespaces (Optional)
+
+We've created a **GitHub Codespaces** quicklink to help you get started instantly in your browser or in a local version of VS Code. [Codespaces](https://docs.github.com/en/codespaces/overview) is a preconfigured dev environment hosted in the GitHub cloud. Use the link below to get started in your browser.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/airbytehq/quickstarts?quickstart=1)
+
 ## 1. Creating an Environment For Your Project
 
 Get the project up and running on your local machine by following these steps:
