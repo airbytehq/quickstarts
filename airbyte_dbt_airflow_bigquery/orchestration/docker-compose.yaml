@@ -75,7 +75,7 @@ x-airflow-common: &airflow-common
         - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
         - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
         - ${DBT_PROJ_DIR:-.}:/opt/airflow/dbt_project
-        - ${GCP_SERVICE_ACCOUNT_PATH:-}:/opt/airflow/service_accounts
+        - ${GCP_SERVICE_ACCOUNT_PATH:-.}:/opt/airflow/service_accounts
     user: '${AIRFLOW_UID:-50000}:0'
     depends_on: &airflow-common-depends-on
         redis:
