@@ -26,7 +26,7 @@ def extract_and_transform():
     extract_data = AirbyteTriggerSyncOperator(
         task_id="trigger_airbyte_faker_to_bigquery",
         airbyte_conn_id="airbyte_connection",
-        connection_id="2bde6265-f4fa-482e-a237-8e2ca9432898",
+        connection_id="your_connection_id", # Update with your Airbyte connection ID
         asynchronous=False,
         timeout=3600,
         wait_seconds=3
