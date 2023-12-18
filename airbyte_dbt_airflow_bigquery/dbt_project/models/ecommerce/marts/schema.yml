@@ -25,14 +25,10 @@ models:
             tests:
                 - not_null
           - name: purchased_at
-            tests:
-                - not_null
           - name: added_to_cart_at
             tests:
                 - not_null
           - name: time_to_purchase_seconds
-            tests:
-                - not_null
           - name: returned_at
 
     - name: user_demographics

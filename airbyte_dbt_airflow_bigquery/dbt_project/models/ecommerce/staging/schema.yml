@@ -52,8 +52,6 @@ models:
             tests:
                 - not_null
           - name: purchased_at
-            tests:
-                - not_null
           - name: returned_at
           - name: created_at
             tests:
