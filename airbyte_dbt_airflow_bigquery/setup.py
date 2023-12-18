@@ -9,7 +9,6 @@ setup(
         "apache-airflow-providers-google",
         "apache-airflow-providers-airbyte",
         "apache-airflow",
-        "airflow-providers-google",
     ],
     extras_require={"dev": ["pytest"]},
 )
