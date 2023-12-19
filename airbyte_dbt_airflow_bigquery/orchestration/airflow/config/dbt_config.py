@@ -18,7 +18,7 @@ google_config = GoogleCloudServiceAccountFileProfileMapping(
 )
 
 profile_config = ProfileConfig(
-    profile_name="dbt_profile",
+    profile_name="dbt_project",
     target_name="dev",
     profile_mapping=google_config
 )
