@@ -2,10 +2,6 @@
 
 Welcome to the Airbyte, dbt and Airflow (ADA) Stack with BigQuery quickstart! This repo contains the code to show how to utilize Airbyte and dbt for data extraction and transformation, and implement Apache Airflow to orchestrate the data workflows, providing a end-to-end ELT pipeline. With this setup, you can pull fake e-commerce data, put it into BigQuery, and play around with it using dbt and Airflow.
 
-Below is a visual representation of how data flows through our integrated tools in this quickstart:
-
-![dbt lineage grapth](assets/10_dbt-lineage.png)
-
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -222,12 +218,13 @@ That’s it! Your connection is set up and ready to go! 🎉
 
    If you want to avoid hardcoding credentials in the `profiles.yml` file, you can leverage environment variables. Here's an example: `keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE_PATH', '') }}"`
 
-3. **Test the Connection**:
-
-   Once you’ve updated the connection details, you can test the connection to your BigQuery instance using:
+3. **Test the Connection (Optional)**:
+   You can test the connection to your BigQuery instance using the following command. Just take into account that you would need to provide the local path to your service account key file instead.
+   
    ```bash
    dbt debug
    ```
+   
    If everything is set up correctly, this command should report a successful connection to BigQuery 🎉.
 
 ## 5. Setting Up Airflow
@@ -243,7 +240,7 @@ Let's set up Airflow for our project, following the steps below. We are basing o
 2. **Set Environment Variables**:
 
    - Open the `.env.example` file located in the `orchestration` directory.
-   - Update the necessary fields, paying special attention to the `GCP_SERVICE_ACCOUNT_PATH`, which should point to your BigQuery service account JSON key directory path.
+   - Update the necessary fields, paying special attention to the `GCP_SERVICE_ACCOUNT_PATH`, which should point to your local service account JSON key directory path.
    - Rename the file from `.env.example` to `.env` after filling in the details.
 
 3. **Build the custom Airflow image**:
@@ -317,10 +314,11 @@ Now that everything is set up, it's time to run your data pipeline!
 - In the Airflow UI, go to the "DAGs" section.
 - Locate `elt_dag` and click on "Trigger DAG" under the "Actions" column.
 
-This will initiate the complete data pipeline, starting with the Airbyte sync from Faker to BigQuery, followed by dbt transforming the raw data into `staging` and `marts` models.
+This will initiate the complete data pipeline, starting with the Airbyte sync from Faker to BigQuery, followed by dbt transforming the raw data into `staging` and `marts` models. As the last step, it generates dbt docs.
 
 - Confirm the sync status in the Airbyte UI.
 - After dbt jobs completion, check the BigQuery console to see the newly created views in the `transformed_data` dataset.
+- Once the dbt pipeline completes, you can check the dbt docs from the Airflow UI by going to the "Custom Docs" > "dbt" tab.
 
 Congratulations! You've successfully run an end-to-end workflow with Airflow, dbt and Airbyte. 🎉
 
