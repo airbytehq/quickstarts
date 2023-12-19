@@ -2,6 +2,14 @@
 
 Welcome to the Airbyte, dbt and Airflow (ADA) Stack with BigQuery quickstart! This repo contains the code to show how to utilize Airbyte and dbt for data extraction and transformation, and implement Apache Airflow to orchestrate the data workflows, providing a end-to-end ELT pipeline. With this setup, you can pull fake e-commerce data, put it into BigQuery, and play around with it using dbt and Airflow.
 
+Here's the diagram of the end to end data pipeline you will build, from the Airflow DAG Graph view:
+
+![elt_dag](assets/elt_dag.png)
+
+And here are the transformations happening when the dbt DAG is executed:
+
+![ecommerce_dag](assets/ecommerce_dag.png)
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
