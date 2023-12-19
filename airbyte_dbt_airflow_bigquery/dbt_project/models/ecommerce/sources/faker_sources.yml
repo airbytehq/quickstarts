@@ -2,11 +2,8 @@ version: 2
 
 sources:
     - name: faker
-      # Use your BigQuery project ID
-      project: retize-dev #TODO change
-      dataset: sample_ecommerce #TODO change
-      # Use your BigQuery dataset name
-
+      project: your_project_id # Update this field with your BigQuery project ID
+      dataset: raw_data
       tables:
           - name: users
             description: 'Simulated user data from the Faker connector.'

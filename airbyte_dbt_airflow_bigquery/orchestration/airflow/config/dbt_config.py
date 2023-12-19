@@ -9,8 +9,8 @@ project_config = ProjectConfig(
 google_config = GoogleCloudServiceAccountFileProfileMapping(
     conn_id="dbt_file_connection",
     profile_args={
-        "dataset": "my_dataset",
-        "location": "US",
+        "dataset": "transformed_data",
+        "location": "US", # Update if you're using a different location for your dataset
         "threads": 1,
         "retries": 1,
         "priority": "interactive",
@@ -18,8 +18,7 @@ google_config = GoogleCloudServiceAccountFileProfileMapping(
 )
 
 profile_config = ProfileConfig(
-    profile_name="airflow_profile",
+    profile_name="dbt_project",
     target_name="dev",
     profile_mapping=google_config
 )
-#

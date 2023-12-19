@@ -6,7 +6,7 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'airflow_profile'
+profile: 'dbt_project'
 
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
@@ -31,9 +31,6 @@ clean-targets: # directories to be removed by `dbt clean`
 models:
     dbt_project:
         # Config indicated by + and applies to all files under models/example/
-        example:
-            +materialized: view
-
         ecommerce:
             +materialized: view
             staging:

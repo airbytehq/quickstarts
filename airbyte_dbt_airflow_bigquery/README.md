@@ -1,59 +1,37 @@
-# Airbyte, dbt and Airflow (ADA) Stack with BigQuery
+# E-commerce Analytics Stack with Airbyte, dbt, Airflow (ADA) and BigQuery
 
-Welcome to the Airbyte, dbt and Airflow (ADA) Stack with BigQuery quickstart! This repo contains the code to show how to utilize Airbyte and dbt for data extraction and transformation, and implement Apache Airflow to orchestrate continuous data synchronization workflows for always-up-to-date data.
-
-This quickstart is designed to help you set up the orchestration of your Airbyte Syncs and dbt models using Apache Airflow, providing a end-to-end ELT pipeline. We have some examples of different forms of running dbt models that can be used as a starting point for your project.
-
-Here's a representation of our data transformations, provided by the dbt Docs page:
-
-![dbt lineage grapth](assets/10_dbt-lineage.png)
-
-In this diagram, the sources in green are provided by our Airbyte Sync.
+Welcome to the Airbyte, dbt and Airflow (ADA) Stack with BigQuery quickstart! This repo contains the code to show how to utilize Airbyte and dbt for data extraction and transformation, and implement Apache Airflow to orchestrate the data workflows, providing a end-to-end ELT pipeline. With this setup, you can pull fake e-commerce data, put it into BigQuery, and play around with it using dbt and Airflow.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [1. Setting an environment for your project](#1-setting-an-environment-for-your-project)
-- [2. Setting up Apache Airflow for development](#2-setting-up-apache-airflow-for-development)
-  - [2.1. Running Airflow locally](#21-running-airflow-locally)
-- [3. Setting up Airflow Connections](#3-setting-up-airflow-connections)
-  - [3.1. Airbyte Connection](#31-airbyte-connection)
-  - [3.2. Google Cloud (BigQuery) connection](#32-google-cloud-bigquery-connection)
-- [4. Setting up Airbyte Connectors](#4-setting-up-airbyte-connectors)
-  - [4.1. With Terraform](#41-with-terraform)
-  - [4.2. With the UI](#42-with-the-ui)
-- [5. Setting Up the dbt project](#5-setting-up-the-dbt-project)
-  - [5.1. Setting up the dbt project on your local machine](#51-setting-up-the-dbt-project-on-your-local-machine)
-  - [5.2. Setting up dbt to run in Airflow](#52-setting-up-dbt-to-run-in-airflow)
-- [6. Orchestrating with Airflow](#6-orchestrating-with-airflow)
-  - [6.1. Triggering Airbyte Syncs](#61-triggering-airbyte-syncs)
-  - [6.2. Running dbt models](#62-running-dbt-models)
-    - [6.2.1. dbt\_\_jaffle-shop](#621-dbt__jaffle-shop)
-    - [6.2.2. dbt\_\_example](#622-dbt__example)
-- [7. Next Steps](#7-next-steps)
+- [Setting an environment for your project](#1-setting-an-environment-for-your-project)
+- [Setting Up BigQuery](#2-setting-up-bigquery)
+- [Setting Up Airbyte Connectors](#3-setting-up-airbyte-connectors)
+- [Setting Up the dbt Project](#4-setting-up-the-dbt-project)
+- [Setting Up Airflow](#5-setting-up-airflow)
+- [Orchestrating with Airflow](#6-orchestrating-with-airflow)
+- [Next Steps](#7-next-steps)
 
 ## Prerequisites
 
-1. **Python 3.10 or later**: If not installed, download and install it from [Python's official website](https://www.python.org/downloads/). We'll also use pip and venv, so make sure they're installed as well.
+Before you embark on this integration, ensure you have the following set up and ready:
 
-2. **Docker and Docker Compose**: Install [Docker](https://docs.docker.com/get-docker/) following the official documentation for your specific OS.
-   
-3. **Apache Airflow with dbt and Airbyte packages**: You can deploy Airflow using Docker Compose. Follow the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html) to install it. We've also provided the full configuration file for using it locally in the `orchestration` folder. More details [below]
+1. **Python 3.10 or later**: If not installed, download and install it from [Python's official website](https://www.python.org/downloads/).
 
-4. **Airbyte OSS version**: Deploy the open-source version of Airbyte. Follow the installation instructions from the [Airbyte Documentation](https://docs.airbyte.com/quickstart/deploy-airbyte/).
+2. **Docker and Docker Compose (Docker Desktop)**: Install [Docker](https://docs.docker.com/get-docker/) following the official documentation for your specific OS.
 
-5. **Terraform**: Terraform will help you provision and manage the Airbyte resources. If you haven't installed it, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/downloads).
+3. **Airbyte OSS version**: Deploy the open-source version of Airbyte locally. Follow the installation instructions from the [Airbyte Documentation](https://docs.airbyte.com/quickstart/deploy-airbyte/).
 
-6. **Google Cloud Project with permission to create and give access to a service account**: You will also need to add the necessary permissions to allow Airbyte and dbt to access and write data in BigQuery. A step-by-step guide is provided [below](#2-setting-up-bigquery).
+4. **Terraform (Optional)**: Terraform will help you provision and manage the Airbyte resources. If you haven't installed it, follow the [official Terraform installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli). This is an optional step because you can also create and manage Airbyte resources via the UI. Both ways will be described below.
+
+5. **Google Cloud account with BigQuery**: You will also need to add the necessary permissions to allow Airbyte and dbt to access the data in BigQuery. A step-by-step guide is provided [below](#2-setting-up-bigquery).
 
 ## 1. Setting an environment for your project
-
-Since we're using most of the tools via Docker, this step is not 100% necessary. However, setting this up will help you develop and test your project (and mainly your dbt models) locally.
 
 Get the project up and running on your local machine by following these steps:
 
 1. **Clone the repository (Clone only this quickstart)**:  
-   
    ```bash
    git clone --filter=blob:none --sparse  https://github.com/airbytehq/quickstarts.git
    ```
@@ -63,128 +41,89 @@ Get the project up and running on your local machine by following these steps:
    ```
 
    ```bash
-   git sparse-checkout add ecommerce_analytics_bigquery
-   ```
-   
-2. **Navigate to the directory**:  
-   
-   ```bash
-   cd ecommerce_analytics_bigquery
+   git sparse-checkout add airbyte_dbt_airflow_bigquery
    ```
 
-3. **Set Up a Virtual Environment**:  
+2. **Navigate to the directory**:  
+   ```bash
+   cd airbyte_dbt_airflow_bigquery
+   ```
+
+   At this point you can view the code in your preferred IDE. 
    
-   - For Linux or Mac:
-     
+   The next steps are only necessary if want to develop or test the dbt models locally, since Airbyte and Airflow are running on Docker.
+
+3. **Set up a virtual environment**:  
+   
+   You can use the following commands, just make sure to adapt to your specific python installation.
+
+   - For Linux and Mac:
      ```bash
      python3 -m venv venv
      source venv/bin/activate
      ```
 
    - For Windows:
-     
      ```bash
      python -m venv venv
      .\venv\Scripts\activate
      ```
 
-4. **Install Dependencies**:  
-   
+4. **Install dependencies**: 
+
    ```bash
    pip install -e ".[dev]"
    ```
 
-## 2. Setting up Apache Airflow for development
+## 2. Setting up BigQuery
 
-We're using the [Running Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html) as a starting point. We've downloaded the official `docker-compose.yaml` file provided by Airflow and adapted it to:
-- Use some configurations from an .env file
-- Add the Airbyte operator, dbt and astronomer-cosmos packages
-- Mount our dbt project folder into the container image
-- Connect it with the local deployment of Airbyte
+1. **Create a Google Cloud project**:
+   - If you have a Google Cloud project, you can skip this step.
+   - Go to the [Google Cloud Console](https://console.cloud.google.com/).
+   - Click on the "Select a project" dropdown at the top right and select "New Project".
+   - Give your project a name and follow the steps to create it.
 
-### 2.1. Running Airflow locally
+2. **Create BigQuery datasets**:
+   - In the Google Cloud Console, go to BigQuery.
+   - Make two new datasets: `raw_data` for Airbyte and `transformed_data` for dbt.
+     - If you pick different names, remember to change the names in the code too.
+   
+   **How to create a dataset:**
+   - In the left sidebar, click on your project name.
+   - Click “Create Dataset”.
+   - Enter the dataset ID (either `raw_data` or `transformed_data`).
+   - Click "Create Dataset".
 
-To run this project, you'll need to fill in the `.env` file with the necessary information. You can find an example of the file in the `orchestration` folder. The most important variable is:
-- `GCP_SERVICE_ACCOUNT_PATH`: the path to the service account key file. This file will be used to authenticate with BigQuery.
+3. **Create a Service Account and Assign Roles**:
+   - Go to “IAM & Admin” > “Service accounts” in the Google Cloud Console.
+   - Click “Create Service Account”.
+   - Name your service account.
+   - Assign the “BigQuery Data Editor” and “BigQuery Job User” roles to the service account.
 
-All others can be found in the docker-compose.yaml file and you can change them if you want to.
+   **How to create a service account and assign roles:**
+   - While creating the service account, under the “Grant this service account access to project” section, click the “Role” dropdown.
+   - Choose the “BigQuery Data Editor” and “BigQuery Job User” roles.
+   - Finish the creation process.
+   
+4. **Generate a JSON key for the Service Account**:
+   - Make a JSON key to let the service account sign in.
+   
+   **How to generate a JSON key:**
+   - Find the service account in the “Service accounts” list.
+   - Click on the service account name.
+   - In the “Keys” section, click “Add Key” and pick JSON.
+   - The key will download automatically. Keep it safe and don’t share it.
 
-This configuration will deploy the following containers:
-- **Postgres Database**: Airflow's metadata database
-- **Airflow Scheduler**: Airflow's scheduler, which will be responsible for parsing and triggering the DAGs
-- **Airflow Triggerer**: Airflow's triggerer, which makes possible that tasks can by suspended and reescheduled based on priority
-- **Airflow Webserver**: Airflow's webserver, which will be responsible for showing the UI
-- **Airflow Worker**: Airflow's worker, which will be responsible for running the tasks
-- **Redis Database**: Airflow's broker database, which will be responsible for storing the tasks and their states between the scheduler and the workers
+## 3. Setting Up Airbyte Connectors
 
-To start it, you need to go to the `orchestration` folder
+To set up your Airbyte connectors, you can choose to do it via Terraform, or the UI. Choose one of the two following options.
 
-```bash
-cd orchestration
-```
+### 3.1. Setting Up Airbyte Connectors with Terraform
 
-Build our Airflow image with the necessary packages
-
-```bash
-docker compose build
-```
-
-And then run it
-
-```bash
-docker compose up
-```
-
-This can take a few minutes in the first run, since it will set up the database with all necessary tables and metadata.
-
-When it's done, you can access the Airflow UI at `http://localhost:8080`. The default username and password are both `airflow`, unless you changed it on the `.env` file.
-
-## 3. Setting up Airflow Connections
-
-Both for using Airbyte and dbt, we need to set up some connections in Airflow. You can do that by accessing the Airflow UI and going to the Admin tab. There, you'll find the Connections option. 
-![airflow connections menu](assets/1_airflow-connection-menu.png)
-
-Click on it and you'll have the Connections page.
-
-![airflow connections page](assets/2_airflow-connections-page.png)
-
-Here you can click on the `+` button to create a new connection.
-
-
-We'll need to create the following connections:
-
-### 3.1. Airbyte Connection
-
-- **Connection Id**: The name of the connection, this will be used in the DAGs responsible for triggering Airbyte syncs. In this example, we'll use `airbyte_connection`.
-- **Connection Type**: The type of the connection. In this case, we'll use `Airbyte`.
-- **Host**: The host of the Airbyte instance. Since we're running it locally, we're using `airbyte-proxy`, which is the name of the container running Airbyte. In case you have a remote instance, you can use the URL of the instance.
-- **Port**: The port of the Airbyte instance. By default the API is exposed on port `8001`, so we'll use that.
-- **Login**: If you're using the proxy (it's used by default in the official Airbyte Docker Compose file), this is required. By default it's `airbyte`.
-- **Password**: If you're using the proxy (it's used by default in the official Airbyte Docker Compose file), this is required. By default it's `password`.
-
-In our example, the `Test` button in the form is enabled. You can use it and the result must be `Connection successfully tested`.
-
-![airbyte airflow connection](assets/3_airbyte-connection.png)
-
-### 3.2. Google Cloud (BigQuery) connection
-
-- **Connection Id**: The name of the connection, this one will be used in the DAGs responsible for triggering dbt runs. In this example, we'll use `dbt_file_connection`.
-- **Connection Type**: The type of the connection. In this case, we'll use `Google Cloud`.
-- **Keyfile path**: The path to the service account key file. In our case, they are mounted into `/opt/airflow/service_accounts/[your-service-account-key-file]`, so we'll use that. Instead of this, you can use the **Keyfile JSON** field and paste the content of the key file.
-
-In our example, the `Test` button in the form is enabled. You can use it and the result must be `Connection successfully tested`.
-
-## 4. Setting up Airbyte Connectors
-
-Airbyte allows you to create connectors for sources and destinations, facilitating data synchronization between various platforms.
-
-### 4.1. With Terraform
-
-You can use Terraform to automate the creation of these connectors and the connections between them. Here's how you can set this up:
+Airbyte allows you to create connectors for sources and destinations via Terraform, facilitating data synchronization between various platforms. Here's how you can set this up:
 
 1. **Navigate to the Airbyte Configuration Directory**:
-   
-   Change to the relevant directory containing the Terraform configuration for Airbyte:
+
    ```bash
    cd infra/airbyte
    ```
@@ -196,15 +135,16 @@ You can use Terraform to automate the creation of these connectors and the conne
     - `main.tf`: Contains the main configuration for creating Airbyte resources.
     - `variables.tf`: Holds various variables, including credentials.
 
-   We've also provided a `terraform.tfvars` file with the necessary variables, so you can provide your own values there.
+   Adjust the configurations in these files to suit your project's needs: 
 
-   Adjust the configurations in these files to suit your project's needs. Specifically, provide credentials for your BigQuery connection. 
+   - Provide credentials for your BigQuery connection in the `main.tf` file.
+      - `dataset_id`: The name of the BigQuery dataset where Airbyte will load data. In this case, enter “raw_data”.
+      - `project_id`: Your BigQuery project ID.
+      - `credentials_json`: The contents of the service account JSON file. You should input a string, so you need to convert the JSON content to string beforehand.
+      - `workspace_id`: Your Airbyte workspace ID, which can be found in the webapp url. For example, in this url: http://localhost:8000/workspaces/910ab70f-0a67-4d25-a983-999e99e1e395/ the workspace id would be `910ab70f-0a67-4d25-a983-999e99e1e395`.
 
-   For our example, you'll need to setup the following:
-   - `workspace_id`: The ID of the workspace you want to use. You can find it in the URL of the workspace page in the Airbyte UI.
-   - `project_id`: The Google Cloud Project ID where we'll use BigQuery.
-   - `dataset_id`: The ID of the dataset in BigQuery where data will be stored. You can create it yourself or let Airbyte create it for you.   
-   - `credentials_json_path`: The path to the service account key file. This file will be used to authenticate with BigQuery. We're using terraform's file function to read this file, so you don't need to store it within your code.
+   - Alternatively, you can utilize the `variables.tf` file to manage these credentials:
+      - You’ll be prompted to enter the credentials when you execute `terraform plan` and `terraform apply`. If going for this option, just move to the next step. If you don’t want to use variables, remove them from the file.
 
 3. **Initialize Terraform**:
    
@@ -227,145 +167,160 @@ You can use Terraform to automate the creation of these connectors and the conne
    terraform apply
    ```
 
-   It will ask you to confirm if you want to apply the changes. Type `yes` and press enter.
-
 6. **Verify in Airbyte UI**:
 
-   Once Terraform completes its tasks, navigate to the [Airbyte UI](http://localhost:8000/). Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go.
+   Once Terraform completes its tasks, navigate to the [Airbyte UI](http://localhost:8000/). Here, you should see your source and destination connectors, as well as the connection between them, set up and ready to go 🎉.
 
-More details, and the sources and destinations available can be found in the [Airbyte Provider Documentation](https://registry.terraform.io/providers/airbytehq/airbyte/latest/docs).
+### 3.2. Setting Up Airbyte Connectors Using the UI
 
-### 4.2. With the UI
+Start by launching the Airbyte UI by going to http://localhost:8000/ in your browser. Then:
 
-You can also create the connectors manually in the Airbyte UI. The process is very well described in the [Getting Started](https://docs.airbyte.com/category/getting-started) official documentation. Here's a quick step-by-step guide, but in case you need more details, you can follow the documentation.
+1. **Create a source**:
 
-1. **Navigate to the Airbyte UI**:
-   
-   Go to the [Airbyte UI](http://localhost:8000/).
+   - Go to the Sources tab and click on `+ New source`.
+   - Search for “faker” using the search bar and select `Sample Data (Faker)`.
+   - Adjust the Count and optional fields as needed for your use case. You can also leave as is. 
+   - Click on `Set up source`.
 
-2. **Create the Source Connector**: 
-   
-      1. Click on the `Sources` menu on the left.
-      2. Click on the `+ New source` button on the top right. 
-      3. Select the type of the source. We're using `Sample Data (Faker)`.
-      4. Fill in the form with the necessary information.
-      5. Click on the `Set up source` button.
-3. **Create the Destination Connector**:
-      
-      1. Click on the `Destinations` menu on the left.
-      2. Click on the `+ New destination` button on the top right. 
-      3. Select the type of the destination. We're using `BigQuery`.
-      4. Fill in the form with the necessary information. You'll need to set authentication here by providing the `Service Account Key JSON`.
-      5. Click on the `Set up destination` button.
+2. **Create a destination**:
 
-4. **Create the Connection**:
-      
-      1. Click on the `Connections` menu on the left.
-      2. Click on the `+ New connection` button on the top right. 
-      3. Select the source and destination connectors you want to connect.
-      4. Fill in the form with the necessary information. Since we're planning on using Airflow as the orchestrator, we'll set the `Replication frequency` to `Manual`.
-      5. Click on the `Set up connection` button.
+   - Go to the Destinations tab and click on `+ New destination`.
+   - Search for “bigquery” using the search bar and select `BigQuery`.
+   - Enter the connection details as needed.
+   - For simplicity, you can use `Standard Inserts` as the loading method.
+   - In the `Service Account Key JSON` field, enter the contents of the JSON file. Yes, the full JSON.
+   - Click on `Set up destination`.
 
-Either way, you should have the connection set up and ready to go. 
+3. **Create a connection**:
 
-## 5. Setting Up the dbt project
+   - Go to the Connections tab and click on `+ New connection`.
+   - Select the source and destination you just created.
+   - Enter the connection details as needed.
+   - Click on `Set up connection`.
 
-[dbt (data build tool)](https://www.getdbt.com/) allows you to transform your data by writing, documenting, and executing SQL workflows. 
+That’s it! Your connection is set up and ready to go! 🎉 
 
-### 5.1. Setting up the dbt project on your local machine
+## 4. Setting Up the dbt Project
 
-To develop it locally, we need to set up some connection details for your data platform, which in this case, is BigQuery. If you don't want to test your models before deploying them, you don't need this step. Here’s a step-by-step guide to help you set this up:
+[dbt (data build tool)](https://www.getdbt.com/) allows you to transform your data by writing, documenting, and executing SQL workflows. Setting up the dbt project requires specifying connection details for your data platform, in this case, BigQuery. Here’s a step-by-step guide to help you set this up:
 
 1. **Navigate to the dbt Project Directory**:
 
-   Change to the directory containing the dbt configuration:
+   Move to the directory containing the dbt configuration:
    ```bash
-   cd dbt_project
+   cd ../../dbt_project
    ```
 
 2. **Update Connection Details**:
 
-   You'll find a `profiles.yml` file within the directory. This file contains configurations for dbt to connect with your data platform. Update this file with your BigQuery connection details.
+   - You'll find a `profiles.yml` file within the directory. This file contains configurations for dbt to connect with your data platform. Update this file with your BigQuery connection details. Specifically, you need to update the Service Account JSON file path, the dataset location and your BigQuery project ID.
+   - Provide your BigQuery project ID in the `database` field of the `/models/ecommerce/sources/faker_sources.yml` file.
 
-3. **Utilize Environment Variables (Optional but Recommended)**:
+   If you want to avoid hardcoding credentials in the `profiles.yml` file, you can leverage environment variables. Here's an example: `keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE_PATH', '') }}"`
 
-   To keep your credentials secure, you can leverage environment variables. An example is provided within the `profiles.yml` file.
-
-4. **Test the Connection**:
-
-   Once you’ve updated the connection details, you can test the connection to your BigQuery instance using:
+3. **Test the Connection (Optional)**:
+   You can test the connection to your BigQuery instance using the following command. Just take into account that you would need to provide the local path to your service account key file instead.
+   
    ```bash
    dbt debug
    ```
+   
+   If everything is set up correctly, this command should report a successful connection to BigQuery 🎉.
 
-   If everything is set up correctly, this command should report a successful connection to BigQuery.
+## 5. Setting Up Airflow
 
-5. **Build and test your models**:
-   When developing, it might be useful to test your models before running them. To do this, you can run:
+Let's set up Airflow for our project, following the steps below. We are basing our setup on the Running Airflow in Docker guide, with some customizations:
+
+1. **Navigate to the Orchestration Directory**:
+
    ```bash
-   dbt build
+   cd ../orchestration
    ```
 
-   This will build and test all your resources and make sure your project is set up correctly.
+2. **Set Environment Variables**:
 
-### 5.2. Setting up dbt to run in Airflow
+   - Open the `.env.example` file located in the `orchestration` directory.
+   - Update the necessary fields, paying special attention to the `GCP_SERVICE_ACCOUNT_PATH`, which should point to your local service account JSON key directory path.
+   - Rename the file from `.env.example` to `.env` after filling in the details.
 
-We use [Astronomer Cosmos](https://astronomer.github.io/astronomer-cosmos/) to integrate dbt with Airflow. This library parses DAGs and Task Groups from dbt models, and allows us to use Airflow connections instead of dbt profiles. Additionally, it runs tests automatically after each model is completed.
+3. **Build the custom Airflow image**:
 
-To set it up, we've created the file `orchestration/airflow/config/dbt_config.py` with the necessary configurations. 
+   ```bash
+   docker compose build
+   ```
 
-In this file we're setting up the following:
+4. **Launch the Airflow container**:
 
-- **project_config**: The path to the dbt project folder. In our case, it's mounted into `/opt/airflow/dbt_project`.
-- **google_config**: The configuration that parses an Airflow connection into a dbt profile. Here we need to set the `conn_id` (it's `dbt_file_connection` by default) and the dataset, locations and any other dbt connection configuration. We're using the  `GoogleCloudServiceAccountFileProfileMapping`, which is created by a connection that uses the Keyfile path. If you used the Keyfile JSON, you can use the `GoogleCloudServiceAccountDictProfileMapping` instead.
-- **profile_config**: The configuration that uses a profile mapping and exports it to be used by the cosmos operators.
+   ```bash
+   docker compose up
+   ```
+
+   This might take a few minutes initially as it sets up necessary databases and metadata.
+
+5. **Setting up Airflow Connections**:
+
+   Both for using Airbyte and dbt, we need to set up connections in Airflow:
+
+   - Access the Airflow UI by navigating to `http://localhost:8080` in your browser. The default username and password are both `airflow`, unless you changed it on the `.env` file.
+   - Go to the "Admin" > "Connections" tab.
+
+   **5.1. Create Airbyte Connection**:
+
+      Click on the `+` button to create a new connection and fill in the following details to create an Airbyte connection:
+
+      - **Connection Id**: The name of the connection, this will be used in the DAGs responsible for triggering Airbyte syncs. Name it `airbyte_connection`.
+      - **Connection Type**: The type of the connection. In this case, select `Airbyte`.
+      - **Host**: The host of the Airbyte instance. Since we're running it locally, use `airbyte-proxy`, which is the name of the container running Airbyte. In case you have a remote instance, you can use the URL of the instance.
+      - **Port**: The port of the Airbyte instance. By default the API is exposed on port `8001`.
+      - **Login**: If you're using the proxy (it's used by default in the official Airbyte Docker Compose file), this is required. By default it's `airbyte`.
+      - **Password**: If you're using the proxy (it's used by default in the official Airbyte Docker Compose file), this is required. By default it's `password`.
+
+      Click on the `Test` button, and make sure you get a `Connection successfully tested` message at the top. Then, you can `Save` the connection.
+
+   **5.2. Create Google Cloud (BigQuery) connection**:
+
+      Click on the `+` button to create a new connection and fill in the following details to create an Google Cloud connection:
+
+      - **Connection Id**: The name of the connection, this one will be used in the DAGs responsible for triggering dbt runs. Name it `dbt_file_connection`.
+      - **Connection Type**: The type of the connection. Select `Google Cloud` from the drop down menu.
+      - **Project ID**: The Google Cloud project ID. 
+      - **Keyfile path**: The path to the service account key file. In this case, it's mounted to `/opt/airflow/service_accounts/[your-service-account-key-file].json`. 
+         - Alternatively, you can use the **Keyfile JSON** field and paste the contents of the key file.
+
+      Click on the `Test` button, and make sure you get a `Connection successfully tested` message at the top. Then, you can `Save` the connection.
+
+6. **Integrate dbt with Airflow**:
+
+   We use [Astronomer Cosmos](https://astronomer.github.io/astronomer-cosmos/) to integrate dbt with Airflow. This library parses DAGs and Task Groups from dbt models, and allows us to use Airflow connections instead of dbt profiles. Additionally, it runs tests automatically after each model is completed. To set it up, we've created the file `orchestration/airflow/config/dbt_config.py` with the necessary configurations.
+
+   Update the following in the `dbt_config.py` file, if necessary:
+
+   - The `location` key inside `google_config` with the location of your BigQuery `transformed_data` dataset, if it's not `US`.
+   - The method used to create the `google_condig`. The code uses the `GoogleCloudServiceAccountFileProfileMapping` method, assuming that the Google Cloud connection in Airflow was created using the *Keyfile Path*. If you used the *Keyfile JSON*, you should use the `GoogleCloudServiceAccountDictProfileMapping` method instead.
+
+7. **Link Airbyte connection to the Airflow DAG**:
+
+   The last step being being able to execute the DAG in Airflow, is to include the `connection_id` from Airbyte:
+
+   - Visit the Airbyte UI at http://localhost:8000/.
+   - In the "Connections" tab, select the "Faker to BigQuery" connection and copy its connection id from the URL.
+   - Update the `connection_id` in the `extract_data` task within `orchestration/airflow/dags/elt_dag.py` with this id.
+
+   That's it! Airflow has been configured to work with dbt and Airbyte. 🎉 
 
 ## 6. Orchestrating with Airflow
+Now that everything is set up, it's time to run your data pipeline!
 
-In the `orchestration/airflow/dags` we have a few examples of DAGs that might be useful. We'll go through some of them and explain how they work.
+- In the Airflow UI, go to the "DAGs" section.
+- Locate `elt_dag` and click on "Trigger DAG" under the "Actions" column.
 
-### 6.1. Triggering Airbyte Syncs
+This will initiate the complete data pipeline, starting with the Airbyte sync from Faker to BigQuery, followed by dbt transforming the raw data into `staging` and `marts` models. As the last step, it generates dbt docs.
 
-The `dags/airbyte_dag.py` file contains an example of a DAG that triggers an Airbyte sync. It uses the `AirbyteTriggerSyncOperator` to trigger the sync and load our data into BigQuery. More details about this can be found in the [Using the Airbyte Operator to orchestrate Airbyte OSS](https://docs.airbyte.com/operator-guides/using-the-airflow-airbyte-operator).
+- Confirm the sync status in the Airbyte UI.
+- After dbt jobs completion, check the BigQuery console to see the newly created views in the `transformed_data` dataset.
+- Once the dbt pipeline completes, you can check the dbt docs from the Airflow UI by going to the "Custom Docs" > "dbt" tab.
 
-This operator uses the Connection we created in Airflow to connect to Airbyte on `airbyte_conn_id`, and it needs the `connection_id` to trigger the sync. This ID can be found in the URL path when you open a connection in the Airbyte UI.
-
-![airbyte dag](assets/4_airbyte-dag.png)
-
-We've also set this DAG to output a dataset when the trigger is done, so it can be used to trigger another DAG that uses this data. 
-
-![airbyte dataset](assets/5_airbyte-dataset.png)
-
-
-### 6.2. Running dbt models 
-
-Now that our configurations are done in the `config/dbt_config.py` file, we can use it in any of our dags to run our models. We've provided the jaffle_shop example in the `dags/dbt_example.py` file.
-
-In this file we're using the `DbtTaskGroup` operator from cosmos, which will parse the dbt models and create a Task Group that can be used within a DAG. This operator uses the `project_config` and `profile_config` we've set up. 
-
-**By default, every cosmos operator will parse all of your dbt models into the Task Group or DAG. We're using a `RenderConfig` to select specific models to be parsed in our example.**
-
-In the official [documentation from cosmos](https://astronomer.github.io/astronomer-cosmos/configuration/selecting-excluding.html) you can find more details about how to select or exclude models. In our case, we're selecting them by passing the **path** of the models to be run.
-
-We've created two dags:
-
-#### 6.2.1. dbt__jaffle-shop
-
-![dbt jaffle shop dag](assets/7_dbt-jaffle-shop.png)
-
-#### 6.2.2. dbt__example
-
-![dbt example dag](assets/8_dbt-others.png)
-
-The dags in this file also have a task with the `DbtDocsOperator`, which will generate/update the dbt docs and provide them in the `plugins/templates/dbt` folder. This is being used to serve the docs in the Airflow UI via a custom plugin. 
-
-Besides these two DAGs with the `DbtTaskGroup` operator, the previous example (`dags/airbyte_dag.py`) also has a DAG parsed by the `DbtDag` operator.
-
-![dbt ecommerce dag](assets/6_dbt-airbyte-dag.png)
-
-In the end, we have the following DAGs:
-
-![dbt all dags](assets/9_airflow-dags.png)
+Congratulations! You've successfully run an end-to-end workflow with Airflow, dbt and Airbyte. 🎉
 
 ## 7. Next Steps
 
