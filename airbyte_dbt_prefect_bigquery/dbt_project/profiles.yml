@@ -1,7 +1,7 @@
 dbt_project:
   outputs:
     dev:
-      dataset: my_dataset
+      dataset: transformed_data
       job_execution_timeout_seconds: 300
       job_retries: 1
       keyfile: "{{ env_var('DBT_BIGQUERY_KEYFILE_PATH', '') }}"
