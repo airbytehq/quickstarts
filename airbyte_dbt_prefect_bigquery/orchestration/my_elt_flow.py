@@ -21,7 +21,7 @@ remote_airbyte_server.save("my-remote-airbyte-server", overwrite=True)
 
 airbyte_connection = AirbyteConnection(
     airbyte_server=remote_airbyte_server,
-    connection_id="...my_airbyte_connection_id...",
+    connection_id="...my_airbyte_connection_id...", # Replace the value with your Airbyte connection ID
     status_updates=True,
 )
 
@@ -44,9 +44,6 @@ def run_dbt_commands(commands, prev_task_result):
 def my_elt_flow():
     
     # run Airbyte sync
-    # airbyte_sync_result: AirbyteSyncResult = run_connection_sync(
-    #     airbyte_connection=airbyte_connection,
-    # )
     airbyte_sync_result = run_airbyte_sync(airbyte_connection)
 
     # run dbt precheck    
@@ -66,5 +63,4 @@ def my_elt_flow():
 
 
 if __name__ == "__main__":
-    # my_elt_flow.visualize()
     my_elt_flow()

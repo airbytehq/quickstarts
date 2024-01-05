@@ -1,4 +1,11 @@
 variable "workspace_id" {
     type = string
-    default = "...my_workspace_id..."
+}
+
+variable "project_id" {
+    type = string
+}
+
+variable "credentials_json_path" {
+    type = string
 }
