@@ -8,7 +8,7 @@ There are three ways to use the quickstart resources here.
 
 ### Google Colab
 
-Google Colab ("Colab" for short) is a hosted version of Jupyter. Because it is hosted by google, most people can access Colab using their existing Google account. To use these notebooks in Colab, use one of the links below, or select "Open from Git" in the Colab "File" menu.
+Google Colab ("Colab" for short) is a hosted version of Jupyter. Because it is hosted by google, most people can access Colab using their existing Google account. To use these notebooks in Colab, click on the "Open in Colab" badge at the top of the file.
 
 Note:
 
