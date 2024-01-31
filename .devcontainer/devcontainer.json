@@ -46,6 +46,7 @@
                 "ms-python.mypy-type-checker",
                 "ms-python.python",
                 "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter",
                 // Toml support:
                 "tamasfe.even-better-toml",
                 // Yaml and JSON Schema support:
