@@ -6,10 +6,10 @@ This quickstart will help you get started quickly with AirbyteLib.
 
 To jump right in, click on any of the below links to open a new Colab notebook from the provided quickstart template.
 
-1. Basic Features Demo - Walks through the basic functionality of AirbyteLib and how to use it in a Notebook environment.
-2. CoinAPI Demo - Shows how to provide credentials securely and perform basic graphing.
-3. GitHub Demo - Demonstrates how to get data from GitHub, how to analyze GitHub metrics and how to refresh your cache data incrementally.
-4. GA4 Demo - A Google Analytics demo showing how to analyze page views and other GA metrics.
+1. [Basic Features Demo](https://colab.research.google.com/github/airbytehq/quickstarts/blob/aj%2Fairbyte-lib-quickstart/airbyte_lib_notebooks/AirbyteLib_Basic_Features_Demo.ipynb) - Walks through the basic functionality of AirbyteLib and how to use it in a Notebook environment.
+2. [CoinAPI Demo](https://colab.research.google.com/github/airbytehq/quickstarts/blob/aj%2Fairbyte-lib-quickstart/airbyte_lib_notebooks/AirbyteLib_CoinAPI_Demo.ipynb) - Shows how to provide credentials securely and perform basic graphing.
+3. [GitHub Demo](https://colab.research.google.com/github/airbytehq/quickstarts/blob/aj%2Fairbyte-lib-quickstart/airbyte_lib_notebooks/AirbyteLib_Github_Incremental_Demo.ipynb) - Demonstrates how to get data from GitHub, how to analyze GitHub metrics and how to refresh your cache data incrementally.
+4. [GA4 Demo](https://colab.research.google.com/github/airbytehq/quickstarts/blob/aj%2Fairbyte-lib-quickstart/airbyte_lib_notebooks/AirbyteLib_GA4_Demo.ipynb) - A Google Analytics demo showing how to analyze page views and other GA metrics.
 
 ## How to use these Quickstarts
 
