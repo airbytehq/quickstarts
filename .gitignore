@@ -9,3 +9,7 @@ venv.bak/
 
 #Desktop Services Store
 .DS_Store
+
+# AirbyteLib caches and virtual environments
+.cache
+.venv*
