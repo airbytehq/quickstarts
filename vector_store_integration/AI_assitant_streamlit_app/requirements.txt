@@ -1,6 +1,0 @@
-streamlit
-openai
-snowflake-connector-python
-langchain
-langchain-community 
-tiktoken
