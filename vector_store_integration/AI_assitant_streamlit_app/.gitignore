@@ -1,0 +1,10 @@
+venv/
+
+.secrets
+.streamlit
+dist/
+build/
+*.egg-info/
+
+.DS_STORE
+
