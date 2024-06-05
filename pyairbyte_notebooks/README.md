@@ -2,8 +2,6 @@
 
 This quickstart will help you get started quickly with PyAirbyte.
 
-> **Note:** **PyAirbyte is currently in private beta and is not intended for production use.**
-
 ## Quickstart Quicklinks
 
 To jump right in, click on any of the below links to open a new Colab notebook from the provided quickstart template.
