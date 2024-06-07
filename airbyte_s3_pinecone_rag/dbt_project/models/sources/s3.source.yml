@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+  - name: s3_raw
+    database: "{{ env_var('BIGQUERY_PROJECT_ID') }}"
+    schema: "{{ env_var('BIGQUERY_DATASET_ID') }}"
+
+    tables:
+      - name: s3_csv
+        description: "Purchase data gathered from csv"
+        columns:
+          - name: id
+            description: "Unique identifier for the purchase."
+          - name: updated_at
+          - name: purchased_at
+          - name: user_id
+          - name: returned_at
+          - name: product_id
+          - name: created_at
+          - name: added_to_cart_at
+          - name: _airbyte_extracted_at
+          - name: _airbyte_raw_id
+          - name: _airbyte_meta
+
