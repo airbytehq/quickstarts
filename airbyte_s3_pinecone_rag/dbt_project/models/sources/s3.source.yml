@@ -21,4 +21,3 @@ sources:
           - name: _airbyte_extracted_at
           - name: _airbyte_raw_id
           - name: _airbyte_meta
-
