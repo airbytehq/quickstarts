@@ -33,15 +33,12 @@ resource "airbyte_destination_postgres" "my_destination_postgres" {
     password         = "...my_password..."
     port             = 5432
     schema           = "public"
+    ssl              = true
     ssl_mode = {
-      destination_postgres_ssl_modes_allow = {
-        mode = "allow"
-      }
+      allow = {}
     }
     tunnel_method = {
-      destination_postgres_ssh_tunnel_method_no_tunnel = {
-        tunnel_method = "NO_TUNNEL"
-      }
+      no_tunnel = {}
     }
     username = "...my_username..."
   }
