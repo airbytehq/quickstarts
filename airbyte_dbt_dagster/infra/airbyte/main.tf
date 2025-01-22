@@ -13,20 +13,12 @@ resource "airbyte_source_postgres" "postgres" {
             "...my_schema..."
         ]
         ssl_mode = {
-            source_postgres_ssl_modes_allow = {
-                mode = "allow"
-            }
+            allow = {}
         }
         tunnel_method = {
-            source_postgres_ssh_tunnel_method_no_tunnel = {
-                tunnel_method = "NO_TUNNEL"
-            }
+            no_tunnel = {}
         }
-        replication_method = {
-            source_postgres_replication_method_standard = {
-                method = "Standard"
-            }
-        }
+        replication_method = {}
     }
     name = "Postgres"
     workspace_id = var.workspace_id

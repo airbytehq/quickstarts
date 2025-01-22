@@ -13,18 +13,13 @@ resource "airbyte_source_postgres" "postgres" {
             "...my_schema..."
         ]
         ssl_mode = {
-            source_postgres_ssl_modes_allow = {
-                mode = "allow"
-            }
+            allow = {}
         }
         tunnel_method = {
-            source_postgres_ssh_tunnel_method_no_tunnel = {
-                tunnel_method = "NO_TUNNEL"
-            }
+            no_tunnel = {}
         }
         replication_method = {
-            source_postgres_update_method_read_changes_using_write_ahead_log_cdc = {
-                method = "CDC"
+            read_changes_using_write_ahead_log_cdc = {
                 publication = "...pub..."
                 replication_slot = "...slot..."
             }
