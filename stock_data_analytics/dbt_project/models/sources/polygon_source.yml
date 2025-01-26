@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: polygon
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: polygon_airbyte
+    
+    tables: 
+
+      - name: stock_api
+        description: "Simulated stock_api data from the Polygon connector."
+        columns:
+          - name: c 
+          - name: t
+          - name: v
+          - name: h
+          - name: l
+          - name: n
+          - name: o
+          - name: otc
+          - name: vw
