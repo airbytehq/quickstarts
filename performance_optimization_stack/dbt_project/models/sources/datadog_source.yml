@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: datadog
+    # Use your BigQuery project ID
+    database: "{{ env_var('BIGQUERY_PROJECT_ID', '') }}"
+    # Use your BigQuery dataset name
+    schema: datadog_airbyte
+    tables:
+      - name: logs
+        columns:
+          - name: log_id
+            description: "Unique identifier for each log entry"
+          - name: timestamp
+            description: "Timestamp when the log was created"
+          - name: log_level
+            description: "Level of the log (e.g., ERROR, INFO)"
+          - name: message
+            description: "Log message details"
+          - name: service
+            description: "Associated service for the log"
+          - name: source
+            description: "Source or application that created the log"
+      - name: metrics
+        columns:
+          - name: metric_id
+            description: "Unique identifier for each metric entry"
+          - name: timestamp
+            description: "Timestamp when the metric was recorded"
+          - name: metric_name
+            description: "Name of the metric (e.g., cpu.usage)"
+          - name: value
+            description: "Value of the recorded metric"
